@@ -1,1 +1,112 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  font-family: Roboto;
+  background: #e0e6e8;
+}
+
+.btn-primary {
+  background: #14aaf5;
+  border: none;
+  color: #fff;
+  padding: 8px 15px;
+}
+
+.btn-circle {
+  background: #fff;
+  border: 1px solid #b7bfc6;
+  border-radius: 50%;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #b7bfc6;
+  fill: #b7bfc6;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  font-size: 13px;
+  height: 30px;
+  line-height: 1;
+  -webkit-transition: 200ms box-shadow, 200ms color, 200ms background, 200ms fill;
+  transition: 200ms box-shadow, 200ms color, 200ms background, 200ms fill;
+  width: 30px;
+  display: inline-block;
+}
+
+.btn-circle:hover {
+  border: 1px solid #14aaf5;
+  color: #14aaf5;
+}
+
+.btn-circle-label {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  height: 100%;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.btn-circle i {
+  font-size: 20px;
+}
+
+.dropdown-menu a i {
+  padding-right: 15px;
+}
+
+.dropdown-menu a {
+  color: #151b26;
+}
+
+input,
+select {
+  font-size: 10pt !important;
+}
+
+.modal-large {
+  min-width: 80vw;
+}
+
+.modal-body .content-container {
+  margin-top: 0;
+  padding: 0;
+}
+
+.alert-info,
+.badge-info {
+  background: #14aaf5;
+  color: #fff;
+}
+
+.alert-danger,
+.badge-danger,
+.btn-danger {
+  background: #ff5263;
+  color: #fff;
+}
+
+.alert-success,
+.badge-success {
+  background: #25e8c8;
+  color: #fff;
+}
+
+.btn-success {
+  border: none;
+  background: #25e8c8;
+  color: #000;
+}
+
+.alert-warning,
+.badge-warning,
+.btn-warning {
+  background: #fcbd01;
+  color: #fff;
+}

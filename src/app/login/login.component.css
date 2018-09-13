@@ -1,0 +1,62 @@
+/* #222b37-dark #DAA161-gold #14aaf5-blue #e0e6e8 light-gray #00674d-nd*/
+.back {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  background: url("../../assets//img/Flat-Mountains.svg") no-repeat;
+  background-size: 100%;
+  background: #fff;
+  z-index: 10000;
+}
+
+.login-logo {
+  margin: 0 auto;
+  width: 100%;
+  padding-bottom: 30px;
+}
+
+.login-logo-text {
+  color: #50514f;
+  font-size: 12pt;
+  font-weight: bold;
+}
+
+.login-form-input {
+  border-radius: 0;
+  border: none;
+  border-bottom: #e0e6e8 solid 1px;
+  background: none;
+  margin: 30px 0;
+}
+
+.login-form-input-text {
+  border-radius: 0;
+  border: none;
+  width: calc(100% - 80px);
+}
+
+.login-form-input-icon {
+  color: #ced4da;
+}
+
+.login-btn {
+  /* background: #F8C63F; */
+  background: -webkit-linear-gradient(to right, #F8C63F, #FBD786);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #F8C63F, #FBD786);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  border: none;
+  width: 100%;
+  padding: 10px;
+  border-radius: 15px;
+  color: #50514f;
+  font-weight: bold;
+  margin-top: 15px;
+}
+.login-form-link{
+  padding-left: 30px;
+  font-size: 10pt;
+}

@@ -1,0 +1,58 @@
+<div class='back'>
+  <div class='container'>
+    <div style="padding-bottom: 30px;"></div>
+    <div class='row'>
+      <div class="col">
+        <div style="padding-bottom: 200px;"></div>
+        <div class="alert alert-info">
+          Мэдээллийн аюулгүй байдлыг хангах үүднээс та өөрт ойр байрлах Нийгмийн<br />даатгалын хэлтэст цахим иргэний
+          үнэмлэхтэйгээ ирж бүртгэлээ<br />баталгаажуулна уу. Баталгаажуулалт хийгдсэнээр нэвтрэх нууц үг бүртгүүлсэн<br />цахим
+          шуудан руу илгээгдэнэ.
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="login-logo text-center">
+          <img class="login-logo-img" src="../../assets/img/logo.svg" alt="" height="100px">
+          <div class="login-logo-text">Нийгмийн даатгал</div>
+        </div>
+        <div class="login-form">
+          <div class="row login-form-input form-control">
+            <span class="col">
+              <input class="login-form-input-text" placeholder="Регисрийн дугаар" type="text" [(ngModel)]="regid">
+            </span>
+          </div>
+          <div class="row login-form-input form-control">
+            <span class="col">
+              <input class="login-form-input-text" placeholder="Эцэг/эхийн нэр" type="text" [(ngModel)]="lastname">
+            </span>
+          </div>
+          <div class="row login-form-input form-control">
+            <span class="col">
+              <input class="login-form-input-text" placeholder="Өөрийн нэр" type="text" [(ngModel)]="firstname">
+            </span>
+          </div>
+          <div class="row login-form-input form-control">
+            <span class="col">
+              <input class="login-form-input-text" placeholder="Имэйл хаяг" type="text" [(ngModel)]="email">
+            </span>
+          </div>
+          <div class="row login-form-input form-control">
+            <span class="col">
+              <input class="login-form-input-text" placeholder="Утасны дугаар" type="text" [(ngModel)]="mobile">
+            </span>
+          </div>
+          <div class="g-recaptcha" data-sitekey="6LfbmW8UAAAAAEs8QklHkNSBtkjXzy3cfAZXsVyZ"></div>
+          <div class="alert alert-danger" *ngIf="errormessage!=undefined">{{errormessage}}</div>
+        </div>
+        <button class="login-btn disabled" [disabled]="loading" (click)='Login()'>
+          <span *ngIf="loading">Уншиж байна...</span>
+          <span *ngIf="!loading">Бүртгүүлэх</span>
+        </button>
+      </div>
+      <div class="col"></div>
+    </div>
+  </div>
+  <!-- <div class="row">
+      <div style="background: #00674d; height: 100px; width: 100%; position: absolute; bottom: 0;">a</div>
+    </div> -->
+</div>
