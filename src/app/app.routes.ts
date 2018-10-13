@@ -1,18 +1,27 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
-import { SalaryComponent } from './salary/salary.component';
+import { AuthGuard } from './core/auth.guard';
 
-// Define which component should be loaded based on the current URL
 export const routes: Routes = [
-  { path: '', component: LoginComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'resetpassword', component: ResetpasswordComponent },
-  { path: 'salary', component: SalaryComponent },
-  { path: '**', component: LoginComponent },
+  {
+    path: 'account',
+    loadChildren: './account/account.module#AccountModule'
+  },
+  {
+    path: 'salary',
+    loadChildren: './salary/salary.module#SalaryModule',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'pention',
+    loadChildren: './pention/pention.module#PentionModule',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: '',
+    redirectTo: 'salary/list',
+    pathMatch: 'full'
+  }
 ];
 @NgModule({
   imports: [

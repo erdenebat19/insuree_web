@@ -7,29 +7,21 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { routes, AppRoutingModule } from './app.routes';
 import { RouterModule } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { RegisterComponent } from './register/register.component';
-import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
-import { SalaryComponent } from './salary/salary.component';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { SidebarModule } from './shared/ui/sidebar/sidebar.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    SidebarComponent,
-    RegisterComponent,
-    ResetpasswordComponent,
-    SalaryComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes), 
     RecaptchaModule.forRoot(),
-    FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    SidebarModule,
   ],
-  providers: [],
+  providers: [JwtHelperService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

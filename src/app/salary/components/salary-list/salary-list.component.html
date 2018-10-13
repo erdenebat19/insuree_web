@@ -1,0 +1,142 @@
+<re-captcha size="invisible" #captchaRef="reCaptcha" (resolved)="$event && getSalary($event)" siteKey="6Lf5l3AUAAAAAOM97Bcnewt1wjYTFKta6HtW2al4"></re-captcha>
+<div class="row">
+  <div class="col-md-12">
+    <div class="content-container">
+      <div class="content-large">
+        <div class="content-header">
+          Цалингийн мэдээлэл
+        </div>
+        <div class="content-body">
+          <div class="row">
+            <div class="col">
+              <div class="row">
+                <div class="col-6">
+                  <div class="row">
+                    <div class="col-3">
+                      <input type="number" class="form-control" [(ngModel)]='byear' id='byear'>
+                    </div>
+                    <div class="col-3">
+                      <input type="number" class="form-control" [(ngModel)]='eyear' id='eyear'>
+                    </div>
+                    <div class="col-3">
+                      <button class="btn btn-outline-primary form-control" (click)='captchaRef.execute()'>Хайх</button>
+                    </div>
+                    <div class="col-3" *ngIf='salaries!=undefined && salaries.length>0'>
+                      <!-- <button class="btn btn-outline-success form-control" (onclick)='printContent()'>Хэвлэх</button> -->
+                      <button class="btn btn-outline-success form-control" (click)='printContent()'>Хэвлэх</button>
+                    </div>
+                  </div>
+                  <br>
+                  <app-inline-loader *ngIf='isloading'></app-inline-loader>
+                  <div class="alert alert-warning" *ngIf="(salaries==undefined || salaries.length==0) && !isloading && !isFirstLoad">
+                    Мэдээлэл алга
+                  </div>
+                </div>
+              </div>
+              <div id='printArea' *ngIf="salaries!=undefined && salaries.length>0">
+                <div class="print-content">
+                  <div class="page" *ngFor='let page of pages; first as isFirst'>
+                    <div class="page-header">
+                      <div class="row">
+                        <div class="col-2">
+                          <img src="../../../../assets/img/logo.svg" width="100px" style="margin-top: 10px;" />
+                        </div>
+                        <div class="col-10">
+                          <div class="row">
+                            <div class="col-7"></div>
+                            <div class="col-5" style="text-align: right; font-size: 8pt;">
+                              Нийгмийн даатгалын ерөнхий газрын даргын 2018 оны 05 дугаар сарын 16-ний өдрийн А/55 тоот
+                              тушаалын нэгдүгээр хавсралт
+                            </div>
+                          </div>
+                          <div>
+                            <div style="padding-top: 30px;">
+                              <h1>НИЙГМИЙН ДААТГАЛЫН ШИМТГЭЛ ТӨЛӨЛТИЙН ТАЛААРХ ТОДОРХОЙЛОЛТ</h1>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="line"></div>
+                      <div class="row">
+                        <div class="col">
+                          Даатгуулагчийн
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-4">
+                          Овог: {{person.lastName}}
+                        </div>
+                        <div class="col-4">
+                          Нэр: {{person.firstName}}
+                        </div>
+                        <div class="col-4">
+                          Регистер: {{person.regID}}
+                        </div>
+                      </div>
+                    </div>
+                    <table class="rtable">
+                      <thead [class.show-in-print]="!isFirst">
+                        <tr style="font-size: 10pt; text-align: center">
+                          <th rowspan="2">Хэлтсийн нэр</th>
+                          <th rowspan="2">Ажил олгогчийн код</th>
+                          <th rowspan="2">Ажил олгогчийн нэр</th>
+                          <th rowspan="2">Он</th>
+                          <th rowspan="2">Сар</th>
+                          <th colspan="2">Даатгуулагч</th>
+                          <th rowspan="2">Ажил олгогч шимтгэл төлсөн эсэх</th>
+                        </tr>
+                        <tr style="font-size: 10pt; text-align: center">
+                          <th>Цалин</th>
+                          <th>Төлөх шимтгэл</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor='let salary of page' style="font-size: 10pt">
+                          <td style="text-align: center; width: 120px;">{{salary.domName}}</td>
+                          <td style="text-align: center; width: 80px;">{{salary.orgndid}}</td>
+                          <td style="text-align: center;" class="small-text">{{salary.orgname}}</td>
+                          <td style="text-align: center; width: 40px;">{{salary.year}}</td>
+                          <td style="text-align: center; width: 30px;">{{salary.month}}</td>
+                          <td style="text-align: right; width: 80px;">{{salary.salary | currency:'':''}}</td>
+                          <td style="text-align: right; width: 80px;">{{salary.shim | currency:'':''}}</td>
+                          <td style="text-align: center; width: 90px;">{{salary.ispayed}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div class="page-footer">
+                      <div class="row">
+                        <div class="col" style="font-size: 10pt;padding-top: 15px;">
+                          Жич: ТҮЦ машинаар олгосон лавлагаа тодорхойлолтыг http://data.ndaatgal.mn:808/checklav цахим
+                          хуудсанд хандаж баталгаажуулах кодоор үнэн эсхийг шалгах боломжтой.
+                        </div>
+                      </div>
+                      <div class="bottom-footer">
+                        <div class="line"></div>
+                        <div class="row">
+                          <div class="col">
+                            <img src="{{qrCodeData}}" width="100px" />
+                            <span>{{qrCode}}</span>
+                          </div>
+                          <div class="col-6">
+                            <div class="row">
+                              <div class="col" style="font-size: 10pt;text-align: right; font-family: Arial; font-weight: 400;">
+                                Лавлагааны хүчинтэй хугацаа 30 хоног
+                                <br />
+                                {{today.getFullYear()}} оны {{today.getMonth()+1}} сарын
+                                {{today.getDate()}}-ны өдрийн байдлаар
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

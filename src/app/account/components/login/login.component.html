@@ -1,0 +1,46 @@
+<div class='back'>
+  <div class='container'>
+    <div style="padding-bottom: 50px;"></div>
+    <div class='row'>
+      <div class="col"></div>
+      <div class="col-md-4">
+        <div class="login-logo text-center">
+          <img class="login-logo-img" src="../../assets/img/logo.svg" alt="" height="100px">
+          <div class="login-logo-text">Нийгмийн даатгал</div>
+        </div>
+        <div class="login-form">
+          <div class='form-group full-width'>
+            <div class="row login-form-input form-control">
+              <span class="col-1">
+                <i class="ion-person login-form-input-icon"></i>
+              </span>
+              <span class="col">
+                <input class="login-form-input-text" placeholder="Имэйл хаяг" type="text" [(ngModel)]="userid">
+              </span>
+            </div>
+          </div>
+          <div class="row login-form-input form-control">
+            <span class="col-1">
+              <i class="ion-locked login-form-input-icon"></i>
+            </span>
+            <span class="col">
+              <input class="login-form-input-text" placeholder="Нууц үг" type="password" [(ngModel)]="password">
+            </span>
+          </div>
+
+          <div class="alert alert-danger" *ngIf="errormessage!=undefined">{{errormessage}}</div>
+        </div>
+        <button class="login-btn disabled" [disabled]="loading" (click)='Login()'>
+          <span *ngIf="loading">Уншиж байна...</span>
+          <span *ngIf="!loading">Нэвтрэх</span>
+        </button>
+        <div style="padding: 15px;"></div>
+        <div class="row" style="width: 100%">
+          <a class='login-form-link' routerLink="/register">Шинээр бүртгүүлэх</a>
+          <a class="login-form-link" routerLink="/resetpassword">Нууц үг сэргээх</a>
+        </div>
+      </div>
+      <div class="col"></div>
+    </div>
+  </div>
+</div>

@@ -9,7 +9,10 @@ body {
   color: #fff;
   padding: 8px 15px;
 }
-
+.btn-noborder {
+  border: none;
+  background: transparent;
+}
 .btn-circle {
   background: #fff;
   border: 1px solid #b7bfc6;
@@ -109,4 +112,88 @@ select {
 .btn-warning {
   background: #fcbd01;
   color: #fff;
+}
+
+
+/* Begin */
+
+.content-medium {
+  clear: both;
+  min-width: 600px;
+  max-width: 800px;
+  margin: 0 auto;
+  /* z-index: -12000; */
+}
+
+.content-small {
+  clear: both;
+  min-width: 100px;
+  max-width: 500px;
+  margin: 15px;
+  /* z-index: -12000; */
+}
+
+.content-large {
+  clear: both;
+  min-width: 800px;
+  max-width: 1400px;
+  margin: 0 auto;
+  /* z-index: -11100; */
+}
+
+.content-header {
+  background: #fff;
+  border-radius: 3px 3px 0 0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
+  padding: 15px 30px;
+  position: relative;
+  /* z-index: 0; */
+}
+
+.content-body {
+  background: #fff;
+  border-radius: 0px 0px 3px 3px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
+  padding: 30px;
+  margin-top: 1px;
+}
+
+.title {
+  padding: 10px 30px;
+  text-align: center;
+  border-bottom: 1px solid #848f99;
+  height: 50px;
+  margin-bottom: 15px;
+}
+
+.title a {
+  text-transform: uppercase;
+  font-size: 13pt;
+  font-weight: 500;
+  color: #fff;
+}
+
+.list-group-item {
+  background: transparent;
+  color: #fff;
+}
+
+.list-group-item:hover {
+  background: #848f99;
+}
+
+/* End */
+
+@media print {
+  body {
+    font-size: 12pt;
+    background: #fff;
+  }
+
+  td,
+  th {
+    font-weight: normal;
+    border: 1px solid #000 !important;
+  }
+
 }

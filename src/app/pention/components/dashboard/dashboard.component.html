@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="content-container">
+          <div class="content-small">
+            <div class="content-header">
+              {{menus[menu[0]].name}}
+              <span class="float-right">
+                <a id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <div class="btn-circle-label">
+                    <i class="icon ion-ios-more"></i>
+                  </div>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <a class="dropdown-item" *ngFor='let m of menus;index as i' (click)='selectMenu(0, i)'>
+                      <i class="icon ion-ios-checkmark" style="color: green" *ngIf='i==menu[0]'></i>{{m.name}}</a>
+                </div>
+              </span>
+            </div>
+            <div class="content-body">
+              <ng-template #component1></ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="content-container">
+          <div class="content-small">
+            <div class="content-header">
+              {{menus[menu[1]].name}}
+              <span class="float-right">
+                <a id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <div class="btn-circle-label">
+                    <i class="icon ion-ios-more"></i>
+                  </div>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                  <a class="dropdown-item" *ngFor='let m of menus;index as i' (click)='selectMenu(1, i)'>
+                    <i class="icon ion-ios-checkmark" style="color: green" *ngIf='i==menu[1]'></i>{{m.name}}</a>
+                </div>
+              </span>
+            </div>
+            <div class="content-body">
+              <ng-template #component2></ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
