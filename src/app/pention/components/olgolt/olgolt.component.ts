@@ -15,8 +15,9 @@ export class OlgoltComponent implements OnInit {
   constructor(private route: Router, private service: PentionService) { }
 
   ngOnInit() {
+    this.isloading = true;
     this.service.getOlgolt().subscribe(result => {
-      console.log(result);
+      this.isloading = false;
       this.olgoltList = result;
     }, error => {
       if (error.status == 0) {

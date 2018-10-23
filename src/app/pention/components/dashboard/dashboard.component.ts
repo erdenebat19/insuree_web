@@ -14,9 +14,9 @@ export class DashboardComponent implements OnInit {
 
   menus: any[] = [
     { id: 1, name: 'Тэтгэвэр авагчийн үндсэн мэдээлэл' },
-    { id: 2, name: 'Тэтгэврийн түүх' },
+    { id: 2, name: 'Тэтгэвэр тогтоолгосон цалин' },
     { id: 3, name: 'Тэтгэврийн олголт' },
-    { id: 4, name: 'Тэтгэвэр тогтоолгосон цалин' },
+    { id: 4, name: 'Тэтгэврийн түүх' },
   ]
 
   menu: number[] = [0, 1];

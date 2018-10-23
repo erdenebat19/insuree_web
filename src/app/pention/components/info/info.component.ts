@@ -11,13 +11,19 @@ export class InfoComponent implements OnInit {
   pentionInfo: any;
   errormassage: string;
   isloading: boolean;
+  current_index: number;
+  info: any;
 
   constructor(private route: Router, private service: PentionService) { }
 
   ngOnInit() {
+    this.isloading = true;
     this.service.getInfo().subscribe(result => {
+      this.isloading = false;
       this.pentionInfo = result;
-      console.log(this.pentionInfo);
+      if (this.pentionInfo != undefined && this.pentionInfo.length > 0) {        
+        this.getPage(0);
+      }
     }, error => {
       if (error.status == 0) {
         this.route.navigate(['/error']);
@@ -28,5 +34,10 @@ export class InfoComponent implements OnInit {
       this.isloading = false;
     });
   }
-
+  getPage(index: number) {
+    this.current_index = index;
+    if (index > -1) {
+      this.info = this.pentionInfo[index];
+    }
+  }
 }

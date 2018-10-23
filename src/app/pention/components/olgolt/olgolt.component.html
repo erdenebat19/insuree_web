@@ -1,26 +1,28 @@
 <app-inline-loader *ngIf='isloading'></app-inline-loader>
-<div *ngIf='olgoltList==undefined' class="alert alert-warning">
+<div *ngIf='olgoltList==undefined && !isloading' class="alert alert-warning">
   Тэтгэв олголт алга
 </div>
-<table class='table table-striped' style="font-size: 8pt;">
-  <thead>
-    <tr>
-      <th>НДХ</th>
-      <th>ТД№</th>
-      <th>Он</th>
-      <th>Сар</th>
-      <th>Өдөр</th>
-      <th>Тэтгэвэр</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor='let olgolt of olgoltList'>
-      <td>{{olgolt.aimagName}}</td>
-      <td>{{olgolt.cardID}}</td>
-      <td>{{olgolt.year}}</td>
-      <td>{{olgolt.month}}</td>
-      <td>{{olgolt.day}}</td>
-      <td>{{olgolt.pention}}</td>
-    </tr>
-  </tbody>
-</table>
+<div *ngIf='olgoltList!=undefined'>
+  <table class='table table-striped' style="font-size: 8pt;">
+    <thead>
+      <tr>
+        <th>НДХ</th>
+        <th>ТД№</th>
+        <th>Он</th>
+        <th>Сар</th>
+        <th>Өдөр</th>
+        <th>Тэтгэвэр</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor='let olgolt of olgoltList'>
+        <td>{{olgolt.aimagName}}</td>
+        <td>{{olgolt.cardID}}</td>
+        <td>{{olgolt.year}}</td>
+        <td>{{olgolt.month}}</td>
+        <td>{{olgolt.day}}</td>
+        <td>{{olgolt.pention}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

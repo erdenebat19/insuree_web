@@ -1,76 +1,84 @@
 <app-inline-loader *ngIf='isloading'></app-inline-loader>
-<div *ngIf='pentionInfo==undefined' class="alert alert-warning">
+<div *ngIf='pentionInfo==undefined && !isloading' class="alert alert-warning">
   Тэтгэвэр тогтоолгосон талаар мэдээлэл алга
 </div>
-<div *ngFor='let info of pentionInfo'>
-  <ul *ngIf='pentionInfo!=undefined' class="pention-info">
-    <li class="row">
-      <div class="col-8">Аймаг</div>
-      <div class="col-4">{{info.aimagName}}</div>
-    </li>
-    <li class="row">
-      <div class="col-8">Сум</div>
-      <div class="col-4">{{info.somName}}</div>
-    </li>
-    <li class="row">
-      <div class="col-8">Хороо</div>
-      <div class="col-4">{{info.khorooID}}</div>
-    </li>
-    <li class="row">
-      <div class="col-8">Дэвтэр</div>
-      <div class="col-4">{{info.cardID}}</div>
-    </li>
-    <li class="row">
-      <div class="col-8">Төрсөн огноо</div>
-      <div class="col-4">{{info.birthDate | date: 'yyyy-MM-dd'}}</div>
-    </li>
-    <li class="row">
-      <div class="col-8">Тэтгэврийн төрөл</div>
-      <div class="col-4">{{info.type}}</div>
-    </li>
-    <li class="row">
-      <div class="col-8">Өргөдөл өгсөн огноо</div>
-      <div class="col-4">{{info.eronDate | date: 'yyyy-MM-dd'}}</div>
-    </li>
-    <li class="row">
-      <div class="col-8">Дуусах хугацаа</div>
-      <div class="col-4">{{info.expireDate | date: 'yyyy-MM-dd'}}</div>
-    </li>
-    <li class="row">
-      <div class="col-8">Тэтгэврийн хэмжээ</div>
-      <div class="col-4">{{info.pentionSum | currency:'':''}}</div>
-    </li>
-    <li class="row">
-      <div class="col-8">Тэтгэвэр тогтоосон дундаж цалин</div>
-      <div class="col-4">{{info.salarySum | currency:'':''}}</div>
-    </li>
-    <li class="row">
-      <div class="col-8">Нөхцөл</div>
-      <div class="col-4">{{info.condition}}</div>
-    </li>
-    <li class="row">
-      <div class="col-8">Хөдөлгөөн</div>
-      <div class="col-4">{{info.movement}}</div>
-    </li>
-    <li class="row">
-      <div class="col-8">Хөдөлмөрийн чадвараа түр алдсан хувь</div>
-      <div class="col-4">{{info.hcaPer}}</div>
-    </li>
-    <li class="row">
-      <div class="col-8">Хөдөлмөрийн чадвараа түр алдаж байсан жил</div>
-      <div class="col-4">{{info.hcaYear}}</div>
-    </li>
-    <li class="row">
-      <div class="col-8">Тэжээгчээ алдсаны хамрагдах хүний тоо</div>
-      <div class="col-4">{{info.taNumber}}</div>
-    </li>
-    <li class="row">
-      <div class="col-8">Ажилласан жил</div>
-      <div class="col-4">{{info.workYear}}</div>
-    </li>
-    <li class="row">
-      <div class="col-8">Цэргийн төрөлөөр тэтгэвэр авагчийн энгийн газар ажилласан жил</div>
-      <div class="col-4">{{info.workYearTS}}</div>
-    </li>
-  </ul>
+<ul *ngIf='info!=undefined' class="pention-info">
+  <li class="row">
+    <div class="col-8">Аймаг</div>
+    <div class="col-4">{{info.aimagName}}</div>
+  </li>
+  <li class="row">
+    <div class="col-8">Сум</div>
+    <div class="col-4">{{info.somName}}</div>
+  </li>
+  <li class="row">
+    <div class="col-8">Хороо</div>
+    <div class="col-4">{{info.khorooID}}</div>
+  </li>
+  <li class="row">
+    <div class="col-8">Дэвтэр</div>
+    <div class="col-4">{{info.cardID}}</div>
+  </li>
+  <li class="row">
+    <div class="col-8">Төрсөн огноо</div>
+    <div class="col-4">{{info.birthDate | date: 'yyyy-MM-dd'}}</div>
+  </li>
+  <li class="row">
+    <div class="col-8">Тэтгэврийн төрөл</div>
+    <div class="col-4">{{info.type}}</div>
+  </li>
+  <li class="row">
+    <div class="col-8">Өргөдөл өгсөн огноо</div>
+    <div class="col-4">{{info.eronDate | date: 'yyyy-MM-dd'}}</div>
+  </li>
+  <li class="row">
+    <div class="col-8">Дуусах хугацаа</div>
+    <div class="col-4">{{info.expireDate | date: 'yyyy-MM-dd'}}</div>
+  </li>
+  <li class="row">
+    <div class="col-8">Тэтгэврийн хэмжээ</div>
+    <div class="col-4">{{info.pentionSum | currency:'':''}}</div>
+  </li>
+  <li class="row">
+    <div class="col-8">Тэтгэвэр тогтоосон дундаж цалин</div>
+    <div class="col-4">{{info.salarySum | currency:'':''}}</div>
+  </li>
+  <li class="row">
+    <div class="col-8">Нөхцөл</div>
+    <div class="col-4">{{info.condition}}</div>
+  </li>
+  <li class="row">
+    <div class="col-8">Хөдөлгөөн</div>
+    <div class="col-4">{{info.movement}}</div>
+  </li>
+  <li class="row">
+    <div class="col-8">Хөдөлмөрийн чадвараа түр алдсан хувь</div>
+    <div class="col-4">{{info.hcaPer}}</div>
+  </li>
+  <li class="row">
+    <div class="col-8">Хөдөлмөрийн чадвараа түр алдаж байсан жил</div>
+    <div class="col-4">{{info.hcaYear}}</div>
+  </li>
+  <li class="row">
+    <div class="col-8">Тэжээгчээ алдсаны хамрагдах хүний тоо</div>
+    <div class="col-4">{{info.taNumber}}</div>
+  </li>
+  <li class="row">
+    <div class="col-8">Ажилласан жил</div>
+    <div class="col-4">{{info.workYear}}</div>
+  </li>
+  <li class="row">
+    <div class="col-8">Цэргийн төрөлөөр тэтгэвэр авагчийн энгийн газар ажилласан жил</div>
+    <div class="col-4">{{info.workYearTS}}</div>
+  </li>
+</ul>
+<br>
+<div style="width: 100%" *ngIf='pentionInfo!=undefined && pentionInfo.length>1'>
+  <nav aria-label="...">
+    <ul class="pagination pagination-sm justify-content-end">
+      <li [ngClass]="(i==current_index)?'page-item active':'page-item'" *ngFor="let page of pentionInfo; index as i">
+        <a class="page-link" (click)="getPage(i)">{{i+1}}</a>
+      </li>
+    </ul>
+  </nav>
 </div>

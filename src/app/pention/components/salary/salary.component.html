@@ -1,3 +1,22 @@
-<p>
-  salary works!
-</p>
+<app-inline-loader *ngIf='isloading'></app-inline-loader>
+<div *ngIf='tetsalary==undefined && !isloading' class="alert alert-warning">
+  Тэтгэв олголт алга
+</div>
+<div *ngIf='tetsalary!=undefined'>
+  <table class='table table-striped' style="font-size: 8pt;">
+    <thead>
+      <tr>
+        <th>Он</th>
+        <th>Сар</th>
+        <th>Цалин</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor='let sal of tetsalary'>
+        <td>{{sal.year}}</td>
+        <td>{{sal.month}}</td>
+        <td>{{sal.salary}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
