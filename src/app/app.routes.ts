@@ -1,6 +1,8 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { AuthGuard } from './core/auth.guard';
+import { ErrorReportComponent } from './shared/ui/error-report/error-report.component';
+import { ChangePasswordComponent } from './shared/components/change-password/change-password.component';
 
 export const routes: Routes = [
   {
@@ -16,6 +18,25 @@ export const routes: Routes = [
     path: 'pention',
     loadChildren: './pention/pention.module#PentionModule',
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'benefit',
+    loadChildren: './benefit/benefit.module#BenefitModule',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'ndans',
+    loadChildren: './pention-account/pention-account.module#PentionAccountModule',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'change_password',
+    component: ChangePasswordComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'error',
+    component: ErrorReportComponent,
   },
   {
     path: '',

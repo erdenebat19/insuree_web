@@ -1,0 +1,98 @@
+<div *ngIf='ndans==undefined || isLoading' class="row">
+  <div class="col-md-12">
+    <div class="content-container">
+      <div class="content-large">
+        <div class="content-header">
+          Нэрийн данс
+        </div>
+        <div class="content-body">
+          <app-inline-loader *ngIf='isloading'></app-inline-loader>
+          <div *ngIf='benefit-list==undefined && !isloading' class="alert alert-warning">
+            Нэрийн дансны талаар мэдээлэл алга
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div *ngIf='ndans!=undefined && !isLoading' class="row">
+  <div class="col-md-5">
+    <div class="content-container">
+      <div class="content-medium">
+        <div class="content-header">
+          {{ndans.year}} оны нэрийн дансны мэдээлэл
+        </div>
+        <div class="content-body">
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <td>Гарааны үлдэгдэл: </td>
+                <td style="text-align: right">{{ndans.guld | currency:'':''}}</td>
+              </tr>
+              <tr>
+                <td>Оны эхний үлдэгдэл: </td>
+                <td style="text-align: right">{{ndans.c1 | currency:'':''}}</td>
+              </tr>
+              <tr>
+                <td>Шимтгэл төлсөн сарын тоо: </td>
+                <td *ngIf="ndans.accountList==undefined && ndans.accountList.length==0"></td>
+                <td *ngIf="ndans.accountList!=undefined && ndans.accountList.length>0" style="text-align: right">{{ndans.accountList[0].month}}</td>
+              </tr>
+              <tr>
+                <td>Нийт цалин: </td>
+                <td *ngIf="ndans.accountList==undefined && ndans.accountList.length==0"></td>
+                <td *ngIf="ndans.accountList!=undefined && ndans.accountList.length>0" style="text-align: right">{{ndans.accountList[0].salary
+                  | currency:'':''}}</td>
+              </tr>
+              <tr>
+                <td>Төлсөн нийт шимтгэл АО: </td>
+                <td *ngIf="ndans.accountList==undefined && ndans.accountList.length==0"></td>
+                <td *ngIf="ndans.accountList!=undefined && ndans.accountList.length>0" style="text-align: right">{{ndans.accountList[0].shim_ao
+                  | currency:'':''}}</td>
+              </tr>
+              <tr>
+                <td>Төлсөн нийт шимтгэл Даатгуулагч: </td>
+                <td *ngIf="ndans.accountList==undefined && ndans.accountList.length==0"></td>
+                <td *ngIf="ndans.accountList!=undefined && ndans.accountList.length>0" style="text-align: right">{{ndans.accountList[0].shim_d
+                  | currency:'':''}}</td>
+              </tr>
+              <tr>
+                <td>Тусгай сангийн зардал: </td>
+                <td *ngIf="ndans.accountList==undefined && ndans.accountList.length==0"></td>
+                <td *ngIf="ndans.accountList!=undefined && ndans.accountList.length>0" style="text-align: right">{{ndans.accountList[0].zardun
+                  | currency:'':''}}</td>
+              </tr>
+              <tr>
+                <td>Бүртгэсэн шимтгэл: </td>
+                <td *ngIf="ndans.accountList==undefined && ndans.accountList.length==0"></td>
+                <td *ngIf="ndans.accountList!=undefined && ndans.accountList.length>0" style="text-align: right">{{ndans.accountList[0].burdun
+                  | currency:'':''}}</td>
+              </tr>
+              <tr>
+                <td>Хүүгийн орлого: </td>
+                <td style="text-align: right">{{ndans.huu | currency:'':''}}</td>
+              </tr>
+              <tr>
+                <td>Эцсийн үлдэгдэл: </td>
+                <td style="text-align: right">{{ndans.c2 | currency:'':''}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-7">
+    <div class="content-container">
+      <div class="content-medium">
+        <div class="content-header">
+          Нэрийн дансны үлдэгдлүүд
+        </div>
+        <div class="content-body">
+          <div [chart]="UldChart"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

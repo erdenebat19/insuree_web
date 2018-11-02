@@ -19,6 +19,7 @@ export class LoginComponent {
   Login(): void {
     this.loading = true;
     this._service.login(this.userid, this.password).subscribe(result => {
+      console.log(result);
       this.loading = false;
       if (result) {
         localStorage.setItem('user', JSON.stringify(result));

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { User } from './user';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 export class AccountService {
 
   apiurl = "http://localhost:10012/api/";
+  appurl = "http://data.ndaatgal.mn/NDM/";
   constructor(private http: HttpClient) { }
 
   login(userName: string, password: string): Observable<any> {
@@ -15,9 +17,38 @@ export class AccountService {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     };
     const data = {
-        'UserName': userName,
-        'Password': password
+      'UserName': userName,
+      'Password': password
     };
     return this.http.post<any>(this.apiurl + "auth/login", data, httpOptions);
+  }
+  register(user: User): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    };
+    // return null;
+    return this.http.post<any>(this.appurl +
+      "Register?user.last_name=" + user.LastName +
+      '&user.first_name=' + user.FirstName +
+      '&user.register=' + user.RegID +
+      '&user.login_id=' + user.Email +
+      '&user.phone=' + user.Phone
+      , httpOptions);
+  }
+  resetpassword(email: string): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    };
+    return this.http.post<any>(this.appurl + "ForgetPass?forgetPass=" + email, httpOptions);
+  }
+  changepassword(RegID: string, OldPass: string, NewPass: string): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    };
+    const data = {
+      'OldPassword': OldPass,
+      'NewPassword': NewPass
+    };
+    return this.http.post<any>(this.apiurl + "auth/ChangePassword", data, httpOptions);
   }
 }

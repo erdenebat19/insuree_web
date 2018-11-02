@@ -9,16 +9,20 @@ import { RecaptchaModule } from 'ng-recaptcha';
 
 @NgModule({
   imports: [
-    CommonModule, 
+    CommonModule,
     AccountRoutingModule,
     FormsModule,
-    RecaptchaModule
+    RecaptchaModule,
   ],
   declarations: [
     LoginComponent,
     RegisterComponent,
     ResetpasswordComponent,
   ],
-  exports: [LoginComponent, RegisterComponent, ResetpasswordComponent]
+  exports: [
+    LoginComponent,
+    RegisterComponent,
+    ResetpasswordComponent,
+  ]
 })
 export class AccountModule { }

@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="content-container">
+      <div class="content-large">
+        <div class="content-header">
+          Авсан тэтгэмжийн жагсаалт
+        </div>
+        <div class="content-body">
+          <app-inline-loader *ngIf='isloading'></app-inline-loader>
+          <div *ngIf='benefit-list==undefined && !isloading' class="alert alert-warning">
+            Тэтгэмж авсан талаар мэдээлэл алга
+          </div>
+          <div *ngIf="benefit_list!=undefined && !isloading">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Тэтгэмж</th>
+                  <th>Огноо</th>
+                  <th>Тэтгэмжийн дүн</th>
+                </tr>                
+              </thead>
+              <tbody>
+                <tr *ngFor="let r of benefit_list">
+                  <td>{{r.tetgemjType}}</td>
+                  <td>{{r.regDate | date: 'yyyy-MM-dd'}}</td>
+                  <td style="text-align: right">{{r.amount | currency:'':''}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

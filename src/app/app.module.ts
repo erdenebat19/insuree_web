@@ -9,10 +9,13 @@ import { routes, AppRoutingModule } from './app.routes';
 import { RouterModule } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { SidebarModule } from './shared/ui/sidebar/sidebar.module';
+import { ErrorReportComponent } from './shared/ui/error-report/error-report.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
+    ErrorReportComponent,
   ],
   imports: [
     BrowserModule,
@@ -20,6 +23,7 @@ import { SidebarModule } from './shared/ui/sidebar/sidebar.module';
     RecaptchaModule.forRoot(),
     HttpClientModule,
     SidebarModule,
+    SharedModule
   ],
   providers: [JwtHelperService],
   bootstrap: [AppComponent]

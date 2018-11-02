@@ -1,8 +1,10 @@
 <div class='back'>
+  <!-- <re-captcha size="invisible" #captchaRef="reCaptcha" (resolved)="$event && (register($event))" siteKey="6Lf5l3AUAAAAAOM97Bcnewt1wjYTFKta6HtW2al4"></re-captcha> -->
   <div class='container'>
     <div style="padding-bottom: 30px;"></div>
     <div class='row'>
       <div class="col">
+
         <div style="padding-bottom: 200px;"></div>
         <div class="alert alert-info">
           Мэдээллийн аюулгүй байдлыг хангах үүднээс та өөрт ойр байрлах Нийгмийн<br />даатгалын хэлтэст цахим иргэний
@@ -16,43 +18,104 @@
           <div class="login-logo-text">Нийгмийн даатгал</div>
         </div>
         <div class="login-form">
-          <div class="row login-form-input form-control">
-            <span class="col">
-              <input class="login-form-input-text" placeholder="Регисрийн дугаар" type="text" [(ngModel)]="regid">
-            </span>
-          </div>
-          <div class="row login-form-input form-control">
-            <span class="col">
-              <input class="login-form-input-text" placeholder="Эцэг/эхийн нэр" type="text" [(ngModel)]="lastname">
-            </span>
-          </div>
-          <div class="row login-form-input form-control">
-            <span class="col">
-              <input class="login-form-input-text" placeholder="Өөрийн нэр" type="text" [(ngModel)]="firstname">
-            </span>
-          </div>
-          <div class="row login-form-input form-control">
-            <span class="col">
-              <input class="login-form-input-text" placeholder="Имэйл хаяг" type="text" [(ngModel)]="email">
-            </span>
-          </div>
-          <div class="row login-form-input form-control">
-            <span class="col">
-              <input class="login-form-input-text" placeholder="Утасны дугаар" type="text" [(ngModel)]="mobile">
-            </span>
-          </div>
-          <div class="g-recaptcha" data-sitekey="6LfbmW8UAAAAAEs8QklHkNSBtkjXzy3cfAZXsVyZ"></div>
-          <div class="alert alert-danger" *ngIf="errormessage!=undefined">{{errormessage}}</div>
+          <form name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
+            <div class="row login-form-input form-control">
+              <span class="col">
+                <input id="RegID" name="RegID" class="login-form-input-text" placeholder='Регистрийн дугаар' required
+                  minlength="10" [(ngModel)]="user.RegID" #RegID="ngModel">
+              </span>
+            </div>
+            <div class="row login-form-input form-control">
+              <span class="col">
+                <input id='last_name' name='LastName' class="login-form-input-text" placeholder="Эцэг/эхийн нэр" type="text"
+                  [(ngModel)]="user.LastName" maxlength="500" #LastName="ngModel" required>
+              </span>
+            </div>
+            <div class="row login-form-input form-control">
+              <span class="col">
+                <input id='first_name' name='FirstName' class="login-form-input-text" placeholder="Өөрийн нэр" type="text"
+                  [(ngModel)]="user.FirstName" maxlength="500" #FirstName="ngModel" required>
+              </span>
+            </div>
+            <div class="row login-form-input form-control">
+              <span class="col">
+                <input class="login-form-input-text" name="Email" placeholder="Имэйл хаяг" type="email" [(ngModel)]="user.Email"
+                  maxlength="100" #Email="ngModel" required>
+              </span>
+            </div>
+            <div class="row login-form-input form-control">
+              <span class="col">
+                <input id='phone' class="login-form-input-text" name='Phone' placeholder="Утасны дугаар" type="number"
+                  [(ngModel)]="user.Phone" minlength="8" maxlength="8" #Phone="ngModel" required>
+              </span>
+            </div>
+            <div class="alert alert-danger" *ngIf="errormessage!=undefined">{{errormessage}}</div>
+            <div class="alert alert-info" *ngIf="success_message!=undefined">{{success_message}}</div>
+            <button type="submit" class="login-btn disabled" [disabled]="loading">
+              <span *ngIf="loading">Уншиж байна...</span>
+              <span *ngIf="!loading">Бүртгүүлэх</span>
+            </button>
+            <div style="text-align: center;width: 100%;">
+              <a class='login-form-link' routerLink="/account/login" style="margin-left: 0;padding-left: 0;">Нэвтрэх цонхруу буцах</a>
+            </div>
+          </form>
         </div>
-        <button class="login-btn disabled" [disabled]="loading" (click)='Login()'>
-          <span *ngIf="loading">Уншиж байна...</span>
-          <span *ngIf="!loading">Бүртгүүлэх</span>
-        </button>
       </div>
-      <div class="col"></div>
+      <div class="col">
+        <div style="padding-bottom: 180px;"></div>
+        <div *ngIf="(f.submitted && RegID.invalid) || (RegID.invalid && (RegID.dirty || RegID.touched))" class="alert alert-danger left-arrow">
+          <div *ngIf="RegID.errors.required">
+            Регистрийн дугаар оруулаагүй байна.
+          </div>
+          <div *ngIf="RegID.errors.minlength">
+            Регистрийн дугаар 10 тэмдэгт байх ёстой
+          </div>
+        </div>
+        <div *ngIf="(f.submitted && LastName.invalid) || (LastName.invalid && (LastName.dirty || LastName.touched))"
+          class="alert alert-danger left-arrow">
+          <div *ngIf="LastName.errors.required">
+            Овог оруулаагүй байна.
+          </div>
+        </div>
+        <div *ngIf="(f.submitted && FirstName.invalid) || (FirstName.invalid && (FirstName.dirty || FirstName.touched))"
+          class="alert alert-danger left-arrow">
+          <div *ngIf="FirstName.errors.required">
+            Нэр оруулаагүй байна.
+          </div>
+        </div>
+        <div *ngIf="(f.submitted && Email.invalid) || (Email.invalid && (Email.dirty || Email.touched))" class="alert alert-danger left-arrow">
+          <div *ngIf="Email.errors.required">
+            Имэйл оруулаагүй байна.
+          </div>
+        </div>
+        <div *ngIf="(f.submitted && Phone.invalid) || (Phone.invalid && (Phone.dirty || Phone.touched))" class="alert alert-danger left-arrow">
+          <div *ngIf="Phone.errors.required">
+            Утасны дугаар оруулаагүй байна.
+          </div>
+          <div *ngIf="RegID.errors.minlength">
+            Утасны дугаар 8 тэмдэгт байх ёстой
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <!-- <div class="row">
       <div style="background: #00674d; height: 100px; width: 100%; position: absolute; bottom: 0;">a</div>
     </div> -->
 </div>
+
+<script type="text/javascript">
+  $("#register").inputmask('Regex', {
+    regex: "^[А-Яа-яӨҮөүЁёà-ÿÀ-ßª¯¨ÿº¿¸]{2}[0-9]{2}[0-9]{1}[0-9]{1}[0-9]{1}[0-9]{3}$"
+  });
+  $("#phone").inputmask('Regex', {
+    regex: "^[0-9]{8}"
+  });
+  $("#first_name").inputmask('Regex', {
+    regex: "^[А-Яа-яӨҮөү]{40}$"
+  });
+  $("#last_name").inputmask('Regex', {
+    regex: "^[А-Яа-яӨҮөү]{40}$"
+  });
+
+</script>

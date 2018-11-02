@@ -1,0 +1,29 @@
+<app-inline-loader *ngIf='isloading'></app-inline-loader>
+<div *ngIf='ndans==undefined && !isloading' class="alert alert-warning">
+  Тэтгэмж авсан талаар мэдээлэл алга
+</div>
+<div *ngIf='ndans!=undefined && !isloading'>
+  <!-- {{ndans.year}} -->
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Сар</th>
+        <th>Цалин</th>
+        <th>Ажил олгогчоос</th>
+        <th>Даатгуулагчаас</th>
+        <th>Зардлын дүн</th>        
+        <th>Бүртгэсэн шимтгэл</th>        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor='let i of ndans.accountList'>
+        <td>{{i.month}}</td>
+        <td>{{i.salary}}</td>
+        <td>{{i.shim_ao}}</td>
+        <td>{{i.shim_d}}</td>
+        <td>{{i.zardun}}</td>
+        <td>{{i.burdun}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

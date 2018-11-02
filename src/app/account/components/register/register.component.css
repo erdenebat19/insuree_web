@@ -59,3 +59,17 @@
   padding-left: 30px;
   font-size: 10pt;
 }
+.left-arrow::before {
+  position: absolute;
+  top: calc(50% - 5px);
+  left: -4px;
+  width: 10px;
+  height: 10px;
+  border: none;
+  background: #ff5263;
+  transform: rotate(45deg);
+  content: '';
+}
+.is-invalid {
+  border-bottom: #ff5263 solid 1px;
+}
