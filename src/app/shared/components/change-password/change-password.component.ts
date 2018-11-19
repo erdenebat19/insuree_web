@@ -30,32 +30,25 @@ export class ChangePasswordComponent implements OnInit {
     }
     else {
       this.loading = true;
-      let user = JSON.parse(localStorage.getItem('user'));      
+      let user = JSON.parse(localStorage.getItem('user'));
       console.log(user.userID);
-      this._service.changepassword(user.userID, this.OldPass, this.NewPass).subscribe(result => {
-        console.log(result);
+      this._service.changepassword(user.userID, this.OldPass, this.NewPass).subscribe(result => {        
         this.loading = false;
-        if (result) {
-          if (result == 1) {
-            this.errormessage = undefined;
-            this.success_message = "Амжилттай солигдлоо!";
-          }
-          if (result == 2) {
-            this.success_message = undefined;
-            this.errormessage = "Алдаатай өгөгдөл дахин солино уу!";
-          }
-          else if (result != 1) {
-            this.success_message = undefined;
-            this.router.navigate(['/error']);
-          }
-        }
+        this.errormessage = undefined;
+        this.success_message = "Амжилттай солигдлоо!";
+
       }, error => {
+        console.log(error);
         this.loading = false;
-        if (error.status == 0) {
+        if (error.status == 0 || error.status == 500) {
           this.router.navigate(['/error']);
         }
+        else if (error.status == 401) {
+          this.success_message = undefined;
+          this.errormessage = "Нууц үг буруу байна!";
+        }
         else {
-          console.log(error);
+          this.success_message = undefined;
           this.errormessage = error.message;
         }
       });

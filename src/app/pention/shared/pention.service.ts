@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class PentionService {
 
-  apiurl = "http://localhost:10012/api/";
+  apiurl = "https://data.ndaatgal.mn:8081/userwebapi/api/";
   constructor(private http: HttpClient) { }
 
   getInfo(): Observable<any> {

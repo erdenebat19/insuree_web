@@ -8,7 +8,7 @@ import { User } from './user';
 })
 export class AccountService {
 
-  apiurl = "http://localhost:10012/api/";
+  apiurl = "https://data.ndaatgal.mn:8081/userwebapi/api/";
   appurl = "http://data.ndaatgal.mn/NDM/";
   constructor(private http: HttpClient) { }
 
@@ -42,8 +42,9 @@ export class AccountService {
     return this.http.post<any>(this.appurl + "ForgetPass?forgetPass=" + email, httpOptions);
   }
   changepassword(RegID: string, OldPass: string, NewPass: string): Observable<any> {
+    let user = JSON.parse(localStorage.getItem('user'));
     const httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': `Bearer ${user.token}` }),
     };
     const data = {
       'OldPassword': OldPass,

@@ -1,3 +1,13 @@
+.main-title {
+  font-size: 20pt;
+  font-weight: bold;
+}
+
+.sub-title {
+  font-size: 14pt;
+  font-weight: 400;
+}
+
 .rtable {
   border: 1px solid #ccc;
   width: 100%;
@@ -40,7 +50,7 @@ td {
   .show-in-print {
     display: table-header-group;
   }
-  
+
   td,
   th {
     font-size: 10pt;

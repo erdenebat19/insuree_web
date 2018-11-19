@@ -6,7 +6,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class PentionAccountService {
-  apiurl = "http://localhost:10012/api/";
+  apiurl = "https://data.ndaatgal.mn:8081/userwebapi/api/";
   constructor(private http: HttpClient) { }
 
   get(): Observable<any> {

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class InsureeService {
-  apiurl = "http://localhost:10012/api/";
+  apiurl = "https://data.ndaatgal.mn:8081/userwebapi/api/";
   constructor(private http: HttpClient) { }
 
   getPerson(): Observable<any> {
