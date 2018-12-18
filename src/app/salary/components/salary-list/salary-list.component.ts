@@ -52,6 +52,7 @@ export class SalaryListComponent implements OnInit {
       this.isloading = false;
     });
     this._service.getSalary(this.byear, this.eyear, CaptchaResponse).subscribe(response => {
+      console.log(response.qrCode);
       this.qrCode = response.qrCode
       this.qrCodeData = response.qrCodeData;
       this.isFirstLoad = false;

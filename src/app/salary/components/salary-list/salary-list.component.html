@@ -52,15 +52,19 @@
                           <div class="col-2">
                             <img src="../../../../assets/img/logo.svg" height="100px" style="margin-top: 10px;" />
                             <div style="position: absolute; bottom: 0; width: 300px; right: 0; overflow: visible; text-align: right; margin-right: 25px;font-size: 8pt;">
-                              Нийгмийн даатгалын ерөнхий газрын даргын 2018 оны 05 дугаар сарын 16-ний өдрийн А/55 тоот
+                              Нийгмийн даатгалын ерөнхий газрын даргын .... оны .. дугаар сарын ..-ний өдрийн .... тоот
                               тушаалын нэгдүгээр хавсралт
                             </div>
                           </div>
                         </div>
                       </div>
                       <br>
-                      <div class="line"></div>
-                      <br>
+                      <img src="/src/assets/img/alhan.png" alt="" class="line">
+                      <div class="row">
+                        <div class="col">
+                          {{ today | date : 'yyyy.MM.dd' }}
+                        </div>
+                      </div>
                       <div class="row">
                         <div class="col-2"></div>
                         <div class="col">
@@ -81,7 +85,7 @@
                           Нэр: {{person.firstName}}
                         </div>
                         <div class="col-4">
-                          Регистер: {{person.regID}}
+                          Регистр: {{person.regID}}
                         </div>
                       </div>
                     </div>
@@ -108,8 +112,8 @@
                           <td style="text-align: center;" class="small-text">{{salary.orgname}}</td>
                           <td style="text-align: center; width: 40px;">{{salary.year}}</td>
                           <td style="text-align: center; width: 30px;">{{salary.month}}</td>
-                          <td style="text-align: right; width: 80px;">{{salary.salary | currency:'':''}}</td>
-                          <td style="text-align: right; width: 80px;">{{salary.shim | currency:'':''}}</td>
+                          <td style="text-align: right; width: 80px;font-size: 8pt;">{{salary.salary | currency:'':''}}</td>
+                          <td style="text-align: right; width: 80px;font-size: 8pt;">{{salary.shim | currency:'':''}}</td>
                           <td style="text-align: center; width: 90px;">{{salary.ispayed}}</td>
                         </tr>
                       </tbody>
@@ -117,12 +121,12 @@
                     <div class="page-footer">
                       <div class="row">
                         <div class="col" style="font-size: 10pt;padding-top: 15px;">
-                          Жич: ТҮЦ машинаар олгосон лавлагаа тодорхойлолтыг http://data.ndaatgal.mn:808/checklav цахим
-                          хуудсанд хандаж баталгаажуулах кодоор үнэн эсхийг шалгах боломжтой.
+                          Жич: Энэхүү тодорхойлолтыг http://data.ndaatgal.mn:808/checklav цахим
+                          хуудсанд хандаж баталгаажуулах кодоор үнэн эсэхийг шалгах боломжтой.
                         </div>
                       </div>
                       <div class="bottom-footer">
-                        <div class="line"></div>
+                          <img src="/src/assets/img/alhan.png" alt="" class="line">
                         <div class="row">
                           <div class="col">
                             <img src="{{qrCodeData}}" width="100px" />
@@ -131,10 +135,7 @@
                           <div class="col-6">
                             <div class="row">
                               <div class="col" style="font-size: 10pt;text-align: right; font-family: Arial; font-weight: 400;">
-                                Лавлагааны хүчинтэй хугацаа 30 хоног
-                                <br />
-                                {{today.getFullYear()}} оны {{today.getMonth()+1}} сарын
-                                {{today.getDate()}}-ны өдрийн байдлаар
+                                Хүчинтэй хугацаа 30 хоног
                               </div>
                             </div>
                           </div>

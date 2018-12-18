@@ -6,6 +6,7 @@ import { ResetpasswordComponent } from './components/resetpassword/resetpassword
 import { AccountRoutingModule } from './account.routes';
 import { FormsModule } from '@angular/forms';
 import { RecaptchaModule } from 'ng-recaptcha';
+import { AuthorizedComponent } from './components/authorized/authorized.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { RecaptchaModule } from 'ng-recaptcha';
     LoginComponent,
     RegisterComponent,
     ResetpasswordComponent,
+    AuthorizedComponent,
   ],
   exports: [
     LoginComponent,

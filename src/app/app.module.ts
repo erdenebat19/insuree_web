@@ -19,7 +19,7 @@ import { SharedModule } from './shared/shared.module';
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes), 
+    RouterModule.forRoot(routes, { useHash: true }), 
     RecaptchaModule.forRoot(),
     HttpClientModule,
     SidebarModule,

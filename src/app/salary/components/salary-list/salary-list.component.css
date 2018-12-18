@@ -116,8 +116,10 @@ td {
   }
 
   .line {
-    height: 10px;
-    background: url('../../../../assets/img/alhan.png') repeat-x;
+    height: 5px;
+    /*background: url('../images/alhan.png') repeat-x;*/
+    background-repeat: repeat-x;
+    width: 100%;
   }
 
   .small-text {
