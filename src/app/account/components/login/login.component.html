@@ -2,11 +2,23 @@
   <div class='container'>
     <div style="padding-bottom: 50px;"></div>
     <div class='row'>
-      <div class="col"></div>
+      <div class="col">
+        <div style="padding-bottom: 200px;"></div>
+        <div class="alert alert-info">
+          <p>
+            Та доорхи 4 төрлийн бүртгэлсэн аль ч эрхээрээ нэвтэрч орох боломжтой
+          </p>
+          <ol>
+            <li>Уг сайтад бүртгүүлсэн эрхээрээ</li>
+            <li>Нийгмийн даатгалын гар утасны аппилкэйшнд бүртгүүлсэн эрхээрээ</li>
+            <li>ДАН системд бүртгүүсэн эрхээрээ</li>
+          </ol>
+        </div>
+      </div>
       <div class="col-md-4">
         <div class="login-logo text-center">
           <img class="login-logo-img" src="../../assets/img/logo.svg" alt="" height="100px">
-          <div class="login-logo-text">Нийгмийн даатгал</div>
+          <div class="login-logo-text">Даатгуулагчид зориулсан вэб</div>
         </div>
         <div class="login-form">
           <div class='form-group full-width'>
@@ -35,7 +47,7 @@
           <span *ngIf="!loading">Нэвтрэх</span>
         </button>
         <div style="text-align: center;margin-top: 15px;">
-          <a [href]="dan_url">Дангаар нэвтрэх</a>
+          <a [href]="dan_url">ДАН-аар нэвтрэх</a>
         </div>
         <div style="padding: 15px;"></div>
         <div class="row" style="width: 100%">
