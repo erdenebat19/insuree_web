@@ -56,7 +56,7 @@ describe('SalaryListComponent', () => {
             sd = data.slice(0, 24);
           }
           if (j > 0) {
-            sd = data.slice(j * 24, 24);
+            sd = data.slice(j * 24, 24 * (j + 1));
           }
           if (j == p2 - 1) {
             sd = data.slice(j * 24, data.length);

@@ -79,7 +79,7 @@ export class SalaryListComponent implements OnInit {
     for (let i = 0; i < data.length; i++) {
       if (irow >= pagesize) {
         lastindex = i;
-        pages.push(data.slice(pages.length * pagesize, pagesize));
+        pages.push(data.slice(pages.length * pagesize, pagesize * (pages.length + 1)));
         irow = 0;
       }
       irow++;
