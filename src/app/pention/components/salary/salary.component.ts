@@ -18,7 +18,6 @@ export class SalaryComponent implements OnInit {
     this.isloading = true;
     this.service.getSalary().subscribe(result => {
       this.isloading = false;
-      console.log(result);
       this.tetsalary = result;
     }, error => {
       if (error.status == 0) {

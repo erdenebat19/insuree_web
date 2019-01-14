@@ -9,7 +9,7 @@ import { User } from './user';
 export class AccountService {
 
   apiurl = "https://data.ndaatgal.mn:8081/userwebapi/api/";
-  appurl = "http://data.ndaatgal.mn/NDM/";
+  appurl = "https://data.ndaatgal.mn/NDM/";
   constructor(private http: HttpClient) { }
 
   login(userName: string, password: string): Observable<any> {

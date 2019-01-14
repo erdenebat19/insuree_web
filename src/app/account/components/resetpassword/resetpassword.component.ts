@@ -30,7 +30,6 @@ export class ResetpasswordComponent implements OnInit {
     else{
       this.loading = true;
       this._service.resetpassword(this.email).subscribe(result => {
-        console.log(result);
         this.loading = false;
         if (result) {
           if (result == 1) {
@@ -56,6 +55,5 @@ export class ResetpasswordComponent implements OnInit {
         }
       });
     }    
-    console.log(RecaptchaResponse);
   }
 }

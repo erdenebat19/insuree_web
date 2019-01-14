@@ -52,7 +52,6 @@ export class SalaryListComponent implements OnInit {
       this.isloading = false;
     });
     this._service.getSalary(this.byear, this.eyear, CaptchaResponse).subscribe(response => {
-      console.log(response.qrCode);
       this.qrCode = response.qrCode
       this.qrCodeData = response.qrCodeData;
       this.isFirstLoad = false;
@@ -104,7 +103,6 @@ export class SalaryListComponent implements OnInit {
     var printcontent = document.getElementById('printArea').innerHTML;
     var printPreview = window.open('_blank', 'print_preview');
     var printDocument = printPreview.document;
-    console.log(document.head);
     printDocument.open();
     printDocument.write("<!doctype html>");
     printDocument.write("<html>");
@@ -114,7 +112,6 @@ export class SalaryListComponent implements OnInit {
     printDocument.write("</body>");
     printDocument.write("</html>");
     printDocument.close();
-    console.log(printDocument.readyState.toString());
     printPreview.focus();
   }
 }

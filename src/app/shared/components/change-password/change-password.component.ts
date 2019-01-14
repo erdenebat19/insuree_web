@@ -31,14 +31,12 @@ export class ChangePasswordComponent implements OnInit {
     else {
       this.loading = true;
       let user = JSON.parse(localStorage.getItem('user'));
-      console.log(user.userID);
       this._service.changepassword(user.userID, this.OldPass, this.NewPass).subscribe(result => {        
         this.loading = false;
         this.errormessage = undefined;
         this.success_message = "Амжилттай солигдлоо!";
 
       }, error => {
-        console.log(error);
         this.loading = false;
         if (error.status == 0 || error.status == 500) {
           this.router.navigate(['/error']);

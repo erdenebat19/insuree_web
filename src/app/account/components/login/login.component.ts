@@ -26,10 +26,11 @@ export class LoginComponent {
   Login(): void {
     this.loading = true;
     this._service.login(this.userid, this.password).subscribe(result => {
-      console.log(result);
       this.loading = false;
       if (result) {
+        var currentDate = new Date();
         localStorage.setItem('user', JSON.stringify(result));
+        localStorage.setItem('startTime', currentDate.toString());
         this.router.navigate(['/']);
       }
       else {

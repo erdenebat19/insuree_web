@@ -39,7 +39,6 @@ export class DashboardComponent implements OnInit {
   }
 
   GetComponent(dashindex: number, componentName: Components): any {
-    console.log(componentName);
     var factory: any;
     switch (componentName) {
       case 0:

@@ -19,7 +19,6 @@ export class HistoryComponent implements OnInit {
   ngOnInit() {
     this.isloading = true;
     this.service.getInfo().subscribe(result => {
-      console.log(result);
       this.isloading = false;
       this.history = result;
       if (this.history != undefined && this.history.length > 0) {        

@@ -22,7 +22,6 @@ export class RegisterComponent implements OnInit {
   register() {
     this.loading = true;
     this._service.register(this.user).subscribe(result => {
-      console.log(result);
       this.loading = false;
       if (result) {
         if (result == 1) {

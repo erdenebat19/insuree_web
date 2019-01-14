@@ -23,9 +23,7 @@ export class BenefitListComponent implements OnInit {
     this.service.get().subscribe(result => {
       this.isloading = false;
       this.benefit_list = result;
-      console.log(this.benefit_list);
     }, error => {
-      console.log(error);
       if (error.status == 0) {
         this.route.navigate(['/error']);
       }

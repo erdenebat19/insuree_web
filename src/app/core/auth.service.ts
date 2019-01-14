@@ -9,12 +9,21 @@ export class AuthService {
   constructor() { }
   public isAuthenticated(): boolean {
     var user = JSON.parse(localStorage.getItem('user'));
+    var startDate = new Date(localStorage.getItem('startTime'));
     if (user == null || user == undefined) {
       return false;
     }
-    if(user.token == null || user.token == undefined) {
+    if (user.token == null || user.token == undefined) {
       return false;
     }
-    return !this.jwtHelper.isTokenExpired(user.token);
+    var currentDate = new Date();
+    var minutes = Math.floor((currentDate.getTime() - startDate.getTime()) / 60000);
+    if (minutes > 60)
+    {
+      localStorage.clear();
+      return false;
+    }
+    else
+      return true;
   }
 }

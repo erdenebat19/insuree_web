@@ -18,9 +18,12 @@ export class AuthorizedComponent implements OnInit {
     if (token != "") {
       let user = {
         token: token,
-        userID: userID
+        userID: userID,
+
       }
+      var currentDate = new Date();
       localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('startTime', currentDate.toString());
       this.router.navigate(['/']);
     }
     else {

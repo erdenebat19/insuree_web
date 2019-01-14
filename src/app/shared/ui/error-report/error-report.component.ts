@@ -13,7 +13,6 @@ export class ErrorReportComponent implements OnInit {
   constructor(private router: Router) { }
   ngOnInit() {
     if (localStorage.getItem('browserRefresh') != null) {
-      console.log(localStorage.getItem('browserRefresh'));
       this.router.navigate(['/login']);
     }
     localStorage.setItem('browserRefresh', '1');
