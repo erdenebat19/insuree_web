@@ -11,6 +11,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { SidebarModule } from './shared/ui/sidebar/sidebar.module';
 import { ErrorReportComponent } from './shared/ui/error-report/error-report.component';
 import { SharedModule } from './shared/shared.module';
+import { GoogleAnalyticsServiceService } from './shared/shared/google-analytics-service.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,12 @@ import { SharedModule } from './shared/shared.module';
     SidebarModule,
     SharedModule
   ],
-  providers: [JwtHelperService],
+  providers: [
+    JwtHelperService, 
+    GoogleAnalyticsServiceService
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  constructor(protected _googleAnalyticsService: GoogleAnalyticsServiceService) { } 
+}
