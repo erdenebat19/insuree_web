@@ -1,0 +1,46 @@
+<div class='back'>
+  <div class='container'>
+    <div style="padding-bottom: 30px;"></div>
+    <div class='row'>
+      <div class="col">
+      </div>
+      <div class="col-md-4">
+        <div class="login-logo text-center">
+          <img class="login-logo-img" src="../../assets/img/logo.svg" alt="" height="100px">
+          <div class="login-logo-text">Нийгмийн даатгал</div>
+        </div>
+        <div class="login-form">
+          <app-inline-loader *ngIf='loading'></app-inline-loader>
+          <div class="alert alert-info">Та сүүлийн 5 жилийн дотор сүүлд ажилласан ажил олгогчийн нэрийг сонгоно уу.
+          </div>
+          <ul class="list-group">
+            <li class="list-group-item" *ngFor='let item of rorgs'>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" id="id{{item.oid}}" [value]="item.oid"
+                  [(ngModel)]='selectedOrg'>
+                <label class="form-check-label" for="id{{item.oid}}">
+                  {{item.orgName}}
+                  <br>
+                  <small>{{item.aimagName}}</small>
+                </label>
+              </div>
+            </li>
+          </ul>
+          <div class="alert alert-danger" *ngIf="errormessage!=undefined">{{errormessage}}</div>
+          <div class="alert alert-info" *ngIf="success_message!=undefined">{{success_message}}</div>
+          <button (click)='goto_next()' type="submit" class="login-btn disabled" [disabled]="loading">
+            <span *ngIf="loading">Уншиж байна...</span>
+            <span *ngIf="!loading">Үргэлжлүүлэх</span>
+          </button>
+          <div style="text-align: center;width: 100%;">
+            <a class='login-form-link' routerLink="/account/login" style="margin-left: 0;padding-left: 0;">Нэвтрэх
+              цонхруу буцах</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+
+      </div>
+    </div>
+  </div>
+</div>

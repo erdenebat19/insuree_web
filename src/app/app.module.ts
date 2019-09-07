@@ -14,24 +14,20 @@ import { SharedModule } from './shared/shared.module';
 import { GoogleAnalyticsServiceService } from './shared/shared/google-analytics-service.service';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ErrorReportComponent,
-  ],
+  declarations: [AppComponent, ErrorReportComponent],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes, { useHash: true }), 
+    RouterModule.forRoot(routes, { useHash: true }),
     RecaptchaModule.forRoot(),
     HttpClientModule,
     SidebarModule,
     SharedModule
   ],
-  providers: [
-    JwtHelperService, 
-    GoogleAnalyticsServiceService
-  ],
+  providers: [JwtHelperService, GoogleAnalyticsServiceService],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
-  constructor(protected _googleAnalyticsService: GoogleAnalyticsServiceService) { } 
+export class AppModule {
+  constructor(
+    protected _googleAnalyticsService: GoogleAnalyticsServiceService
+  ) {}
 }

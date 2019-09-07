@@ -1,0 +1,42 @@
+<div class='back'>
+  <div class='container'>
+    <div style="padding-bottom: 30px;"></div>
+    <div class='row'>
+      <div class="col">
+      </div>
+      <div class="col-md-4">
+        <div class="login-logo text-center">
+          <img class="login-logo-img" src="../../assets/img/logo.svg" alt="" height="100px">
+          <div class="login-logo-text">Нийгмийн даатгал</div>
+        </div>
+        <div class="login-form">
+          <app-inline-loader *ngIf='loading'></app-inline-loader>
+          <div class="alert alert-info" *ngIf='org!=undefined && date!=undefined && info_message!=undefined'>
+            {{info_message}}
+          </div>
+          <div class="row login-form-input form-control">
+            <span class="col">
+              <input id="dun" name="dun" class="login-form-input-text" [placeholder]='pholder' [(ngModel)]='dun'>
+            </span>
+          </div>
+          <div class="alert alert-danger" *ngIf="errormessage!=undefined">{{errormessage}}</div>
+          <div class="alert alert-info" *ngIf="success_message!=undefined">{{success_message}}</div>
+          <button type="submit" class="login-btn disabled" [disabled]="loading" (click)='confirm()'>
+            <span *ngIf="loading">Уншиж байна...</span>
+            <span *ngIf="!loading">Баталгаажуулах</span>
+          </button>
+          <div style="text-align: center;width: 100%;">
+            <a class=' login-form-link' routerLink="/account/login" style="margin-left: 0;padding-left: 0;">Нэвтрэх
+              цонхруу буцах</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+
+      </div>
+    </div>
+  </div>
+  <!-- <div class="row">
+        <div style="background: #00674d; height: 100px; width: 100%; position: absolute; bottom: 0;">a</div>
+      </div> -->
+</div>

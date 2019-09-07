@@ -26,7 +26,13 @@ export const routes: Routes = [
   },
   {
     path: 'ndans',
-    loadChildren: './pention-account/pention-account.module#PentionAccountModule',
+    loadChildren:
+      './pention-account/pention-account.module#PentionAccountModule',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'sd',
+    loadChildren: './sd/sd.module#SdModule',
     canActivate: [AuthGuard]
   },
   {
@@ -36,7 +42,7 @@ export const routes: Routes = [
   },
   {
     path: 'error',
-    component: ErrorReportComponent,
+    component: ErrorReportComponent
   },
   {
     path: '',
@@ -45,9 +51,7 @@ export const routes: Routes = [
   }
 ];
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes),
-  ],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

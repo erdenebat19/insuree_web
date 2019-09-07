@@ -9,10 +9,12 @@ body {
   color: #fff;
   padding: 8px 15px;
 }
+
 .btn-noborder {
   border: none;
   background: transparent;
 }
+
 .btn-circle {
   background: #fff;
   border: 1px solid #b7bfc6;
@@ -181,6 +183,26 @@ select {
 
 .list-group-item:hover {
   background: #848f99;
+}
+
+.itable {
+  font-size: 10pt;
+  border: 1px solid #ccc;
+}
+
+.itable th {
+  font-size: 11pt;
+  font-weight: 400;
+  text-align: center;
+  background: #14aaf5;
+  border: none;
+  color: #fff;
+  padding: 5px;
+}
+
+.itable td {
+  padding: 5px;
+  border: 1px solid #ccc;
 }
 
 /* End */

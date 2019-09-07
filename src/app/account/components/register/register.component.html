@@ -6,11 +6,7 @@
       <div class="col">
 
         <div style="padding-bottom: 200px;"></div>
-        <div class="alert alert-info">
-          Мэдээллийн аюулгүй байдлыг хангах үүднээс та өөрт ойр байрлах Нийгмийн<br />даатгалын хэлтэст цахим иргэний
-          үнэмлэхтэйгээ ирж бүртгэлээ<br />баталгаажуулна уу. Баталгаажуулалт хийгдсэнээр нэвтрэх нууц үг бүртгүүлсэн<br />цахим
-          шуудан руу илгээгдэнэ.<br> <br> Хэрэв та ДАН систем ашиглан бүртгүүлвэл Нийгмийн даатгалын хэлтэст очих шаардлагагүй. ДАН систем ашиглан бүртгүүлэх бол <a style="color: yellow;" href="https://sso.gov.mn/register/">энд дарна</a> уу
-        </div>
+        <div [innerHTML]='info_message' class="alert alert-info" *ngIf='info_message!=undefined'></div>
       </div>
       <div class="col-md-4">
         <div class="login-logo text-center">
@@ -27,20 +23,26 @@
             </div>
             <div class="row login-form-input form-control">
               <span class="col">
-                <input id='last_name' name='LastName' class="login-form-input-text" placeholder="Эцэг/эхийн нэр" type="text"
-                  [(ngModel)]="user.LastName" maxlength="500" #LastName="ngModel" required>
+                <input id='sur_name' name='SurName' class="login-form-input-text" placeholder="Ургийн овог" type="text"
+                  [(ngModel)]="user.SurName" maxlength="500" #LastName="ngModel" required>
               </span>
             </div>
             <div class="row login-form-input form-control">
               <span class="col">
-                <input id='first_name' name='FirstName' class="login-form-input-text" placeholder="Өөрийн нэр" type="text"
-                  [(ngModel)]="user.FirstName" maxlength="500" #FirstName="ngModel" required>
+                <input id='last_name' name='LastName' class="login-form-input-text" placeholder="Эцэг/эхийн нэр"
+                  type="text" [(ngModel)]="user.LastName" maxlength="500" #LastName="ngModel" required>
               </span>
             </div>
             <div class="row login-form-input form-control">
               <span class="col">
-                <input class="login-form-input-text" name="Email" placeholder="Имэйл хаяг" type="email" [(ngModel)]="user.Email"
-                  maxlength="100" #Email="ngModel" required>
+                <input id='first_name' name='FirstName' class="login-form-input-text" placeholder="Өөрийн нэр"
+                  type="text" [(ngModel)]="user.FirstName" maxlength="500" #FirstName="ngModel" required>
+              </span>
+            </div>
+            <div class="row login-form-input form-control">
+              <span class="col">
+                <input class="login-form-input-text" name="Email" placeholder="Имэйл хаяг" type="email"
+                  [(ngModel)]="user.Email" maxlength="100" #Email="ngModel" required>
               </span>
             </div>
             <div class="row login-form-input form-control">
@@ -53,17 +55,19 @@
             <div class="alert alert-info" *ngIf="success_message!=undefined">{{success_message}}</div>
             <button type="submit" class="login-btn disabled" [disabled]="loading">
               <span *ngIf="loading">Уншиж байна...</span>
-              <span *ngIf="!loading">Бүртгүүлэх</span>
+              <span *ngIf="!loading">{{btn_register_caption}}</span>
             </button>
             <div style="text-align: center;width: 100%;">
-              <a class='login-form-link' routerLink="/account/login" style="margin-left: 0;padding-left: 0;">Нэвтрэх цонхруу буцах</a>
+              <a class='login-form-link' routerLink="/account/login" style="margin-left: 0;padding-left: 0;">Нэвтрэх
+                цонхруу буцах</a>
             </div>
           </form>
         </div>
       </div>
       <div class="col">
         <div style="padding-bottom: 180px;"></div>
-        <div *ngIf="(f.submitted && RegID.invalid) || (RegID.invalid && (RegID.dirty || RegID.touched))" class="alert alert-danger left-arrow">
+        <div *ngIf="(f.submitted && RegID.invalid) || (RegID.invalid && (RegID.dirty || RegID.touched))"
+          class="alert alert-danger left-arrow">
           <div *ngIf="RegID.errors.required">
             Регистрийн дугаар оруулаагүй байна.
           </div>
@@ -83,12 +87,14 @@
             Нэр оруулаагүй байна.
           </div>
         </div>
-        <div *ngIf="(f.submitted && Email.invalid) || (Email.invalid && (Email.dirty || Email.touched))" class="alert alert-danger left-arrow">
+        <div *ngIf="(f.submitted && Email.invalid) || (Email.invalid && (Email.dirty || Email.touched))"
+          class="alert alert-danger left-arrow">
           <div *ngIf="Email.errors.required">
             Имэйл оруулаагүй байна.
           </div>
         </div>
-        <div *ngIf="(f.submitted && Phone.invalid) || (Phone.invalid && (Phone.dirty || Phone.touched))" class="alert alert-danger left-arrow">
+        <div *ngIf="(f.submitted && Phone.invalid) || (Phone.invalid && (Phone.dirty || Phone.touched))"
+          class="alert alert-danger left-arrow">
           <div *ngIf="Phone.errors.required">
             Утасны дугаар оруулаагүй байна.
           </div>
