@@ -1,0 +1,27 @@
+<div class="wrapper">
+  <sidebar></sidebar>
+  <div>sidebar</div>
+  <div class="topbar">
+    <div class="topbar-left">
+    </div>
+    <span class="topbar-right">
+      <a href="" class="btn-circle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">
+        <div class="btn-circle-label">
+          <i class="icon ion-ios-gear-outline"></i>
+        </div>
+      </a>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" [routerLink]="['change_password']">
+          <i class="icon ion-ios-locked"></i>Нууц үг солих</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#" (click)='Logout()'>
+          <i class="icon ion-android-exit"></i>Програмаас гарах</a>
+      </div>
+    </span>
+  </div>
+  <div class="topbar1"></div>
+  <div class="content-container">
+    <router-outlet></router-outlet>
+  </div>
+</div>

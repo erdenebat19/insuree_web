@@ -6,7 +6,7 @@ import { AccountService } from "../../shared/account.service";
 @Component({
   selector: "app-register",
   templateUrl: "./register.component.html",
-  styleUrls: ["./register.component.css"]
+  styleUrls: ["./register.component.css", "../../shared/account.css"]
 })
 export class RegisterComponent implements OnInit {
   loading: boolean = false;

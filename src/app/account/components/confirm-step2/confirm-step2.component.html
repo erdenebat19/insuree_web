@@ -1,6 +1,6 @@
 <div class='back'>
   <div class='container'>
-    <div style="padding-bottom: 30px;"></div>
+    <div style="padding-bottom: 15px;"></div>
     <div class='row'>
       <div class="col">
       </div>
@@ -19,8 +19,10 @@
               <input id="dun" name="dun" class="login-form-input-text" [placeholder]='pholder' [(ngModel)]='dun'>
             </span>
           </div>
-          <div class="alert alert-danger" *ngIf="errormessage!=undefined">{{errormessage}}</div>
-          <div class="alert alert-info" *ngIf="success_message!=undefined">{{success_message}}</div>
+          <div class="alert alert-danger" *ngIf="errormessage!=undefined">{{errormessage}}
+          </div>
+          <div class="alert alert-success" *ngIf="success_message!=undefined">
+            {{success_message}}</div>
           <button type="submit" class="login-btn disabled" [disabled]="loading" (click)='confirm()'>
             <span *ngIf="loading">Уншиж байна...</span>
             <span *ngIf="!loading">Баталгаажуулах</span>

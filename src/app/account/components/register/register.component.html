@@ -1,15 +1,13 @@
 <div class='back'>
-  <!-- <re-captcha size="invisible" #captchaRef="reCaptcha" (resolved)="$event && (register($event))" siteKey="6Lf5l3AUAAAAAOM97Bcnewt1wjYTFKta6HtW2al4"></re-captcha> -->
   <div class='container'>
-    <div style="padding-bottom: 30px;"></div>
+    <div style="padding-bottom: 15px;"></div>
     <div class='row'>
       <div class="col">
-
-        <div style="padding-bottom: 200px;"></div>
+        <div class="pad-bottom-200"></div>
         <div [innerHTML]='info_message' class="alert alert-info" *ngIf='info_message!=undefined'></div>
       </div>
       <div class="col-md-4">
-        <div class="login-logo text-center">
+        <div class="login-logo text-center d-none d-md-block">
           <img class="login-logo-img" src="../../assets/img/logo.svg" alt="" height="100px">
           <div class="login-logo-text">Нийгмийн даатгал</div>
         </div>

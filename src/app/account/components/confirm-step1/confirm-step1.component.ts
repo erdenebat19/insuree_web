@@ -5,7 +5,7 @@ import { AccountService } from "../../shared/account.service";
 @Component({
   selector: "app-confirm-step1",
   templateUrl: "./confirm-step1.component.html",
-  styleUrls: ["./confirm-step1.component.css"]
+  styleUrls: ["./confirm-step1.component.css", "../../shared/account.css"]
 })
 export class ConfirmStep1Component implements OnInit {
   regid: string;

@@ -1,10 +1,9 @@
 <div class='back'>
   <div class='container'>
-    <div style="padding-bottom: 30px;"></div>
+    <div style="padding-bottom: 15px;"></div>
     <div class='row'>
       <div class="col">
-
-        <div style="padding-bottom: 200px;"></div>
+        <div class="pad-bottom-200"></div>
       </div>
       <div class="col-md-4">
         <div class="login-logo text-center">
@@ -13,8 +12,12 @@
         </div>
         <div class="login-form">
           <app-inline-loader *ngIf='loading'></app-inline-loader>
-          <div [innerHTML]='info_message' class="alert alert-info"></div>
-          <div [innerHTML]='error_message' class="alert alert-danger"></div>
+          <div [innerHTML]='info_message' class="alert alert-info" *ngIf='info_message!=undefined'></div>
+          <div [innerHTML]='error_message' class="alert alert-danger" *ngIf='error_message!=undefined'></div>
+        </div>
+        <div style="text-align: center;width: 100%;">
+          <a class='login-form-link' routerLink="/account/login" style="margin-left: 0;padding-left: 0;">Нэвтрэх
+            цонхруу буцах</a>
         </div>
       </div>
       <div class="col">

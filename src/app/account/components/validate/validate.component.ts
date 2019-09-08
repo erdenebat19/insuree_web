@@ -5,7 +5,7 @@ import { AccountService } from "../../shared/account.service";
 @Component({
   selector: "app-validate",
   templateUrl: "./validate.component.html",
-  styleUrls: ["./validate.component.css"]
+  styleUrls: ["./validate.component.css", "../../shared/account.css"]
 })
 export class ValidateComponent implements OnInit {
   loading: boolean;
@@ -26,6 +26,7 @@ export class ValidateComponent implements OnInit {
         if (result != undefined && result != null) {
           this.router.navigate(["/account/editregister"]);
         } else {
+          this.loading = false;
           this.info_message = "Баталгаажуулах хаяг буруу байна.";
         }
       },
