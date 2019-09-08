@@ -1,4 +1,5 @@
-<re-captcha size="invisible" #captchaRef="reCaptcha" (resolved)="$event && getSalary($event)" siteKey="6Lf5l3AUAAAAAOM97Bcnewt1wjYTFKta6HtW2al4"></re-captcha>
+<re-captcha size="invisible" #captchaRef="reCaptcha" (resolved)="$event && getSalary($event)"
+  siteKey="6Lf5l3AUAAAAAOM97Bcnewt1wjYTFKta6HtW2al4"></re-captcha>
 <div class="row">
   <div class="col-md-12">
     <div class="content-container">
@@ -10,25 +11,31 @@
           <div class="row">
             <div class="col">
               <div class="row">
-                <div class="col-6">
-                  <div class="row">
-                    <div class="col-3">
-                      <input type="number" class="form-control" [(ngModel)]='byear' id='byear'>
+                <div class="col-md-6 col-sm-12">
+                  <div class="d-flex">
+                    <div class="mx-2">
+                      <input type="number" class="form-control" [(ngModel)]='byear' id='byear' style="width: 80px;">
                     </div>
-                    <div class="col-3">
-                      <input type="number" class="form-control" [(ngModel)]='eyear' id='eyear'>
+                    <div class="mx-2">
+                      <input type="number" class="form-control" [(ngModel)]='eyear' id='eyear' style="width: 80px;">
                     </div>
-                    <div class="col-3">
-                      <button class="btn btn-outline-primary form-control" (click)='captchaRef.execute()'>Хайх</button>
+                    <div class="mx-2">
+                      <button class="btn btn-outline-primary form-control" (click)='captchaRef.execute()'>
+                        <i class="ion-search px-2"></i>
+                        <span class="d-none d-md-inline">Хайх</span>
+                      </button>
                     </div>
-                    <div class="col-3" *ngIf='salaries!=undefined && salaries.length>0'>
-                      <!-- <button class="btn btn-outline-success form-control" (onclick)='printContent()'>Хэвлэх</button> -->
-                      <button class="btn btn-outline-success form-control" (click)='printContent()'>Хэвлэх</button>
+                    <div class="mx-2" *ngIf='salaries!=undefined && salaries.length>0'>
+                      <button class="btn btn-outline-success form-control" (click)='printContent()'>
+                        <i class="ion-ios-printer px-2"></i>
+                        <span class="d-none d-md-inline">Хэвлэх</span>
+                      </button>
                     </div>
                   </div>
                   <br>
                   <app-inline-loader *ngIf='isloading'></app-inline-loader>
-                  <div class="alert alert-warning" *ngIf="(salaries==undefined || salaries.length==0) && !isloading && !isFirstLoad">
+                  <div class="alert alert-warning"
+                    *ngIf="(salaries==undefined || salaries.length==0) && !isloading && !isFirstLoad">
                     Мэдээлэл алга
                   </div>
                 </div>
@@ -40,7 +47,8 @@
                       <div class="row">
                         <div class="row" style="height: 150px">
                           <div class="col-2">
-                            <img src="../../../../assets/img/soyombo.png" height="120px" style="margin-top: 10px;margin-left: 5px;" />
+                            <img src="../../../../assets/img/soyombo.png" height="120px"
+                              style="margin-top: 10px;margin-left: 5px;" />
                           </div>
                           <div class="col-8">
                             <div>
@@ -51,7 +59,8 @@
                           </div>
                           <div class="col-2">
                             <img src="../../../../assets/img/logo.svg" height="100px" style="margin-top: 10px;" />
-                            <div style="position: absolute; bottom: 0; width: 300px; right: 0; overflow: visible; text-align: right; margin-right: 25px;font-size: 8pt;">
+                            <div
+                              style="position: absolute; bottom: 0; width: 300px; right: 0; overflow: visible; text-align: right; margin-right: 25px;font-size: 8pt;">
                               Нийгмийн даатгалын ерөнхий газрын даргын 2018 оны 11 дугаар сарын 27-ний өдрийн А/204 тоот
                               тушаалын нэгдүгээр хавсралт
                             </div>
@@ -89,35 +98,41 @@
                         </div>
                       </div>
                     </div>
-                    <table class="rtable">
-                      <thead [class.show-in-print]="!isFirst">
-                        <tr style="font-size: 10pt; text-align: center">
-                          <th rowspan="2">Хэлтсийн нэр</th>
-                          <th rowspan="2">Ажил олгогчийн код</th>
-                          <th rowspan="2">Ажил олгогчийн нэр</th>
-                          <th rowspan="2">Он</th>
-                          <th rowspan="2">Сар</th>
-                          <th colspan="2">Даатгуулагч</th>
-                          <th rowspan="2">Ажил олгогч шимтгэл төлсөн эсэх</th>
-                        </tr>
-                        <tr style="font-size: 10pt; text-align: center">
-                          <th>Цалин</th>
-                          <th>Төлөх шимтгэл</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr *ngFor='let salary of page' style="font-size: 10pt">
-                          <td style="text-align: center; width: 120px;">{{salary.domName}}</td>
-                          <td style="text-align: center; width: 80px;">{{salary.orgndid}}</td>
-                          <td style="text-align: center;" class="small-text">{{salary.orgname}}</td>
-                          <td style="text-align: center; width: 40px;">{{salary.year}}</td>
-                          <td style="text-align: center; width: 30px;">{{salary.month}}</td>
-                          <td style="text-align: right; width: 80px;font-size: 8pt;">{{salary.salary | currency:'':''}}</td>
-                          <td style="text-align: right; width: 80px;font-size: 8pt;">{{salary.shim | currency:'':''}}</td>
-                          <td style="text-align: center; width: 90px;">{{salary.ispayed}}</td>
-                        </tr>
-                      </tbody>
-                    </table>
+                    <div></div>
+                    <div class='table-responsive'>
+                      <table class="rtable">
+                        <thead [class.show-in-print]="!isFirst">
+                          <tr style="font-size: 10pt; text-align: center">
+                            <th rowspan="2">Хэлтсийн нэр</th>
+                            <th rowspan="2">Ажил олгогчийн код</th>
+                            <th rowspan="2">Ажил олгогчийн нэр</th>
+                            <th rowspan="2">Он</th>
+                            <th rowspan="2">Сар</th>
+                            <th colspan="2">Даатгуулагч</th>
+                            <th rowspan="2">Ажил олгогч шимтгэл төлсөн эсэх</th>
+                          </tr>
+                          <tr style="font-size: 10pt; text-align: center">
+                            <th>Цалин</th>
+                            <th>Төлөх шимтгэл</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor='let salary of page' style="font-size: 10pt">
+                            <td style="text-align: center; width: 120px;">{{salary.domName}}</td>
+                            <td style="text-align: center; width: 80px;">{{salary.orgndid}}</td>
+                            <td style="text-align: center;" class="small-text">{{salary.orgname}}</td>
+                            <td style="text-align: center; width: 40px;">{{salary.year}}</td>
+                            <td style="text-align: center; width: 30px;">{{salary.month}}</td>
+                            <td style="text-align: right; width: 80px;font-size: 8pt;">
+                              {{salary.salary | currency:'':''}}
+                            </td>
+                            <td style="text-align: right; width: 80px;font-size: 8pt;">{{salary.shim | currency:'':''}}
+                            </td>
+                            <td style="text-align: center; width: 90px;">{{salary.ispayed}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
                     <div class="page-footer">
                       <div class="row">
                         <div class="col" style="font-size: 10pt;padding-top: 15px;">
@@ -126,15 +141,16 @@
                         </div>
                       </div>
                       <div class="bottom-footer">
-                          <img src="../../../../assets/img/alhan.png" alt="" class="line" style="margin-top: -5px;">
+                        <img src="../../../../assets/img/alhan.png" alt="" class="line" style="margin-top: -5px;">
                         <div class="row">
                           <div class="col">
-                            <img src="{{qrCodeData}}" width="100px" style="margin-top: -8px;"/>
+                            <img src="{{qrCodeData}}" width="100px" style="margin-top: -8px;" />
                             <span>{{qrCode}}</span>
                           </div>
                           <div class="col-6">
                             <div class="row">
-                              <div class="col" style="font-size: 10pt;text-align: right; font-family: Arial; font-weight: 400;">
+                              <div class="col"
+                                style="font-size: 10pt;text-align: right; font-family: Arial; font-weight: 400;">
                                 Хүчинтэй хугацаа 30 хоног
                               </div>
                             </div>

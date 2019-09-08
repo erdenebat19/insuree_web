@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.info_message =
-      'Мэдээллийн аюулгүй байдлыг хангах үүднээс та өөрт ойр байрлах Нийгмийн<br />даатгалын хэлтэст цахим иргэний үнэмлэхтэйгээ ирж бүртгэлээ<br />баталгаажуулна уу. Баталгаажуулалт хийгдсэнээр нэвтрэх нууц үг бүртгүүлсэн<br />цахим шуудан руу илгээгдэнэ.<br> <br> Хэрэв та ДАН систем ашиглан бүртгүүлвэл Нийгмийн даатгалын хэлтэст очих шаардлагагүй. ДАН систем ашиглан бүртгүүлэх бол <a style="color: yellow;" href="https://sso.gov.mn/register/">энд дарна</a> уу';
+      'Баталгаажуулалт хийгдсэний дараа нэвтрэх нууц үг бүртгүүлсэн цахим шуудан руу илгээгдэх тул мэдээллээ зөв оруулна уу.<br> <br> ДАН систем ашиглан бүртгүүлэх бол <a style="color: yellow;" href="https://sso.gov.mn/register/">энд дарна</a> уу';
   }
 
   register() {
@@ -31,6 +31,7 @@ export class RegisterComponent implements OnInit {
         if (result) {
           if (result == 1) {
             this.errormessage = undefined;
+            sessionStorage.setItem("profile", JSON.stringify(this.user));
             //this.success_message = 'Хүсэлтийг хүлээн авлаа. Та өөрт ойр байрлах Нийгмийн даатгалын хэлтэс дээр иргэний үнэмлэхтэйгээ очиж бүртгэлээ баталгаажуулна уу!';
             this.router.navigate(["/account/confirm1"]);
           }

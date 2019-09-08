@@ -118,28 +118,39 @@ select {
 
 /* Begin */
 
+.content-container {
+  display: block;
+  /* float: left; */
+  margin-top: 0px;
+  margin-left: 0px;
+  /* padding: 15px; */
+  /* width: calc(100%); */
+  width: 100%;
+  /* background: #14aaf5; */
+}
+
 .content-medium {
   clear: both;
   width: 100%;
-  min-width: 300px;
-  max-width: 800px;
   margin: 0 auto;
+  padding: 15px;
   /* z-index: -12000; */
 }
 
 .content-small {
   clear: both;
   min-width: 100px;
-  max-width: 500px;
-  margin: 15px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 15px;
   /* z-index: -12000; */
 }
 
 .content-large {
   clear: both;
-  min-width: 800px;
-  max-width: 1400px;
+  width: 100%;
   margin: 0 auto;
+  padding: 15px;
   /* z-index: -11100; */
 }
 
