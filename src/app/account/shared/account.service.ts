@@ -10,7 +10,7 @@ export class AccountService {
   apiurl = "https://data.ndaatgal.mn:8081/userwebapi/api/";
   // apiurl = "http://localhost:10012/api/";
   appurl = "https://data.ndaatgal.mn/NDM/";
-  ndmurl = "http://data.ndaatgal.mn:8080/ndmapi/api/";
+  ndmurl = "https://data.ndaatgal.mn:8081/ndmapi/api/";
 
   constructor(private http: HttpClient) {}
 
@@ -138,6 +138,26 @@ export class AccountService {
     return this.http.post<boolean>(
       this.apiurl + "auth/confirm",
       data,
+      httpOptions
+    );
+  }
+  setRetryNum(email: string): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({ "Content-Type": "application/json" })
+    };
+    return this.http.post<any>(
+      this.ndmurl + "RetryNum?login_id=" + email,
+      httpOptions
+    );
+  }
+  getRetryNum(email: string): Observable<number> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      })
+    };
+    return this.http.get<number>(
+      this.ndmurl + "RetryNum?login_id=" + email,
       httpOptions
     );
   }

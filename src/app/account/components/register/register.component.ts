@@ -25,22 +25,32 @@ export class RegisterComponent implements OnInit {
 
   register() {
     this.loading = true;
-    this._service.register(this.user).subscribe(
+    this._service.editregister(this.user).subscribe(
       result => {
         this.loading = false;
-        if (result) {
-          if (result == 1) {
-            this.errormessage = undefined;
-            sessionStorage.setItem("profile", JSON.stringify(this.user));
-            //this.success_message = 'Хүсэлтийг хүлээн авлаа. Та өөрт ойр байрлах Нийгмийн даатгалын хэлтэс дээр иргэний үнэмлэхтэйгээ очиж бүртгэлээ баталгаажуулна уу!';
+        if (result != undefined && result != null) {
+          var r: number;
+          r = 0;
+
+          result.forEach(item => {
+            r = r + item.infoid;
+            if (item.infoid == 2) this.errormessage = result[0].infotext;
+            if (item.infoid == 1) {
+              this.errormessage =
+                "Таны мэдээлэл УБЕГ-н мэдээллээс зөрүүтэй байна шалгаад дахин оруулна уу.";
+            }
+          });
+          if (r == 0) {
+            var profile = {
+              register: this.user.RegID,
+              sur_name: this.user.SurName,
+              last_name: this.user.LastName,
+              first_name: this.user.FirstName,
+              login_id: this.user.Email,
+              phone: this.user.Phone
+            };
+            sessionStorage.setItem("profile", JSON.stringify(profile));
             this.router.navigate(["/account/confirm1"]);
-          }
-          if (result == 0) {
-            this.success_message = undefined;
-            this.errormessage = "Бүртгэлтэй хэрэглэгч байна!";
-          } else if (result != 1) {
-            this.success_message = undefined;
-            this.router.navigate(["/error"]);
           }
         }
       },

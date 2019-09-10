@@ -16,7 +16,8 @@
           </div>
           <div class="row login-form-input form-control">
             <span class="col">
-              <input id="dun" name="dun" class="login-form-input-text" [placeholder]='pholder' [(ngModel)]='dun'>
+              <input id="dun" name="dun" type='number' class="login-form-input-text" [placeholder]='pholder'
+                [(ngModel)]='dun'>
             </span>
           </div>
           <div class="alert alert-danger" *ngIf="errormessage!=undefined">{{errormessage}}

@@ -10,6 +10,7 @@ import { AccountService } from "../../shared/account.service";
 export class ValidateComponent implements OnInit {
   loading: boolean;
   info_message: string;
+  error_message: string;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -19,9 +20,25 @@ export class ValidateComponent implements OnInit {
   ngOnInit() {
     var id = this.route.snapshot.paramMap.get("id");
     var val = this.route.snapshot.paramMap.get("val");
+
     this.loading = true;
     this.service.getProfile(id, val).subscribe(
       result => {
+        if (sessionStorage.getItem("profile") != undefined) {
+          if (
+            JSON.stringify(result) ==
+            JSON.stringify(sessionStorage.getItem("profile"))
+          ) {
+            this.service.getRetryNum(result.login_id).subscribe(retrynum => {
+              if (retrynum > 0) {
+                this.router.navigate(["/account/confirm2"]);
+              } else {
+                this.router.navigate(["/account/confirm1"]);
+              }
+            });
+          }
+        }
+
         sessionStorage.setItem("profile", JSON.stringify(result));
         if (result != undefined && result != null) {
           this.router.navigate(["/account/editregister"]);

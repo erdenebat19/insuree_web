@@ -12,6 +12,7 @@
           <div class="login-logo-text">Нийгмийн даатгал</div>
         </div>
         <div class="login-form">
+          <app-inline-loader *ngIf='loading'></app-inline-loader>
           <form name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
             <div class="row login-form-input form-control">
               <span class="col">
@@ -22,7 +23,7 @@
             <div class="row login-form-input form-control">
               <span class="col">
                 <input id='sur_name' name='SurName' class="login-form-input-text" placeholder="Ургийн овог" type="text"
-                  [(ngModel)]="user.SurName" maxlength="500" #LastName="ngModel" required>
+                  [(ngModel)]="user.SurName" maxlength="500" #SurName="ngModel" required>
               </span>
             </div>
             <div class="row login-form-input form-control">
@@ -40,13 +41,13 @@
             <div class="row login-form-input form-control">
               <span class="col">
                 <input class="login-form-input-text" name="Email" placeholder="Имэйл хаяг" type="email"
-                  [(ngModel)]="user.Email" maxlength="100" #Email="ngModel" required>
+                  [(ngModel)]="user.Email" maxlength="100" #Email="ngModel" required email>
               </span>
             </div>
             <div class="row login-form-input form-control">
               <span class="col">
-                <input id='phone' class="login-form-input-text" name='Phone' placeholder="Утасны дугаар" type="number"
-                  [(ngModel)]="user.Phone" minlength="8" maxlength="8" #Phone="ngModel" required>
+                <input id='phone' class="login-form-input-text" name='Phone' placeholder="Утасны дугаар"
+                  [(ngModel)]="user.Phone" minlength="8" #Phone="ngModel" required>
               </span>
             </div>
             <div class="alert alert-danger" *ngIf="errormessage!=undefined">{{errormessage}}</div>
@@ -73,6 +74,12 @@
             Регистрийн дугаар 10 тэмдэгт байх ёстой
           </div>
         </div>
+        <div *ngIf="(f.submitted && SurName.invalid) || (SurName.invalid && (SurName.dirty || SurName.touched))"
+          class="alert alert-danger left-arrow">
+          <div *ngIf="SurName.errors.required">
+            Ургийн овог оруулаагүй байна.
+          </div>
+        </div>
         <div *ngIf="(f.submitted && LastName.invalid) || (LastName.invalid && (LastName.dirty || LastName.touched))"
           class="alert alert-danger left-arrow">
           <div *ngIf="LastName.errors.required">
@@ -90,13 +97,16 @@
           <div *ngIf="Email.errors.required">
             Имэйл оруулаагүй байна.
           </div>
+          <div *ngIf="Email.errors.email">
+            Имэйл хаяг буруу байна.
+          </div>
         </div>
         <div *ngIf="(f.submitted && Phone.invalid) || (Phone.invalid && (Phone.dirty || Phone.touched))"
           class="alert alert-danger left-arrow">
           <div *ngIf="Phone.errors.required">
             Утасны дугаар оруулаагүй байна.
           </div>
-          <div *ngIf="RegID.errors.minlength">
+          <div *ngIf="Phone.errors.minlength">
             Утасны дугаар 8 тэмдэгт байх ёстой
           </div>
         </div>

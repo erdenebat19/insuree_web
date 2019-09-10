@@ -9,6 +9,7 @@ import { AccountService } from "../../shared/account.service";
 })
 export class ConfirmStep1Component implements OnInit {
   regid: string;
+  email: string;
   rorgs: any[];
   selectedOrg: any;
   errormessage: string;
@@ -19,24 +20,30 @@ export class ConfirmStep1Component implements OnInit {
     this.loading = true;
     if (sessionStorage.getItem("profile") != undefined) {
       this.regid = JSON.parse(sessionStorage.getItem("profile")).register;
-      if (localStorage.getItem("rorgs") == undefined) {
-        this.service.getRandomOrgs(this.regid).subscribe(
-          result => {
-            console.log(result);
+      this.email = JSON.parse(sessionStorage.getItem("profile")).login_id;
+      this.service.getRetryNum(this.email).subscribe(result => {
+        if (result > 0) {
+          this.router.navigate(["/account/confirm2"]);
+        } else {
+          if (localStorage.getItem("rorgs") == undefined) {
+            this.service.getRandomOrgs(this.regid).subscribe(
+              result => {
+                this.loading = false;
+                this.rorgs = result;
+                localStorage.setItem("rorgs", JSON.stringify(this.rorgs));
+              },
+              error => {
+                this.loading = false;
+                console.log(error);
+                this.router.navigate(["/error"]);
+              }
+            );
+          } else {
             this.loading = false;
-            this.rorgs = result;
-            localStorage.setItem("rorgs", JSON.stringify(this.rorgs));
-          },
-          error => {
-            this.loading = false;
-            console.log(error);
-            this.router.navigate(["/error"]);
+            this.rorgs = JSON.parse(localStorage.getItem("rorgs"));
           }
-        );
-      } else {
-        this.loading = false;
-        this.rorgs = JSON.parse(localStorage.getItem("rorgs"));
-      }
+        }
+      });
     } else {
       this.loading = false;
       this.router.navigate(["/account/register"]);
@@ -47,7 +54,7 @@ export class ConfirmStep1Component implements OnInit {
     if (this.selectedOrg == undefined) {
       this.errormessage = "Байгууллага сонгоогүй байна.";
     } else {
-      sessionStorage.setItem(
+      localStorage.setItem(
         "selectedOrg",
         JSON.stringify(this.rorgs.find(x => x.oid == this.selectedOrg))
       );

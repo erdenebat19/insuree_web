@@ -27,7 +27,7 @@
             </li>
           </ul>
           <div class="alert alert-danger" *ngIf="errormessage!=undefined">{{errormessage}}</div>
-          <div class="alert alert-info" *ngIf="success_message!=undefined">{{success_message}}</div>
+          <!-- <div class="alert alert-info" *ngIf="success_message!=undefined">{{success_message}}</div> -->
           <button (click)='goto_next()' type="submit" class="login-btn disabled" [disabled]="loading">
             <span *ngIf="loading">Уншиж байна...</span>
             <span *ngIf="!loading">Үргэлжлүүлэх</span>

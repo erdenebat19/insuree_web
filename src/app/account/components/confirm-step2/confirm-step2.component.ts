@@ -14,7 +14,8 @@ export class ConfirmStep2Component implements OnInit {
   loading: boolean;
   info_message: string;
   errormessage: string;
-  regid: any;
+  regid: string;
+  email: string;
   dun: number;
   success_message: string;
 
@@ -23,24 +24,25 @@ export class ConfirmStep2Component implements OnInit {
   ngOnInit() {
     this.loading = true;
     if (
-      sessionStorage.getItem("selectedOrg") == undefined ||
-      sessionStorage.getItem("selectedOrg") == null
+      localStorage.getItem("selectedOrg") == undefined ||
+      localStorage.getItem("selectedOrg") == null
     ) {
       this.router.navigate(["/account/confirm1"]);
     } else {
       this.regid = JSON.parse(sessionStorage.getItem("profile")).register;
-      this.org = JSON.parse(sessionStorage.getItem("selectedOrg"));
+      this.email = JSON.parse(sessionStorage.getItem("profile")).login_id;
+      this.org = JSON.parse(localStorage.getItem("selectedOrg"));
       this.service.getLastDate(this.regid, this.org.oid).subscribe(
         result => {
           this.loading = false;
           this.date = new Date(result);
-          this.date.setHours(48);
+          this.date.setDate(this.date.getDate() + 3);
           if (this.org.oid == 1) {
             this.info_message =
               "Та " +
               this.date.getFullYear() +
               " оны " +
-              this.date.getMonth() +
+              (this.date.getMonth() + 1) +
               " сард сайн дурын даатгалд төлсөн мөнгөн дүнгээ оруулна уу.";
             this.pholder = "Төлсөн шимтгэл";
           } else {
@@ -50,10 +52,13 @@ export class ConfirmStep2Component implements OnInit {
               " байгууллагад " +
               this.date.getFullYear() +
               " оны " +
-              this.date.getMonth() +
+              (this.date.getMonth() + 1) +
               " сард авсан цалингийн дүнгээ оруулна уу.";
             this.pholder = "Цалин";
           }
+          this.info_message =
+            this.info_message +
+            " Хэрэв та 3 удаа буруу оруулах юм бол өөрт ойр байрлах Нийгмийн даатгалын хэлтэст очиж баталгаажуулахыг анхаарна уу.";
         },
         error => {
           this.loading = false;
@@ -65,12 +70,22 @@ export class ConfirmStep2Component implements OnInit {
   }
   confirm() {
     this.loading = true;
-    if (localStorage.getItem("retrynum") == undefined) {
-      localStorage.setItem("retrynum", "0");
-    }
-    var retrynum = Number.parseInt(localStorage.getItem("retrynum"));
+    var retrynum: number = 0;
+    this.service.getRetryNum(this.email).subscribe(
+      result => {
+        retrynum = result;
+        this.saveconfirm(retrynum);
+      },
+      error => {
+        console.log(error);
+        retrynum = 0;
+        this.saveconfirm(retrynum);
+      }
+    );
+  }
+  private saveconfirm(retrynum: number) {
     this.success_message = undefined;
-    this.errormessage = "Буруу оруулсан байна. " + retrynum;
+
     if (retrynum >= 3) {
       this.loading = false;
       this.success_message = undefined;
@@ -88,7 +103,6 @@ export class ConfirmStep2Component implements OnInit {
       this.service.confirm(data).subscribe(
         result => {
           this.loading = false;
-          console.log(result);
           if (result) {
             sessionStorage.clear();
             localStorage.clear();
@@ -96,8 +110,18 @@ export class ConfirmStep2Component implements OnInit {
             this.success_message =
               "Амжилттай баталгаажлаа. Та нууц үгээ бүртгүүлсэн мэйл хаягаасаа авна уу. /Хэрэв ирээгүй байвал SPAM фолдертоо шалгана уу/";
           } else {
-            retrynum++;
-            localStorage.setItem("retrynum", retrynum.toString());
+            this.errormessage =
+              "Оруулсан дүн буруу байна. Таньд " +
+              (3 - retrynum) +
+              " удаа оруулах боломж байна.";
+            this.service.setRetryNum(this.email).subscribe(
+              result => {
+                console.log(result);
+              },
+              error => {
+                console.log(error);
+              }
+            );
           }
         },
         error => {
