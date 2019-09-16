@@ -7,8 +7,8 @@ import { User } from "./user";
   providedIn: "root"
 })
 export class AccountService {
-  apiurl = "https://data.ndaatgal.mn:8081/userwebapi/api/";
-  // apiurl = "http://localhost:10012/api/";
+  // apiurl = "https://data.ndaatgal.mn:8081/userwebapi/api/";
+  apiurl = "http://localhost:10012/api/";
   appurl = "https://data.ndaatgal.mn/NDM/";
   ndmurl = "https://data.ndaatgal.mn:8081/ndmapi/api/";
 
@@ -123,7 +123,7 @@ export class AccountService {
       httpOptions
     );
   }
-  confirm(param: any): Observable<boolean> {
+  confirm(param: any): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({ "Content-Type": "application/json" })
     };
@@ -135,11 +135,7 @@ export class AccountService {
       Date: param.Date,
       Dun: param.Dun
     };
-    return this.http.post<boolean>(
-      this.apiurl + "auth/confirm",
-      data,
-      httpOptions
-    );
+    return this.http.post<any>(this.apiurl + "auth/confirm", data, httpOptions);
   }
   setRetryNum(email: string): Observable<any> {
     const httpOptions = {

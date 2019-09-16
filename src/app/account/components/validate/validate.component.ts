@@ -24,6 +24,7 @@ export class ValidateComponent implements OnInit {
     this.loading = true;
     this.service.getProfile(id, val).subscribe(
       result => {
+        console.log(result);
         if (sessionStorage.getItem("profile") != undefined) {
           if (
             JSON.stringify(result) ==

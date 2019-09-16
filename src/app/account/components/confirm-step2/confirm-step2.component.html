@@ -17,21 +17,20 @@
           <div class="row login-form-input form-control">
             <span class="col">
               <input id="dun" name="dun" type='number' class="login-form-input-text" [placeholder]='pholder'
-                [(ngModel)]='dun'>
+                *ngIf='this.org.oid!=0' [(ngModel)]='dun'>
             </span>
           </div>
           <div class="alert alert-danger" *ngIf="errormessage!=undefined">{{errormessage}}
           </div>
           <div class="alert alert-success" *ngIf="success_message!=undefined">
             {{success_message}}</div>
-          <button type="submit" class="login-btn disabled" [disabled]="loading" (click)='confirm()'>
+          <button type="submit" class="login-btn disabled" [disabled]="loading" (click)='confirm()'
+            *ngIf='success_message==undefined'>
             <span *ngIf="loading">Уншиж байна...</span>
             <span *ngIf="!loading">Баталгаажуулах</span>
           </button>
-          <div style="text-align: center;width: 100%;">
-            <a class=' login-form-link' routerLink="/account/login" style="margin-left: 0;padding-left: 0;">Нэвтрэх
-              цонхруу буцах</a>
-          </div>
+          <a *ngIf='success_message!=undefined' class='login-btn form-control text-center'
+            routerLink="/account/login">Нэвтрэх</a>
         </div>
       </div>
       <div class="col">

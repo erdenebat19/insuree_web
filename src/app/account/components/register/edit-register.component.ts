@@ -15,6 +15,7 @@ export class EditRegisterComponent implements OnInit {
   success_message: string;
   btn_register_caption: string = "Үргэлжлүүлэх";
   info_message: string;
+  isedit: boolean = true;
 
   constructor(private router: Router, private _service: AccountService) {}
 
@@ -39,6 +40,7 @@ export class EditRegisterComponent implements OnInit {
     this.loading = true;
     this._service.editregister(this.user).subscribe(
       result => {
+        console.log(result);
         this.loading = false;
         if (result != undefined && result != null) {
           var r: number;
@@ -46,10 +48,28 @@ export class EditRegisterComponent implements OnInit {
           result.forEach(item => {
             r = r + item.infoid;
           });
-          if (r != 0) {
-            this.errormessage =
-              "Таны мэдээлэл УБЕГ-н мэдээллээс зөрүүтэй байна шалгаад дахин оруулна уу.";
-          } else {
+          result.forEach(item => {
+            r = r + item.infoid;
+            if (item.infoid == 2) {
+              this.success_message = undefined;
+              this.errormessage = result[0].infotext;
+            }
+            if (item.infoid == 1) {
+              this.success_message = undefined;
+              this.errormessage =
+                "Таны оруулсан мэдээлэл Улсын бүртгэлийн мэдээллээс зөрүүтэй байна. Та мэдээллээ шалгаад дахин оруулна уу!";
+            }
+          });
+          if (r == 0) {
+            var profile = {
+              register: this.user.RegID,
+              sur_name: this.user.SurName,
+              last_name: this.user.LastName,
+              first_name: this.user.FirstName,
+              login_id: this.user.Email,
+              phone: this.user.Phone
+            };
+            sessionStorage.setItem("profile", JSON.stringify(profile));
             this.router.navigate(["/account/confirm1"]);
           }
         }

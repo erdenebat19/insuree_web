@@ -15,18 +15,20 @@ export class RegisterComponent implements OnInit {
   success_message: string;
   btn_register_caption: string = "Бүртгүүлэх";
   info_message: string;
+  isedit: boolean = false;
 
   constructor(private router: Router, private _service: AccountService) {}
 
   ngOnInit() {
     this.info_message =
-      'Баталгаажуулалт хийгдсэний дараа нэвтрэх нууц үг бүртгүүлсэн цахим шуудан руу илгээгдэх тул мэдээллээ зөв оруулна уу.<br> <br> ДАН систем ашиглан бүртгүүлэх бол <a style="color: yellow;" href="https://sso.gov.mn/register/">энд дарна</a> уу';
+      'Бүртгэл, баталгаажуулалт хийгдсэний дараа таны цахим шуудан руу холбогдох мэдээллийг илгээх тул та өөрийн мэдээллээ үнэн, зөв оруулна уу!<br> <br> ДАН систем ашиглан системд нэвтрэхийг <a style="color: yellow;" href="https://sso.gov.mn/register/">энд дарна</a> уу';
   }
 
   register() {
     this.loading = true;
     this._service.editregister(this.user).subscribe(
       result => {
+        console.log(result);
         this.loading = false;
         if (result != undefined && result != null) {
           var r: number;
@@ -34,23 +36,20 @@ export class RegisterComponent implements OnInit {
 
           result.forEach(item => {
             r = r + item.infoid;
-            if (item.infoid == 2) this.errormessage = result[0].infotext;
+            if (item.infoid == 2) {
+              this.success_message = undefined;
+              this.errormessage = result[0].infotext;
+            }
             if (item.infoid == 1) {
+              this.success_message = undefined;
               this.errormessage =
-                "Таны мэдээлэл УБЕГ-н мэдээллээс зөрүүтэй байна шалгаад дахин оруулна уу.";
+                "Таны оруулсан мэдээлэл Улсын бүртгэлийн мэдээллээс зөрүүтэй байна. Та мэдээллээ шалгаад дахин оруулна уу!";
             }
           });
           if (r == 0) {
-            var profile = {
-              register: this.user.RegID,
-              sur_name: this.user.SurName,
-              last_name: this.user.LastName,
-              first_name: this.user.FirstName,
-              login_id: this.user.Email,
-              phone: this.user.Phone
-            };
-            sessionStorage.setItem("profile", JSON.stringify(profile));
-            this.router.navigate(["/account/confirm1"]);
+            this.errormessage = undefined;
+            this.success_message =
+              "Амжилттай бүртгэгдлээ. Таны бүртгүүлсэн цахим шуудан руу баталгаажуулалтын хаяг илгээгдсэн тул та уг хаягаар орон өөрийн нэвтрэх эрхээ баталгаажуулж нууц үгээ авна уу. /Хэрэв ирээгүй бол SPAM дотроо шалгана уу/";
           }
         }
       },
