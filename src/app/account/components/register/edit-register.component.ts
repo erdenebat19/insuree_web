@@ -6,7 +6,7 @@ import { AccountService } from "../../shared/account.service";
 @Component({
   selector: "app-edit-register",
   templateUrl: "./register.component.html",
-  styleUrls: ["./register.component.css", "../../shared/account.css"]
+  styleUrls: ["../../shared/account.css", "./register.component.css"]
 })
 export class EditRegisterComponent implements OnInit {
   loading: boolean = false;
@@ -62,6 +62,7 @@ export class EditRegisterComponent implements OnInit {
           });
           if (r == 0) {
             var profile = {
+              user_id: this.user.id,
               register: this.user.RegID,
               sur_name: this.user.SurName,
               last_name: this.user.LastName,

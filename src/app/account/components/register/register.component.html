@@ -14,41 +14,88 @@
         <div class="login-form">
           <app-inline-loader *ngIf="loading"></app-inline-loader>
           <form name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
-            <div class="row login-form-input form-control">
-              <span class="col">
-                <input id="RegID" name="RegID" class="login-form-input-text" placeholder="Регистрийн дугаар" required
-                  minlength="10" [(ngModel)]="user.RegID" #RegID="ngModel" [readonly]="isedit" />
-              </span>
+            <div class="row py-1">
+              <div class="col">
+                <small class="text-primary">Регистрийн дугаар</small>
+                <div class="login-form-input form-control">
+                  <input id="RegID" name="RegID" class="login-form-input-text" required minlength="10"
+                    [(ngModel)]="user.RegID" #RegID="ngModel" [readonly]="isedit" />
+                </div>
+                <div *ngIf="(f.submitted && RegID.invalid) || (RegID.invalid && (RegID.dirty || RegID.touched))"
+                  class="text-danger font-italic">
+                  <small *ngIf="RegID.errors.required">*Регистрийн дугаар оруулаагүй байна.</small>
+                  <small *ngIf="RegID.errors.minlength">*Регистрийн дугаар 10 тэмдэгт байх ёстой</small>
+                </div>
+              </div>
             </div>
-            <div class="row login-form-input form-control">
-              <span class="col">
-                <input id="sur_name" name="SurName" class="login-form-input-text" placeholder="Ургийн овог" type="text"
-                  [(ngModel)]="user.SurName" maxlength="500" #SurName="ngModel" required />
-              </span>
+            <div class="row py-2">
+              <div class="col">
+                <small class="text-primary">Ургийн овог</small>
+                <div class="login-form-input form-control">
+                  <input id="sur_name" name="SurName" class="login-form-input-text" type="text"
+                    [(ngModel)]="user.SurName" maxlength="500" #SurName="ngModel" required />
+                </div>
+                <div *ngIf="(f.submitted && SurName.invalid) || (SurName.invalid && (SurName.dirty || SurName.touched))"
+                  class="text-danger font-italic">
+                  <small *ngIf="SurName.errors.required">*Ургийн овог оруулаагүй байна.</small>
+                </div>
+              </div>
             </div>
-            <div class="row login-form-input form-control">
-              <span class="col">
-                <input id="last_name" name="LastName" class="login-form-input-text" placeholder="Эцэг/эхийн нэр"
-                  type="text" [(ngModel)]="user.LastName" maxlength="500" #LastName="ngModel" required />
-              </span>
+            <div class="row py-2">
+              <div class="col">
+                <small class="text-primary">Эцэг/эхийн нэр</small>
+                <div class="login-form-input form-control">
+                  <input id="last_name" name="LastName" class="login-form-input-text" type="text"
+                    [(ngModel)]="user.LastName" maxlength="500" #LastName="ngModel" required />
+                </div>
+                <div
+                  *ngIf="(f.submitted && LastName.invalid) || (LastName.invalid && (LastName.dirty || LastName.touched))"
+                  class="text-danger font-italic">
+                  <small *ngIf="LastName.errors.required">*Эцэг/эхийн нэр оруулаагүй байна.</small>
+                </div>
+              </div>
             </div>
-            <div class="row login-form-input form-control">
-              <span class="col">
-                <input id="first_name" name="FirstName" class="login-form-input-text" placeholder="Өөрийн нэр"
-                  type="text" [(ngModel)]="user.FirstName" maxlength="500" #FirstName="ngModel" required />
-              </span>
+            <div class="row py-2">
+              <div class="col">
+                <small class="text-primary">Өөрийн нэр</small>
+                <div class="login-form-input form-control">
+                  <input id="first_name" name="FirstName" class="login-form-input-text" type="text"
+                    [(ngModel)]="user.FirstName" maxlength="500" #FirstName="ngModel" required />
+                </div>
+                <div
+                  *ngIf="(f.submitted && FirstName.invalid) || (FirstName.invalid && (FirstName.dirty || FirstName.touched))"
+                  class="text-danger font-italic">
+                  <small *ngIf="FirstName.errors.required">*Нэр оруулаагүй байна.</small>
+                </div>
+              </div>
             </div>
-            <div class="row login-form-input form-control">
-              <span class="col">
-                <input class="login-form-input-text" name="Email" placeholder="Цахим шуудан" type="email"
-                  [(ngModel)]="user.Email" maxlength="100" #Email="ngModel" required email />
-              </span>
+            <div class="row py-2">
+              <div class="col">
+                <small class="text-primary">Цахим шуудан</small>
+                <div class="login-form-input form-control">
+                  <input class="login-form-input-text" name="Email" type="email" [(ngModel)]="user.Email"
+                    maxlength="100" #Email="ngModel" required email />
+                </div>
+                <div *ngIf="(f.submitted && Email.invalid) || (Email.invalid && (Email.dirty || Email.touched))"
+                  class="text-danger font-italic">
+                  <small *ngIf="Email.errors.required">*Цахим шуудан оруулаагүй байна.</small>
+                  <small *ngIf="Email.errors.email">*Цахим шуудан буруу байна.</small>
+                </div>
+              </div>
             </div>
-            <div class="row login-form-input form-control">
-              <span class="col">
-                <input id="phone" class="login-form-input-text" name="Phone" placeholder="Утасны дугаар"
-                  [(ngModel)]="user.Phone" minlength="8" #Phone="ngModel" required />
-              </span>
+            <div class="row py-2">
+              <div class="col">
+                <small class="text-primary">Утасны дугаар</small>
+                <div class="login-form-input form-control">
+                  <input id="phone" class="login-form-input-text" name="Phone" [(ngModel)]="user.Phone" minlength="8"
+                    #Phone="ngModel" required />
+                </div>
+                <div *ngIf="(f.submitted && Phone.invalid) || (Phone.invalid && (Phone.dirty || Phone.touched))"
+                  class="text-danger font-italic">
+                  <small *ngIf="Phone.errors.required">*Утасны дугаар оруулаагүй байна.</small>
+                  <small *ngIf="Phone.errors.minlength">*Утасны дугаар 8 тэмдэгт байх ёстой</small>
+                </div>
+              </div>
             </div>
             <div class="alert alert-danger" *ngIf="errormessage != undefined">
               {{ errormessage }}
@@ -60,78 +107,21 @@
               <span *ngIf="loading">Уншиж байна...</span>
               <span *ngIf="!loading">{{ btn_register_caption }}</span>
             </button>
-            <div style="text-align: center;width: 100%;">
-              <a class="login-form-link" routerLink="/account/login" style="margin-left: 0;padding-left: 0;">Нэвтрэх
-                цонхруу буцах</a>
+            <div class="row" style="width: 100%">
+              <div class="col-6" style="text-align: center; padding: 0; margin: 0;">
+                <a class='login-form-link' href="https://sso.gov.mn/register/">ДАН-аар бүртгүүлэх</a>
+              </div>
+              <div class="col-6" style="text-align: center; padding: 0; margin: 0;">
+                <a class="login-form-link" routerLink="/account/login" style="margin-left: 0;padding-left: 0;">Нэвтрэх
+                  цонхруу буцах</a>
+              </div>
             </div>
           </form>
         </div>
       </div>
-      <div class="col">
-        <div style="padding-bottom: 180px;"></div>
-        <div *ngIf="
-            (f.submitted && RegID.invalid) ||
-            (RegID.invalid && (RegID.dirty || RegID.touched))
-          " class="alert alert-danger left-arrow">
-          <div *ngIf="RegID.errors.required">
-            Регистрийн дугаар оруулаагүй байна.
-          </div>
-          <div *ngIf="RegID.errors.minlength">
-            Регистрийн дугаар 10 тэмдэгт байх ёстой
-          </div>
-        </div>
-        <div *ngIf="
-            (f.submitted && SurName.invalid) ||
-            (SurName.invalid && (SurName.dirty || SurName.touched))
-          " class="alert alert-danger left-arrow">
-          <div *ngIf="SurName.errors.required">
-            Ургийн овог оруулаагүй байна.
-          </div>
-        </div>
-        <div *ngIf="
-            (f.submitted && LastName.invalid) ||
-            (LastName.invalid && (LastName.dirty || LastName.touched))
-          " class="alert alert-danger left-arrow">
-          <div *ngIf="LastName.errors.required">
-            Овог оруулаагүй байна.
-          </div>
-        </div>
-        <div *ngIf="
-            (f.submitted && FirstName.invalid) ||
-            (FirstName.invalid && (FirstName.dirty || FirstName.touched))
-          " class="alert alert-danger left-arrow">
-          <div *ngIf="FirstName.errors.required">
-            Нэр оруулаагүй байна.
-          </div>
-        </div>
-        <div *ngIf="
-            (f.submitted && Email.invalid) ||
-            (Email.invalid && (Email.dirty || Email.touched))
-          " class="alert alert-danger left-arrow">
-          <div *ngIf="Email.errors.required">
-            Цахим шуудан оруулаагүй байна.
-          </div>
-          <div *ngIf="Email.errors.email">
-            Цахим шуудан буруу байна.
-          </div>
-        </div>
-        <div *ngIf="
-            (f.submitted && Phone.invalid) ||
-            (Phone.invalid && (Phone.dirty || Phone.touched))
-          " class="alert alert-danger left-arrow">
-          <div *ngIf="Phone.errors.required">
-            Утасны дугаар оруулаагүй байна.
-          </div>
-          <div *ngIf="Phone.errors.minlength">
-            Утасны дугаар 8 тэмдэгт байх ёстой
-          </div>
-        </div>
-      </div>
+      <div class="col-md"></div>
     </div>
   </div>
-  <!-- <div class="row">
-      <div style="background: #00674d; height: 100px; width: 100%; position: absolute; bottom: 0;">a</div>
-    </div> -->
 </div>
 
 <script type="text/javascript">

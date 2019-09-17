@@ -31,7 +31,7 @@
               </span>
             </div>
           </div>
-          <div class="row login-form-input form-control">
+          <div class="row login-form-input form-control" *ngIf='status==1'>
             <span class="col-1">
               <i class="ion-locked login-form-input-icon"></i>
             </span>
@@ -40,9 +40,13 @@
             </span>
           </div>
 
-          <div class="alert alert-danger" *ngIf="errormessage!=undefined">{{errormessage}}</div>
+          <div class="alert alert-danger" *ngIf="errormessage!=undefined" [innerHTML]='errormessage'></div>
         </div>
-        <button class="login-btn disabled" [disabled]="loading" (click)='Login()'>
+        <button class="login-btn disabled" [disabled]="loading" (click)='check()' *ngIf='status==undefined'>
+          <span *ngIf="loading">Уншиж байна...</span>
+          <span *ngIf="!loading">Үргэлжлүүлэх</span>
+        </button>
+        <button class="login-btn disabled" [disabled]="loading" (click)='Login()' *ngIf='status==1'>
           <span *ngIf="loading">Уншиж байна...</span>
           <span *ngIf="!loading">Нэвтрэх</span>
         </button>

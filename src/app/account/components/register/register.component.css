@@ -1,1 +1,22 @@
+.login-form-input {
+  margin: 8px 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  border: #e0e6e8 solid 1px;
+}
 
+.login-form-input-text {
+  border-radius: 0;
+  border: none;
+  width: 100%;
+}
+
+.padding-left-30 {
+  padding-left: 30px;
+}
+
+.form-control {
+  padding: 0;
+  margin: 0;
+  height: auto;
+}

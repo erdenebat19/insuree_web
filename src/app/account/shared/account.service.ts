@@ -7,8 +7,8 @@ import { User } from "./user";
   providedIn: "root"
 })
 export class AccountService {
-  // apiurl = "https://data.ndaatgal.mn:8081/userwebapi/api/";
-  apiurl = "http://localhost:10012/api/";
+  apiurl = "https://data.ndaatgal.mn:8081/userwebapi/api/";
+  // apiurl = "http://localhost:10012/api/";
   appurl = "https://data.ndaatgal.mn/NDM/";
   ndmurl = "https://data.ndaatgal.mn:8081/ndmapi/api/";
 
@@ -154,6 +154,17 @@ export class AccountService {
     };
     return this.http.get<number>(
       this.ndmurl + "RetryNum?login_id=" + email,
+      httpOptions
+    );
+  }
+  getStatus(email: string): Observable<number> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      })
+    };
+    return this.http.get<number>(
+      this.ndmurl + "findByMail?m=" + email,
       httpOptions
     );
   }

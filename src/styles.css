@@ -99,7 +99,7 @@ select {
 .alert-success,
 .badge-success {
   background: #25e8c8;
-  color: #fff;
+  color: #555;
 }
 
 .btn-success {

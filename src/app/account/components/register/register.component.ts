@@ -6,7 +6,7 @@ import { AccountService } from "../../shared/account.service";
 @Component({
   selector: "app-register",
   templateUrl: "./register.component.html",
-  styleUrls: ["./register.component.css", "../../shared/account.css"]
+  styleUrls: ["../../shared/account.css", "./register.component.css"]
 })
 export class RegisterComponent implements OnInit {
   loading: boolean = false;
@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.info_message =
-      'Бүртгэл, баталгаажуулалт хийгдсэний дараа таны цахим шуудан руу холбогдох мэдээллийг илгээх тул та өөрийн мэдээллээ үнэн, зөв оруулна уу!<br> <br> ДАН систем ашиглан системд нэвтрэхийг <a style="color: yellow;" href="https://sso.gov.mn/register/">энд дарна</a> уу';
+      "Бүртгэл, баталгаажуулалт хийгдсэний дараа таны цахим шуудан руу холбогдох мэдээллийг илгээх тул та өөрийн мэдээллээ үнэн, зөв оруулна уу!";
   }
 
   register() {

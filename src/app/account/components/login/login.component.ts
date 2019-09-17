@@ -11,6 +11,8 @@ export class LoginComponent {
   loading: boolean = false;
   password: string;
   userid: string;
+  status: number = undefined;
+
   errormessage: string = undefined;
   redirect_uri: string = encodeURI(
     "https://data.ndaatgal.mn:8081/userwebapi/api/auth/authorized"
@@ -57,6 +59,28 @@ export class LoginComponent {
         } else {
           this.errormessage = error.message;
         }
+      }
+    );
+  }
+  check(): void {
+    this.loading = true;
+    this._service.getStatus(this.userid).subscribe(
+      result => {
+        this.loading = false;
+        this.status = result;
+        if (this.status == 0) {
+          this.errormessage =
+            'Таны бүртгэл баталгаажаагүй байна. Баталгаажуулах бол <a href="/#/account/register/">энд дарна</a> уу.';
+        }
+        if (this.status == -1) {
+          this.errormessage =
+            'Та бүртгүүлээгүй байна бүртгүүлах бол <a href="/#/account/register/">энд дарна</a> уу';
+        }
+      },
+      error => {
+        this.loading = false;
+        console.log(error);
+        this.status = undefined;
       }
     );
   }
