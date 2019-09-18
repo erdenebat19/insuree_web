@@ -27,7 +27,8 @@
                 <i class="ion-person login-form-input-icon"></i>
               </span>
               <span class="col">
-                <input class="login-form-input-text" placeholder="Имэйл хаяг" type="text" [(ngModel)]="userid">
+                <input class="login-form-input-text" placeholder="Имэйл хаяг" type="text" [(ngModel)]="userid"
+                  [readonly]='status!=undefined'>
               </span>
             </div>
           </div>
@@ -39,8 +40,17 @@
               <input class="login-form-input-text" placeholder="Нууц үг" type="password" [(ngModel)]="password">
             </span>
           </div>
-
-          <div class="alert alert-danger" *ngIf="errormessage!=undefined" [innerHTML]='errormessage'></div>
+          <app-inline-loader *ngIf="loading"></app-inline-loader>
+          <div class="alert alert-warning" *ngIf="show_validation">
+            Таны бүртгэл баталгаажаагүй байна. Баталгаажуулах бол <a style="color: #14aaf5;cursor: pointer;"
+              (click)='sendValidation()'>энд дарна</a>
+            уу.
+          </div>
+          <div class="alert alert-warning" *ngIf="show_registration">
+            Та бүртгүүлээгүй байна бүртгүүлах бол <a routerLink="/account/register/">энд дарна</a> уу
+          </div>
+          <div class="alert alert-danger" *ngIf="errormessage!=undefined">{{errormessage}}</div>
+          <div class="alert alert-success" *ngIf="success_message!=undefined">{{success_message}}</div>
         </div>
         <button class="login-btn disabled" [disabled]="loading" (click)='check()' *ngIf='status==undefined'>
           <span *ngIf="loading">Уншиж байна...</span>

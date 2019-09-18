@@ -33,6 +33,9 @@ export class LoginComponent {
     "&state=" +
     this.state;
   closeResult: string;
+  show_registration: boolean = false;
+  show_validation: boolean = false;
+  success_message: string;
 
   constructor(private router: Router, private _service: AccountService) {}
   ngOnInit(): void {
@@ -63,24 +66,46 @@ export class LoginComponent {
     );
   }
   check(): void {
+    this.show_registration = false;
+    this.show_validation = false;
     this.loading = true;
     this._service.getStatus(this.userid).subscribe(
       result => {
         this.loading = false;
         this.status = result;
         if (this.status == 0) {
-          this.errormessage =
-            'Таны бүртгэл баталгаажаагүй байна. Баталгаажуулах бол <a href="/#/account/register/">энд дарна</a> уу.';
+          this.show_validation = true;
         }
         if (this.status == -1) {
-          this.errormessage =
-            'Та бүртгүүлээгүй байна бүртгүүлах бол <a href="/#/account/register/">энд дарна</a> уу';
+          this.show_registration = true;
         }
       },
       error => {
         this.loading = false;
         console.log(error);
         this.status = undefined;
+      }
+    );
+  }
+  sendValidation() {
+    this.loading = true;
+    this._service.sendValidation(this.userid).subscribe(
+      result => {
+        this.loading = false;
+        console.log(result);
+        if (result) {
+          this.errormessage = undefined;
+          this.success_message =
+            "Баталгаажуулах хаягийг таны цахим хаягаар илгээлээ.";
+        } else {
+          this.success_message = undefined;
+          this.errormessage =
+            "Баталгаажилт илгээх явцад алдаа гарлаа та имэйл хаягаа шалгаад дахин үзнэ үү";
+        }
+      },
+      error => {
+        this.loading = false;
+        console.log(error);
       }
     );
   }

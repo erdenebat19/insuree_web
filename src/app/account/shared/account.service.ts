@@ -168,4 +168,15 @@ export class AccountService {
       httpOptions
     );
   }
+  sendValidation(email: string): Observable<boolean> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      })
+    };
+    return this.http.get<boolean>(
+      this.ndmurl + "SendMail?mail=" + email,
+      httpOptions
+    );
+  }
 }
