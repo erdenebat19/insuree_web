@@ -8,7 +8,7 @@ export const routes: Routes = [
   {
     path: "view",
     component: MainPageComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     children: [
       {
         path: "salary",

@@ -12,7 +12,8 @@
                 <label for="ddpAMClass" class="col-sm-5 col-form-label">Ажил, мэргэжил</label>
                 <div class="col-sm-7">
                   <select class="form-control" id="ddpAMClass">
-                    <option value="1">-</option>
+                    <option value="0">-</option>
+                    <option [value]="item.id" *ngFor='let item of AMClasses'>{{item.name}}</option>
                   </select>
                 </div>
               </div>
