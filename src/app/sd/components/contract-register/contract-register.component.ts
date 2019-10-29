@@ -8,12 +8,15 @@ import { ReferenceService } from "../../shared/reference.service";
 })
 export class ContractRegisterComponent implements OnInit {
   AMClasses: any[];
+  Banks: any[];
   constructor(private refService: ReferenceService) {}
 
   ngOnInit() {
-    this.refService.List().subscribe(result => {
+    this.refService.AMClassList().subscribe(result => {
       this.AMClasses = result;
-      console.log(result);
+    });
+    this.refService.BankList().subscribe(result => {
+      this.Banks = result;
     });
   }
 }

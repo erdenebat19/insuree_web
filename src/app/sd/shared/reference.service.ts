@@ -10,12 +10,28 @@ export class ReferenceService {
   apiurl = "http://localhost:3000/";
   constructor(private http: HttpClient) {}
 
-  List(): Observable<any> {
+  AMClassList(): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         "Content-Type": "application/json"
       })
     };
     return this.http.get(this.apiurl + "AMClasses", httpOptions);
+  }
+  BankList(): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      })
+    };
+    return this.http.get(this.apiurl + "Banks", httpOptions);
+  }
+  GetMinSalary(): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      })
+    };
+    return this.http.get(this.apiurl + "GetMinSalary", httpOptions);
   }
 }

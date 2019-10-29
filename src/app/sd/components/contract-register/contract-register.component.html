@@ -7,7 +7,7 @@
         </div>
         <div class="content-body">
           <div class="row">
-            <div class="col-6">
+            <div class="col-md-6">
               <div class="form-group row">
                 <label for="ddpAMClass" class="col-sm-5 col-form-label">Ажил, мэргэжил</label>
                 <div class="col-sm-7">
@@ -44,6 +44,7 @@
                 <div class="col-sm-5">
                   <select class="form-control" id="ddpAMClass">
                     <option value="1">-</option>
+                    <option [value]="item.dans" *ngFor='let item of Banks'>{{item.name}}</option>
                   </select>
                 </div>
               </div>
