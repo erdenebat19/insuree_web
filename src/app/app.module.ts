@@ -15,9 +15,9 @@ import { GoogleAnalyticsServiceService } from "./shared/shared/google-analytics-
   declarations: [AppComponent, ErrorReportComponent],
   imports: [
     BrowserModule,
+    HttpClientModule,
     RouterModule.forRoot(routes, { useHash: true }),
-    RecaptchaModule.forRoot(),
-    HttpClientModule
+    RecaptchaModule.forRoot()
   ],
   providers: [JwtHelperService, GoogleAnalyticsServiceService],
   bootstrap: [AppComponent]

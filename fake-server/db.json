@@ -72,5 +72,21 @@
   ],
   "GetMinSalary": {
     "MinSalary": 320000
+  },
+  "ContractPeriods": [{
+      "id": 1,
+      "name": "Сараар"
+    },
+    {
+      "id": 2,
+      "name": "Улирлаар"
+    },
+    {
+      "id": 3,
+      "name": "Хагас жилээр"
+    }
+  ],
+  "GetSdContactStatus": {
+    "Status": 1
   }
 }

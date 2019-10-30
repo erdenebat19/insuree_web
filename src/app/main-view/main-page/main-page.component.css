@@ -94,7 +94,7 @@
 
 #sidebar {
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 20px);
   vertical-align: top;
   background: #222b37;
   color: #fff;

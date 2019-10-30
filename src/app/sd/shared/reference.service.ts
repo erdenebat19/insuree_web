@@ -34,4 +34,12 @@ export class ReferenceService {
     };
     return this.http.get(this.apiurl + "GetMinSalary", httpOptions);
   }
+  ContractPeriods(): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      })
+    };
+    return this.http.get(this.apiurl + "ContractPeriods", httpOptions);
+  }
 }
