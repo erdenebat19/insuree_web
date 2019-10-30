@@ -32,6 +32,10 @@ export const routes: Routes = [
         loadChildren: "../sd/sd.module#SdModule"
       },
       {
+        path: "message",
+        loadChildren: "../notification/notification.module#NotificationModule"
+      },
+      {
         path: "change_password",
         component: ChangePasswordComponent,
         canActivate: [AuthGuard]

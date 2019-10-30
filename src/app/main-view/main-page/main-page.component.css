@@ -37,11 +37,17 @@
 }
 
 .topbar-right {
+  list-style: none;
   z-index: 100;
   /*position: fixed;
    right: 0px; */
-  padding: 10px 30px;
-  /* float: right; */
+  /* padding: 10px 30px; */
+  float: right;
+}
+
+.topbar-right li {
+  padding: 10px;
+  float: left;
 }
 
 .topbar-left {
@@ -141,4 +147,14 @@
 
 .dropdown-menu {
   left: 0;
+}
+
+.badge-circle {
+  position: absolute;
+  margin-top: 0px;
+  margin-left: -6px;
+  background: #725ec3;
+  color: #fff;
+  border-radius: 50%;
+  z-index: 1000;
 }
