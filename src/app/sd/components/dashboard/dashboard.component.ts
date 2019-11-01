@@ -13,22 +13,22 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-    this.service.GetStatus().subscribe(
-      result => {
-        this.loading = false;
-        let status = result.Status;
-        switch (status) {
-          case 1:
-            this.router.navigate(["/main/view/sd/register"]);
-            break;
-          default:
-            this.router.navigate(["/main/view/sd/404"]);
-            break;
-        }
-      },
-      error => {
-        this.loading = false;
-      }
-    );
+    // this.service.GetStatus().subscribe(
+    //   result => {
+    //     this.loading = false;
+    //     let status = result.Status;
+    //     switch (status) {
+    //       case 1:
+    //         this.router.navigate(["/main/view/sd/register"]);
+    //         break;
+    //       default:
+    //         this.router.navigate(["/main/view/sd/404"]);
+    //         break;
+    //     }
+    //   },
+    //   error => {
+    //     this.loading = false;
+    //   }
+    // );
   }
 }
