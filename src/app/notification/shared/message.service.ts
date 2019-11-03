@@ -5,24 +5,27 @@ import { Observable } from "rxjs";
 @Injectable({
   providedIn: "root"
 })
-export class ContractService {
+export class MessageService {
+  // apiurl = "https://data.ndaatgal.mn:8081/userwebapi/api/";
   apiurl = "http://localhost:3000/";
   constructor(private http: HttpClient) {}
 
-  GetStatus(): Observable<any> {
+  List(): Observable<any> {
+    let user = JSON.parse(localStorage.getItem("user"));
     const httpOptions = {
       headers: new HttpHeaders({
         "Content-Type": "application/json"
       })
     };
-    return this.http.get(this.apiurl + "GetSdContactStatus", httpOptions);
+    return this.http.get(this.apiurl + "Messages", httpOptions);
   }
-  Get(): Observable<any> {
+  GetLast(): Observable<any> {
+    let user = JSON.parse(localStorage.getItem("user"));
     const httpOptions = {
       headers: new HttpHeaders({
         "Content-Type": "application/json"
       })
     };
-    return this.http.get(this.apiurl + "Contract", httpOptions);
+    return this.http.get(this.apiurl + "LastMessage", httpOptions);
   }
 }
