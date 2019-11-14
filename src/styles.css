@@ -215,6 +215,10 @@ select {
   border: 1px solid #ccc;
 }
 
+.lightgray {
+  background: #e6ecf0;
+}
+
 /* End */
 
 @media print {

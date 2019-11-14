@@ -21,3 +21,25 @@
 .content-small .content-body {
   font-size: 10pt;
 }
+
+.list-group-item {
+  color: #393f49;
+  border-color: #e6ecf0;
+}
+
+.list-group-item-line {
+  display: block;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: -1px;
+  color: #393f49;
+  border: none;
+  border-bottom: 1px solid #e6ecf0;
+}
+
+.list-group-item:hover {
+  background: #e6ecf0;
+}
+
+tr {
+  cursor: pointer;
+}
