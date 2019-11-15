@@ -31,6 +31,17 @@
               <div class="content-small">
                 <div class="content-header">
                   Гэрээний мэдээлэл
+                  <span class="float-right">
+                    <a id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                      class="btn-icon">
+                      <div class="btn-circle-label">
+                        <i class="icon ion-ios-more"></i>
+                      </div>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                      <a class="dropdown-item">Гэрээний түүх</a>
+                    </div>
+                  </span>
                 </div>
                 <div class="content-body">
                   <app-inline-loader *ngIf="loading_contract"></app-inline-loader>
@@ -116,6 +127,14 @@
           <div class="content-small">
             <div class="content-header">
               Төлбөрийн мэдээлэл
+              <span class="float-right">
+                <a id="dropdownMenuButton2" class="btn-icon" data-toggle="dropdown" aria-haspopup="true"
+                  aria-expanded="false">
+                  <div class="btn-circle-label">
+                    <i class="icon ion-help"></i>
+                  </div>
+                </a>
+              </span>
             </div>
             <div class="content-body">
               <div class="row" *ngIf='lastPayment!=undefined'>
@@ -179,7 +198,7 @@
                               [class.badge-success]='item.Status.id==1'>{{item.Status.name}}</span>
                           </td>
                         </tr>
-                        <tr *ngIf='expanded && item==selectedPayment && item.Paid>0'>
+                        <tr *ngIf='expanded && item==selectedPayment && (item.Paid>0 || item.ald>0)'>
                           <td colspan="6" style="padding: 0; margin: 0;">
 
                             <div class="row">
