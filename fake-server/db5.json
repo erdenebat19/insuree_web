@@ -33,7 +33,7 @@
     },
     {
       "id": 9,
-      "name": "Гадаад улс оронд оршин суугч иргэн"
+      "name": "Гадаад улс орCalYearд оршин суугч иргэн"
     },
     {
       "id": 10,
@@ -87,12 +87,12 @@
     }
   ],
   "GetSdContactStatus": {
-    "Status": 1
+    "Status": 2
   },
   "LastMessage": {
-    "title": "Гэрээний хүслэтийг хүлээн авлаа",
-    "regdate": "2019-11-2 05:04",
-    "desc": "Таны гэрээний хүслэтийг хүлээн авлаа. Та төлбөрөө ХААН банкны 5027691218 дансанд төлснөөр гэрээ хүчинтэй болно.",
+    "title": "Төлбөр гэрээний хугацаа дууссан байна",
+    "regdate": "2020-01-5 05:04",
+    "desc": "Таны гэрээний хугацаа 2019-12-31-нд дууссан байна. Та хэрэв гэрээний нөхцөлөө өөрчилж сунгах бол <a href='http://localhost:4200/#/main/view/sd/register'>энд дарна</a> уу. Хэрэв өөрчлөхгүй сунгах бол 2020-01-30-аас өмнө 46400 төгрөгийг ХААН банкны 5027691218 дансанд төлнө үү.",
     "type": 2,
     "isread": false
   },
@@ -175,12 +175,16 @@
     }
   ],
   "Contract": {
+    "id": "23001904900",
     "Length": 12,
     "Period": {
       "id": 1,
       "name": "Сараар"
     },
+    "bdate": "2019-01-01",
+    "edate": "2019-12-31",
     "Income": 320000,
+    "Fee": 46400,
     "AMClass": {
       "id": 1,
       "name": "Ажилгүй иргэн"
@@ -190,11 +194,205 @@
       "dans": "5003440919",
       "name": "Хаан тєвлєрсєн"
     },
+    "RegDate": "2019-11-14",
     "Status": {
-      "id": 1,
-      "name": "Бүртгэсэн"
+      "id": 3,
+      "name": "Хугацаа дууссан"
     }
   },
+  "payment": [{
+      "CalYear": 2019,
+      "CalMonth": 1,
+      "Salary": 320000,
+      "Fee": 43200,
+      "PayDate": "2019-1-01",
+      "PayAmount": 43200,
+      "ald": 0,
+      "Amount": 43200,
+      "Paid": 43200,
+      "Status": {
+        "id": 1,
+        "name": "Төлсөн"
+      }
+    },
+    {
+      "CalYear": 2019,
+      "CalMonth": 2,
+      "Salary": 320000,
+      "Fee": 43200,
+      "PayDate": "2019-2-01",
+      "PayAmount": 43200,
+      "ald": 0,
+      "Amount": 43200,
+      "Paid": 43200,
+      "Status": {
+        "id": 1,
+        "name": "Төлсөн"
+      }
+    },
+    {
+      "CalYear": 2019,
+      "CalMonth": 3,
+      "Salary": 320000,
+      "Fee": 46400,
+      "PayDate": "2019-03-01",
+      "PayAmount": 46400,
+      "ald": 0,
+      "Amount": 46400,
+      "Paid": 46400,
+      "Status": {
+        "id": 1,
+        "name": "Төлсөн"
+      }
+    },
+    {
+      "CalYear": 2019,
+      "CalMonth": 4,
+      "Salary": 320000,
+      "Fee": 46400,
+      "PayDate": "2019-04-01",
+      "PayAmount": 46400,
+      "ald": 0,
+      "Amount": 46400,
+      "Paid": 46400,
+      "Status": {
+        "id": 1,
+        "name": "Төлсөн"
+      }
+    },
+    {
+      "CalYear": 2019,
+      "CalMonth": 5,
+      "Salary": 320000,
+      "Fee": 46400,
+      "PayDate": "2019-05-01",
+      "PayAmount": 46400,
+      "ald": 0,
+      "Amount": 46400,
+      "Paid": 46400,
+      "Status": {
+        "id": 1,
+        "name": "Төлсөн"
+      }
+    },
+    {
+      "CalYear": 2019,
+      "CalMonth": 6,
+      "Salary": 320000,
+      "Fee": 46400,
+      "PayDate": "2019-06-01",
+      "PayAmount": 46400,
+      "ald": 0,
+      "Amount": 46400,
+      "Paid": 46400,
+      "Status": {
+        "id": 1,
+        "name": "Төлсөн"
+      }
+    },
+    {
+      "CalYear": 2019,
+      "CalMonth": 7,
+      "Salary": 320000,
+      "Fee": 46400,
+      "PayDate": "2019-07-01",
+      "PayAmount": 46400,
+      "ald": 0,
+      "Amount": 46400,
+      "Paid": 46400,
+      "Status": {
+        "id": 1,
+        "name": "Төлсөн"
+      }
+    },
+    {
+      "CalYear": 2019,
+      "CalMonth": 8,
+      "Salary": 320000,
+      "Fee": 46400,
+      "PayDate": "2019-08-01",
+      "PayAmount": 46400,
+      "ald": 0,
+      "Amount": 46400,
+      "Paid": 46400,
+      "Status": {
+        "id": 1,
+        "name": "Төлсөн"
+      }
+    },
+    {
+      "CalYear": 2019,
+      "CalMonth": 9,
+      "Salary": 320000,
+      "Fee": 46400,
+      "PayDate": "2019-09-01",
+      "PayAmount": 46400,
+      "ald": 0,
+      "Amount": 46400,
+      "Paid": 46400,
+      "Status": {
+        "id": 1,
+        "name": "Төлсөн"
+      }
+    },
+    {
+      "CalYear": 2019,
+      "CalMonth": 10,
+      "Salary": 320000,
+      "Fee": 46400,
+      "PayDate": "2019-10-01",
+      "PayAmount": 46400,
+      "ald": 0,
+      "Amount": 46400,
+      "Paid": 46400,
+      "Status": {
+        "id": 1,
+        "name": "Төлсөн"
+      }
+    },
+    {
+      "CalYear": 2019,
+      "CalMonth": 11,
+      "Salary": 320000,
+      "Fee": 46400,
+      "PayDate": "2019-11-01",
+      "PayAmount": 46400,
+      "ald": 0,
+      "Amount": 46400,
+      "Paid": 46400,
+      "Status": {
+        "id": 1,
+        "name": "Төлсөн"
+      }
+    },
+    {
+      "CalYear": 2019,
+      "CalMonth": 12,
+      "Salary": 320000,
+      "Fee": 46400,
+      "PayDate": "2019-12-01",
+      "PayAmount": 46400,
+      "ald": 0,
+      "Amount": 46400,
+      "Paid": 46400,
+      "Status": {
+        "id": 1,
+        "name": "Төлсөн"
+      }
+    }
+  ],
+  "LastPayment": {
+    "Amount": 46400,
+    "type": {
+      "id": 2,
+      "name": "Гэрээ сунгалт"
+    },
+    "nextDate": null
+  },
+  "transacs": [{
+    "RegDate": "2019-11-14",
+    "Amount": 46400
+  }],
   "contact": {
     "Section": {
       "aid": "2300",

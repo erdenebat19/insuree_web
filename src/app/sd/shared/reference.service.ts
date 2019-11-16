@@ -26,6 +26,14 @@ export class ReferenceService {
     };
     return this.http.get(this.apiurl + "Banks", httpOptions);
   }
+  AimagList(): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      })
+    };
+    return this.http.get(this.apiurl + "Aimags", httpOptions);
+  }
   GetMinSalary(): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({

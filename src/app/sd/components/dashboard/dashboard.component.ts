@@ -3,6 +3,8 @@ import { ContractService } from "../../shared/contract.service";
 import { Router } from "@angular/router";
 import { MessageService } from "src/app/notification/shared/message.service";
 import { PaymentService } from "../../shared/payment.service";
+import { ContactService } from "../../shared/contact.service";
+import { ReferenceService } from "../../shared/reference.service";
 
 @Component({
   selector: "app-dashboard",
@@ -20,11 +22,17 @@ export class DashboardComponent implements OnInit {
   selectedPayment: any;
   lastPayment: any;
   transacs: any;
+  contact: any;
+  loading_contact: boolean;
+  contract_moving_error_message: string;
+  aimags: any;
 
   constructor(
     private contractService: ContractService,
     private messageService: MessageService,
     private paymentService: PaymentService,
+    private contactService: ContactService,
+    private referenceService: ReferenceService,
     private router: Router
   ) {}
 
@@ -36,34 +44,50 @@ export class DashboardComponent implements OnInit {
         this.message = result;
       },
       error => {
-        this.loading_message = true;
+        this.loading_message = false;
       }
     );
+    this.loading_contract = true;
     this.contractService.Get().subscribe(
       result => {
         this.loading_contract = false;
         this.contract = result;
       },
       error => {
-        this.loading_contract = true;
+        this.loading_contract = false;
       }
     );
+    this.loading_payment = true;
     this.paymentService.Get().subscribe(
       result => {
         this.loading_payment = false;
         this.payment = result;
       },
       error => {
-        this.loading_payment = true;
+        this.loading_payment = false;
       }
     );
+    this.loading_payment = true;
     this.paymentService.GetLastPayment().subscribe(
       result => {
         this.loading_payment = false;
         this.lastPayment = result;
       },
       error => {
-        this.loading_payment = true;
+        this.loading_payment = false;
+      }
+    );
+    this.loading_contact = true;
+    this.referenceService.AimagList().subscribe(
+      result => {
+        this.loading_contact = false;
+        this.aimags = result;
+        this.contactService.Get().subscribe(result => {
+          this.contact = result;
+        });
+      },
+      error => {
+        this.loading_contact = false;
       }
     );
   }
@@ -83,5 +107,10 @@ export class DashboardComponent implements OnInit {
         }
       );
     }
+  }
+  ContractMove() {
+    console.log(this.contact.Section.aid);
+    this.contract_moving_error_message =
+      "Та тооцооны үлдэгдэлтэй байгаа тул таны гэрээг шилжүүлэх боломжгүй байна. Та тооцооны үлдэгдэлгүй болоод дараа шилжүүлэх боломжтой.";
   }
 }

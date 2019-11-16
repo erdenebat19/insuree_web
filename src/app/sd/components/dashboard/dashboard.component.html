@@ -18,8 +18,7 @@
                     <div class="message-date">
                       {{message.regdate}}
                     </div>
-                    <div class="message-desc">
-                      {{message.desc}}
+                    <div class="message-desc" [innerHTML]='message.desc'>
                     </div>
                   </div>
                 </div>
@@ -40,6 +39,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
                       <a class="dropdown-item">Гэрээний түүх</a>
+                      <a class="dropdown-item">Гэрээ шилжүүлэх</a>
                     </div>
                   </span>
                 </div>
@@ -105,7 +105,8 @@
                         <div class="col-md-5">Төлөв</div>
                         <div class="col-md-7">
                           <span class="badge" [class.badge-primary]='contract.Status.id==1'
-                            [class.badge-success]='contract.Status.id==2'>{{contract.Status.name}}</span>
+                            [class.badge-success]='contract.Status.id==2'
+                            [class.badge-danger]='contract.Status.id==3'>{{contract.Status.name}}</span>
                         </div>
                       </div>
                     </div>
@@ -117,6 +118,58 @@
                       гэрээний байгуулах
                       хүсэлтээ явуулна уу
                     </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col" *ngIf='contact!=undefined'>
+              <div class="content-small">
+                <div class="content-header">
+                  Холбоо барих
+                </div>
+                <div class="content-body">
+                  <app-inline-loader *ngIf="loading_contact"></app-inline-loader>
+                  <div class="list-group-item-line">
+                    <div class="row">
+                      <div class="col-md-5 ">Хэлтэс</div>
+                      <!-- <div class="col-md-7 font-weight-bold">{{contact.Section.AimagName}}</div> -->
+                      <div class="col-md-7 font-weight-bold">
+                        <select class="custom-select" [(ngModel)]='contact.Section.aid'>
+                          <option [ngValue]="item.AimagID" *ngFor='let item of aimags'>
+                            {{item.AimagName}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="list-group-item-line">
+                    <div class="row">
+                      <div class="col-md-5 ">Байцаагч</div>
+                      <div class="col-md-7 font-weight-bold">{{contact.Officer.LastName}} {{contact.Officer.FirstName}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="list-group-item-line">
+                    <div class="row">
+                      <div class="col-md-5 ">Хэлтсийн утас</div>
+                      <div class="col-md-7 font-weight-bold">{{contact.Section.Phone}}</div>
+                    </div>
+                  </div>
+                  <div class="list-group-item-line">
+                    <div class="row">
+                      <div class="col-md-5 ">Байцаагчийн утас</div>
+                      <div class="col-md-7 font-weight-bold">{{contact.Officer.Phone}}</div>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="alert alert-warning" *ngIf='contract_moving_error_message!=undefined'>
+                    {{contract_moving_error_message}}
+                  </div>
+                  <div class="row" *ngIf='contract!=undefined && contract.Status.id==2'>
+                    <div class="col-md-5 "></div>
+                    <div class="col-md-7"><button class="btn btn-default float-right" (click)='ContractMove()'>Гэрээ
+                        шилжүүлэх</button></div>
                   </div>
                 </div>
               </div>
@@ -139,7 +192,7 @@
             <div class="content-body">
               <div class="row" *ngIf='lastPayment!=undefined'>
                 <div class="col-md-7">
-                  <ul class="list-group">
+                  <ul class="list-group" *ngIf='lastPayment.type.id==1'>
                     <li class="list-group-item lightgray">
                       {{lastPayment.CalYear}} оны {{lastPayment.CalMonth}} сар хүртэлх төлбөр
                     </li>
@@ -162,12 +215,24 @@
                       </div>
                     </li>
                   </ul>
+                  <ul class="list-group" *ngIf='lastPayment.type.id==2'>
+                    <li class="list-group-item lightgray">
+                      Өмнөх нөхцөлөөр сунгах
+                    </li>
+                    <li class="list-group-item">
+                      <div class="row">
+                        <span class="col-md-8">Төлөх дүн</span>
+                        <span class="col-md-4 text-right font-weight-bold">{{lastPayment.Amount}}</span>
+                      </div>
+                    </li>
+                  </ul>
                 </div>
                 <div class="col-md-5">
                   <button class="btn btn-default">Төлбөр төлөх</button>
                   <br>
                   <br>
-                  <div class="alert alert-primary">
+                  <div class="alert alert-primary"
+                    *ngIf='lastPayment.nextDate!=null && lastPayment.nextDate!=undefined'>
                     Дараагийн төлбөр төлөх хугацаа {{lastPayment.nextDate}}
                   </div>
                 </div>
@@ -194,13 +259,13 @@
                           <td class="text-right" style="min-width: 80px;">{{item.Amount}}</td>
                           <td class="text-right" style="min-width: 80px;">{{item.Paid}}</td>
                           <td class="text-center" style="max-width: 100px; min-width: 80px;"><span class='badge'
-                              [class.badge-primary]='item.Status.id==0'
-                              [class.badge-success]='item.Status.id==1'>{{item.Status.name}}</span>
+                              [class.badge-primary]='item.Status.id==0' [class.badge-success]='item.Status.id==1'
+                              [class.badge-secondary]='item.Status.id==2'
+                              [class.badge-danger]='item.Status.id==3'>{{item.Status.name}}</span>
                           </td>
                         </tr>
                         <tr *ngIf='expanded && item==selectedPayment && (item.Paid>0 || item.ald>0)'>
                           <td colspan="6" style="padding: 0; margin: 0;">
-
                             <div class="row">
                               <div class="col-md-6" style="padding: 0; margin: 0;">
                                 <ul class="list-group" style="margin: 0;">

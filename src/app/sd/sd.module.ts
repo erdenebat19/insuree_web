@@ -8,7 +8,7 @@ import { ContractBalanceComponent } from "./components/contract-balance/contract
 import { ConfirmContractRegisterComponent } from "./components/confirm-contract-register/confirm-contract-register.component";
 import { NgxMaskModule } from "ngx-mask";
 import { InlineLoaderModule } from "../shared/ui/inline-loader/inline-loader.module";
-import { NotFoundComponent } from './components/not-found/not-found.component';
+import { NotFoundComponent } from "./components/not-found/not-found.component";
 
 @NgModule({
   imports: [
