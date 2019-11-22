@@ -12,9 +12,9 @@ import { ReferenceService } from "../../shared/reference.service";
   styleUrls: ["./dashboard.component.css"]
 })
 export class DashboardComponent implements OnInit {
-  loading_message: boolean = false;
-  loading_contract: boolean = false;
-  loading_payment: boolean = false;
+  loading_message = false;
+  loading_contract = false;
+  loading_payment = false;
   message: string;
   contract: any;
   payment: any;
@@ -26,6 +26,7 @@ export class DashboardComponent implements OnInit {
   loading_contact: boolean;
   contract_moving_error_message: string;
   aimags: any;
+  loading_transac: boolean;
 
   constructor(
     private contractService: ContractService,
@@ -95,15 +96,16 @@ export class DashboardComponent implements OnInit {
   selectPayment(item: any) {
     this.expanded = !this.expanded;
     this.selectedPayment = item;
+    this.loading_transac = true;
     if (item.Paid > 0) {
       this.paymentService.GetTransac(item.CalYear, item.CalMonth).subscribe(
         result => {
-          // this.loading_transac = false;
+          this.loading_transac = false;
           this.transacs = result;
         },
         error => {
           console.log(error);
-          // this.loading_transac = true;
+          this.loading_transac = false;
         }
       );
     }

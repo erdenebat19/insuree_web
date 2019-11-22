@@ -265,8 +265,9 @@
                           </td>
                         </tr>
                         <tr *ngIf='expanded && item==selectedPayment && (item.Paid>0 || item.ald>0)'>
+                          <app-inline-loader *ngIf="loading_transac"></app-inline-loader>
                           <td colspan="6" style="padding: 0; margin: 0;">
-                            <div class="row">
+                            <div class="row" *ngIf='transac!=undefined'>
                               <div class="col-md-6" style="padding: 0; margin: 0;">
                                 <ul class="list-group" style="margin: 0;">
                                   <li class="list-group-item lightgray">
