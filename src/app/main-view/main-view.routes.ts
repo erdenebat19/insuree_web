@@ -32,6 +32,10 @@ export const routes: Routes = [
         loadChildren: "../sd/sd.module#SdModule"
       },
       {
+        path: "payment",
+        loadChildren: "../payment/payment.module#PaymentModule"
+      },
+      {
         path: "message",
         loadChildren: "../notification/notification.module#NotificationModule"
       },

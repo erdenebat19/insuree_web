@@ -12,11 +12,11 @@
               <div class="form-group row">
                 <label for="ddpAMClass" class="col-sm-5 col-form-label">Ажил, мэргэжил</label>
                 <div class="col-sm-7">
-                  <select class="form-control" id="ddpAMClass" [(ngModel)]='contract.AMClass'>
+                  <select class="form-control" id="ddpAMClass" [(ngModel)]='contract.Class'>
                     <option value="0">-</option>
                     <option [ngValue]="item" *ngFor='let item of AMClasses'>{{item.name}}</option>
                   </select>
-                  <div *ngIf="postback && contract.AMClass == 0" class="text-danger font-italic">
+                  <div *ngIf="postback && contract.Class == 0" class="text-danger font-italic">
                     <small>*Ажил мэргэжил сонгоогүй байна.</small>
                   </div>
                 </div>
@@ -35,7 +35,7 @@
               <div class="form-group row">
                 <label for="ddpPeriod" class="col-sm-5 col-form-label">Давтамж</label>
                 <div class="col-sm-5">
-                  <select class="form-control" id="ddpPeriod" [(ngModel)]='contract.Period'>
+                  <select class="form-control" id="ddpPeriod" [(ngModel)]='contract.ContractPeriod'>
                     <option [ngValue]="item" *ngFor='let item of Periods'>{{item.name}}</option>
                   </select>
                   <div *ngIf="postback && contract.Length == 0" class="text-danger font-italic">
@@ -62,9 +62,9 @@
               <div class="form-group row">
                 <label for="ddpBank" class="col-sm-5 col-form-label">Банк</label>
                 <div class="col-sm-5">
-                  <select class="form-control" id="ddpBank" [(ngModel)]='contract.Bank'>
+                  <select class="form-control" id="ddpBank" [(ngModel)]='contract.Account'>
                     <option value="0">-</option>
-                    <option [ngValue]="item" *ngFor='let item of Banks'>{{item.name}}</option>
+                    <option [ngValue]="item" *ngFor='let item of Banks'>{{item.bankName}}</option>
                   </select>
                   <div *ngIf="postback && contract.Bank == 0" class="text-danger font-italic">
                     <small>*Төлбөр төлөх банкаа сонгоогүй байна.</small>

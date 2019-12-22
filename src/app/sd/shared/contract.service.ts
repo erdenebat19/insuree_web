@@ -6,23 +6,50 @@ import { Observable } from "rxjs";
   providedIn: "root"
 })
 export class ContractService {
-  apiurl = "http://localhost:3000/";
+  //apiurl = "http://localhost:3000/";
+  apiurl = "http://localhost:10012/api/";
+
   constructor(private http: HttpClient) {}
 
-  GetStatus(): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json"
-      })
-    };
-    return this.http.get(this.apiurl + "GetSdContactStatus", httpOptions);
-  }
   Get(): Observable<any> {
+    let user = JSON.parse(localStorage.getItem("user"));
     const httpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user.token}`
       })
     };
-    return this.http.get(this.apiurl + "Contract", httpOptions);
+    return this.http.get(this.apiurl + "SdContract", httpOptions);
+  }
+  Register(contract: any): Observable<any> {
+    let user = JSON.parse(localStorage.getItem("user"));
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user.token}`
+      })
+    };
+    return this.http.post(this.apiurl + "SdContract", contract, httpOptions);
+  }
+
+  GetSchedule(): Observable<any> {
+    let user = JSON.parse(localStorage.getItem("user"));
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user.token}`
+      })
+    };
+    return this.http.get(this.apiurl + "SdContract/schedule", httpOptions);
+  }
+  GetPreSchedule(): Observable<any> {
+    let user = JSON.parse(localStorage.getItem("user"));
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user.token}`
+      })
+    };
+    return this.http.get(this.apiurl + "SdContract/preschedule", httpOptions);
   }
 }

@@ -1,8 +1,8 @@
 import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
+import { NgModule, ErrorHandler } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { RecaptchaModule } from "ng-recaptcha";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
 import { AppComponent } from "./app.component";
 import { routes } from "./app.routes";
@@ -10,6 +10,10 @@ import { RouterModule } from "@angular/router";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { ErrorReportComponent } from "./shared/ui/error-report/error-report.component";
 import { GoogleAnalyticsServiceService } from "./shared/shared/google-analytics-service.service";
+import { GlobalErrorHandler } from "./shared/shared/global-error-handle";
+import { ServerErrorInterceptor } from "./shared/shared/server-error.interceptor";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { SharedModule } from "./shared/shared.module";
 
 @NgModule({
   declarations: [AppComponent, ErrorReportComponent],
@@ -17,9 +21,20 @@ import { GoogleAnalyticsServiceService } from "./shared/shared/google-analytics-
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(routes, { useHash: true }),
-    RecaptchaModule.forRoot()
+    RecaptchaModule.forRoot(),
+    BrowserAnimationsModule,
+    SharedModule
   ],
-  providers: [JwtHelperService, GoogleAnalyticsServiceService],
+  providers: [
+    JwtHelperService,
+    GoogleAnalyticsServiceService,
+    { provide: ErrorHandler, useClass: GlobalErrorHandler },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ServerErrorInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -10,6 +10,7 @@
                   Мэдэгдэл
                 </div>
                 <div class="content-body">
+                  <app-alert-inline [message]="message_error_message"></app-alert-inline>
                   <app-inline-loader *ngIf="loading_message"></app-inline-loader>
                   <div *ngIf="message!=undefined">
                     <div class="message-title">
@@ -44,69 +45,71 @@
                   </span>
                 </div>
                 <div class="content-body">
+                  <app-alert-inline [message]="contract_error_message"></app-alert-inline>
                   <app-inline-loader *ngIf="loading_contract"></app-inline-loader>
                   <div *ngIf='contract!=undefined' class="list-group">
                     <div class="list-group-item-line" *ngIf='contract.bdate!=undefined'>
                       <div class="row">
                         <div class="col-md-5 ">Гэрээний дугаар</div>
-                        <div class="col-md-7 font-weight-bold">{{contract.id}}</div>
+                        <div class="col-md-7 font-weight-bold">{{contract.code}}</div>
                       </div>
                     </div>
                     <div class="list-group-item-line">
                       <div class="row">
                         <div class="col-md-5 ">Гэрээний урт</div>
-                        <div class="col-md-7 font-weight-bold">{{contract.Length}}</div>
+                        <div class="col-md-7 font-weight-bold">{{contract.length}}</div>
                       </div>
                     </div>
                     <div class="list-group-item-line" *ngIf='contract.bdate!=undefined'>
                       <div class="row">
                         <div class="col-md-5 ">Гэрээний хугацаа</div>
-                        <div class="col-md-7 font-weight-bold">{{contract.bdate}} - {{contract.edate}}</div>
+                        <div class="col-md-7 font-weight-bold">{{contract.beginDate}} - {{contract.endDate}}</div>
                       </div>
                     </div>
                     <div class="list-group-item-line">
                       <div class="row">
                         <div class="col-md-5">Төлбөр төлөх давтамж</div>
-                        <div class="col-md-7 font-weight-bold">{{contract.Period.name}}</div>
+                        <div class="col-md-7 font-weight-bold">{{contract.period}}</div>
                       </div>
                     </div>
                     <div class="list-group-item-line">
                       <div class="row">
                         <div class="col-md-5">Сарын орлого</div>
-                        <div class="col-md-7 font-weight-bold">{{contract.Income}}</div>
+                        <div class="col-md-7 font-weight-bold">{{contract.income}}</div>
                       </div>
                     </div>
                     <div class="list-group-item-line">
                       <div class="row">
                         <div class="col-md-5">Сарын шимтгэл</div>
-                        <div class="col-md-7 font-weight-bold">{{contract.Fee}}</div>
+                        <div class="col-md-7 font-weight-bold">{{contract.dun}}</div>
                       </div>
                     </div>
                     <div class="list-group-item-line">
                       <div class="row">
                         <div class="col-md-5">Ажил, мэргэжил</div>
-                        <div class="col-md-7 font-weight-bold">{{contract.AMClass.name}}</div>
+                        <div class="col-md-7 font-weight-bold">{{contract.class.name}}</div>
                       </div>
                     </div>
                     <div class="list-group-item-line">
                       <div class="row">
                         <div class="col-md-5">Төлбөр төлөх банк</div>
-                        <div class="col-md-7 font-weight-bold">{{contract.Bank.dans}} - {{contract.Bank.name}}</div>
+                        <div class="col-md-7 font-weight-bold">{{contract.dans.account}} - {{contract.dans.bankName}}
+                        </div>
                       </div>
                     </div>
                     <div class="list-group-item-line">
                       <div class="row">
                         <div class="col-md-5">Бүртгэсэн огноо</div>
-                        <div class="col-md-7 font-weight-bold">{{contract.RegDate}}</div>
+                        <div class="col-md-7 font-weight-bold">{{contract.regDate | date}}</div>
                       </div>
                     </div>
                     <div class="list-group-item-line">
                       <div class="row">
                         <div class="col-md-5">Төлөв</div>
                         <div class="col-md-7">
-                          <span class="badge" [class.badge-primary]='contract.Status.id==1'
-                            [class.badge-success]='contract.Status.id==2'
-                            [class.badge-danger]='contract.Status.id==3'>{{contract.Status.name}}</span>
+                          <span class="badge" [class.badge-primary]='contract.status==0'
+                            [class.badge-success]='contract.status==1'
+                            [class.badge-danger]='contract.status==2'>{{contract.statusName}}</span>
                         </div>
                       </div>
                     </div>
@@ -130,6 +133,7 @@
                   Холбоо барих
                 </div>
                 <div class="content-body">
+                  <app-alert></app-alert>
                   <app-inline-loader *ngIf="loading_contact"></app-inline-loader>
                   <div class="list-group-item-line">
                     <div class="row">
@@ -190,6 +194,7 @@
               </span>
             </div>
             <div class="content-body">
+              <app-alert></app-alert>
               <div class="row" *ngIf='lastPayment!=undefined'>
                 <div class="col-md-7">
                   <ul class="list-group" *ngIf='lastPayment.type.id==1'>
@@ -264,7 +269,7 @@
                               [class.badge-danger]='item.Status.id==3'>{{item.Status.name}}</span>
                           </td>
                         </tr>
-                        <tr *ngIf='expanded && item==selectedPayment && (item.Paid>0 || item.ald>0)'>
+                        <tr *ngIf='expanded && item==selectedPayment'>
                           <app-inline-loader *ngIf="loading_transac"></app-inline-loader>
                           <td colspan="6" style="padding: 0; margin: 0;">
                             <div class="row" *ngIf='transac!=undefined'>

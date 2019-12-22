@@ -18,7 +18,7 @@
             </div>
             <div class="form-group row">
               <div class="col-md-5">Төлбөр төлөх давтамж</div>
-              <div class="col-md-6">{{contract.Period.name}}</div>
+              <div class="col-md-6">{{contract.ContractPeriod.name}}</div>
             </div>
             <div class="form-group row">
               <div class="col-md-5">Сарын орлого</div>
@@ -26,16 +26,17 @@
             </div>
             <div class="form-group row">
               <div class="col-md-5">Ажил, мэргэжил</div>
-              <div class="col-md-6">{{contract.AMClass.name}}</div>
+              <div class="col-md-6">{{contract.Class.name}}</div>
             </div>
             <div class="form-group row">
               <div class="col-md-5">Төлбөр төлөх банк</div>
-              <div class="col-md-6">{{contract.Bank.dans}} - {{contract.Bank.name}}</div>
+              <div class="col-md-6">{{contract.Account.account}} - {{contract.Account.bankName}}</div>
             </div>
             <div class="alert alert-danger" *ngIf="errormessage != undefined">
               {{ errormessage }}
             </div>
             <div class="form-group row">
+              <app-alert-inline [message]="error_message"></app-alert-inline>
               <div class="col-sm-5"></div>
               <div class="col-sm-6"><button class="btn btn-primary" (click)='register()'>Хадгалах</button>
               </div>

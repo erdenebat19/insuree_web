@@ -20,10 +20,10 @@ export class ContractRegisterComponent implements OnInit {
 
   ngOnInit() {
     this.contract = {
-      AMClass: 0,
+      Class: 0,
       Length: 12,
-      Period: 1,
-      Bank: 0
+      ContractPeriod: 1,
+      Account: 0
     };
     this.loading = true;
     this.refService.AMClassList().subscribe(result => {
@@ -37,13 +37,13 @@ export class ContractRegisterComponent implements OnInit {
     });
     this.loading = true;
     this.refService.GetMinSalary().subscribe(result => {
-      this.MinSalary = result.MinSalary;
+      this.MinSalary = result;
       this.loading = false;
     });
     this.loading = true;
     this.refService.ContractPeriods().subscribe(result => {
       this.Periods = result;
-      this.contract.Period = this.Periods[0];
+      //this.contract.Period = this.Periods[0];
       this.loading = false;
     });
   }
@@ -63,10 +63,10 @@ export class ContractRegisterComponent implements OnInit {
     }
   }
   validate(): boolean {
-    if (this.contract.AMClass == 0) {
+    if (this.contract.Class == 0) {
       return false;
     }
-    if (this.contract.Bank == 0) {
+    if (this.contract.Account == 0) {
       return false;
     }
     if (this.contract.Income < this.MinSalary) {

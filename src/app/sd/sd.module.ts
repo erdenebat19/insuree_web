@@ -9,6 +9,8 @@ import { ConfirmContractRegisterComponent } from "./components/confirm-contract-
 import { NgxMaskModule } from "ngx-mask";
 import { InlineLoaderModule } from "../shared/ui/inline-loader/inline-loader.module";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
+import { ContractRegisterPaymentComponent } from "./components/contract-register-payment/contract-register-payment.component";
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
   imports: [
@@ -16,14 +18,16 @@ import { NotFoundComponent } from "./components/not-found/not-found.component";
     SdRoutingModule,
     FormsModule,
     InlineLoaderModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    SharedModule
   ],
   declarations: [
     DashboardComponent,
     ContractRegisterComponent,
     ContractBalanceComponent,
     ConfirmContractRegisterComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ContractRegisterPaymentComponent
   ]
 })
 export class SdModule {}

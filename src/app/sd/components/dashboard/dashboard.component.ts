@@ -5,6 +5,7 @@ import { MessageService } from "src/app/notification/shared/message.service";
 import { PaymentService } from "../../shared/payment.service";
 import { ContactService } from "../../shared/contact.service";
 import { ReferenceService } from "../../shared/reference.service";
+import { ErrorService } from "src/app/shared/shared/error.service";
 
 @Component({
   selector: "app-dashboard",
@@ -18,7 +19,7 @@ export class DashboardComponent implements OnInit {
   message: string;
   contract: any;
   payment: any;
-  expanded: boolean;
+  expanded: boolean = false;
   selectedPayment: any;
   lastPayment: any;
   transacs: any;
@@ -27,6 +28,8 @@ export class DashboardComponent implements OnInit {
   contract_moving_error_message: string;
   aimags: any;
   loading_transac: boolean;
+  message_error_message: any;
+  contract_error_message: string;
 
   constructor(
     private contractService: ContractService,
@@ -34,74 +37,88 @@ export class DashboardComponent implements OnInit {
     private paymentService: PaymentService,
     private contactService: ContactService,
     private referenceService: ReferenceService,
-    private router: Router
+    private errorService: ErrorService
   ) {}
 
   ngOnInit() {
     this.loading_message = true;
-    this.messageService.GetLast().subscribe(
-      result => {
+    this.messageService
+      .GetLast()
+      .subscribe(
+        result => {
+          this.loading_message = false;
+          this.message = result;
+        },
+        error => {
+          console.log(error);
+          this.message_error_message = this.errorService.getInlineError(error);
+        }
+      )
+      .add(() => {
         this.loading_message = false;
-        this.message = result;
-      },
-      error => {
-        this.loading_message = false;
-      }
-    );
+      });
     this.loading_contract = true;
-    this.contractService.Get().subscribe(
-      result => {
+    this.contractService
+      .Get()
+      .subscribe(
+        result => {
+          this.loading_contract = false;
+          this.contract = result;
+        },
+        error => {
+          this.contract_error_message = this.errorService.getInlineError(error);
+        }
+      )
+      .add(() => {
         this.loading_contract = false;
-        this.contract = result;
-      },
-      error => {
-        this.loading_contract = false;
-      }
-    );
+      });
     this.loading_payment = true;
-    this.paymentService.Get().subscribe(
-      result => {
+    this.paymentService
+      .Get()
+      .subscribe(result => {
         this.loading_payment = false;
         this.payment = result;
-      },
-      error => {
+      })
+      .add(() => {
         this.loading_payment = false;
-      }
-    );
+      });
     this.loading_payment = true;
-    this.paymentService.GetLastPayment().subscribe(
-      result => {
+    this.paymentService
+      .GetLastPayment()
+      .subscribe(result => {
         this.loading_payment = false;
         this.lastPayment = result;
-      },
-      error => {
+      })
+      .add(() => {
         this.loading_payment = false;
-      }
-    );
+      });
     this.loading_contact = true;
-    this.referenceService.AimagList().subscribe(
-      result => {
+    this.referenceService
+      .AimagList()
+      .subscribe(result => {
         this.loading_contact = false;
         this.aimags = result;
         this.contactService.Get().subscribe(result => {
           this.contact = result;
         });
-      },
-      error => {
+      })
+      .add(() => {
         this.loading_contact = false;
-      }
-    );
+      });
   }
 
   selectPayment(item: any) {
     this.expanded = !this.expanded;
     this.selectedPayment = item;
+    console.log(this.expanded);
+    console.log(this.selectedPayment);
     this.loading_transac = true;
     if (item.Paid > 0) {
       this.paymentService.GetTransac(item.CalYear, item.CalMonth).subscribe(
         result => {
           this.loading_transac = false;
           this.transacs = result;
+          console.log(this.transacs);
         },
         error => {
           console.log(error);

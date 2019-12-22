@@ -7,8 +7,8 @@ import { User } from "./user";
   providedIn: "root"
 })
 export class AccountService {
-  apiurl = "https://data.ndaatgal.mn:8081/userwebapi/api/";
-  // apiurl = "http://localhost:10012/api/";
+  //apiurl = "https://data.ndaatgal.mn:8081/userwebapi/api/";
+  apiurl = "http://localhost:10012/api/";
   appurl = "https://data.ndaatgal.mn/NDM/";
   ndmurl = "https://data.ndaatgal.mn:8081/ndmapi/api/";
 

@@ -1,0 +1,57 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="content-container">
+      <div class="content-small">
+        <div class="content-header">
+          Гэрээний төлбөр төлөх
+        </div>
+        <div class="content-body">
+          <app-alert-inline [message]="error_message"></app-alert-inline>
+          Нийгмийн даатгалын гэрээний төлбөр
+          {{amount}}
+          <br>
+          <button class="btn btn-default">Төлбөр төлөх</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="content-container">
+      <div class="content-small">
+        <div class="content-header">
+          Гэрээний төлбөр төлөх хуваарь
+        </div>
+        <div class="content-body">
+          <div>
+            <label for="customRange2">Example range</label>
+            <input type="range" class="custom-range" min="1" max="12" id="customRange2" [(ngModel)]='PayMonth'
+              (change)='calc()'>
+            <app-inline-loader *ngIf="loading_payment"></app-inline-loader>
+            <div *ngIf="payment!=undefined">
+              <div class="table-responsive">
+                <table class="table table-bordered table-sm">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="text-center">Огноо</th>
+                      <th scope="col" class="text-center">Төлөх дүн</th>
+                      <th scope="col" class="text-center">Төлөв</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor='let item of payment'>
+                      <td class="text-center" style="width: 120px;">{{item.PayDate | date : 'yyyy-MM-dd'}}</td>
+                      <td class="text-right" style="min-width: 70px;">{{item.Amount | number}}</td>
+                      <td class="text-center" style="max-width: 70px; min-width: 70px;">
+                        <input type="checkbox" name="payMonth" [(ngModel)]="item.ischecked" disabled>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
