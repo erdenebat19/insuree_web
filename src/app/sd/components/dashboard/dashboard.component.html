@@ -197,14 +197,20 @@
               <app-alert></app-alert>
               <div class="row" *ngIf='lastPayment!=undefined'>
                 <div class="col-md-7">
-                  <ul class="list-group" *ngIf='lastPayment.type.id==1'>
+                  <div *ngIf='lastPayment.status==0'>
+                    <div class="row">
+                      <span class="col-md-6">Гэрээний төлбөр: </span>
+                      <span class="col-md-6 text-left font-weight-bold">{{lastPayment.payAmount}}</span>
+                    </div>
+                  </div>
+                  <ul class="list-group" *ngIf='lastPayment.status==1'>
                     <li class="list-group-item lightgray">
-                      {{lastPayment.CalYear}} оны {{lastPayment.CalMonth}} сар хүртэлх төлбөр
+                      {{lastPayment.calYear}} оны {{lastPayment.calMonth}} сар хүртэлх төлбөр
                     </li>
                     <li class="list-group-item">
                       <div class="row">
                         <span class="col-md-8">Төлөх дүн</span>
-                        <span class="col-md-4 text-right font-weight-bold">{{lastPayment.PayAmount}}</span>
+                        <span class="col-md-4 text-right font-weight-bold">{{lastPayment.payAmount}}</span>
                       </div>
                     </li>
                     <li class="list-group-item">
@@ -216,24 +222,24 @@
                     <li class="list-group-item">
                       <div class="row">
                         <span class="col-md-8">Нийт дүн: </span>
-                        <span class="col-md-4 text-right font-weight-bold">{{lastPayment.Amount}}</span>
+                        <span class="col-md-4 text-right font-weight-bold">{{lastPayment.amount}}</span>
                       </div>
                     </li>
                   </ul>
-                  <ul class="list-group" *ngIf='lastPayment.type.id==2'>
+                  <ul class="list-group" *ngIf='lastPayment.status==3'>
                     <li class="list-group-item lightgray">
                       Өмнөх нөхцөлөөр сунгах
                     </li>
                     <li class="list-group-item">
                       <div class="row">
                         <span class="col-md-8">Төлөх дүн</span>
-                        <span class="col-md-4 text-right font-weight-bold">{{lastPayment.Amount}}</span>
+                        <span class="col-md-4 text-right font-weight-bold">{{lastPayment.amount}}</span>
                       </div>
                     </li>
                   </ul>
                 </div>
                 <div class="col-md-5">
-                  <button class="btn btn-default">Төлбөр төлөх</button>
+                  <button class="btn btn-default" (click)="pay()">Төлбөр төлөх</button>
                   <br>
                   <br>
                   <div class="alert alert-primary"
@@ -325,16 +331,6 @@
                   <div class="col-6 text-right">
                     <a><i class="icon ion-ios-arrow-right pull right"></i></a>
                   </div>
-                </div>
-              </div>
-              <div *ngIf="payment==undefined && contract!=undefined">
-                <div class="row">
-                  <span class="col-md-6">Гэрээний төлбөр</span>
-                  <span class="col-md-6">{{contract.Income}}</span>
-                </div>
-                <br>
-                <div class="alert alert-info">
-                  Та төлбөрөө ХААН банкны 5027691218 дансанд төлснөөр гэрээ хүчинтэй болно.
                 </div>
               </div>
             </div>

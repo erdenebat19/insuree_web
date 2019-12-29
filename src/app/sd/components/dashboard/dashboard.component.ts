@@ -30,6 +30,7 @@ export class DashboardComponent implements OnInit {
   loading_transac: boolean;
   message_error_message: any;
   contract_error_message: string;
+  amount: number;
 
   constructor(
     private contractService: ContractService,
@@ -37,7 +38,8 @@ export class DashboardComponent implements OnInit {
     private paymentService: PaymentService,
     private contactService: ContactService,
     private referenceService: ReferenceService,
-    private errorService: ErrorService
+    private errorService: ErrorService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -88,6 +90,7 @@ export class DashboardComponent implements OnInit {
       .subscribe(result => {
         this.loading_payment = false;
         this.lastPayment = result;
+        this.amount = this.lastPayment.amount;
       })
       .add(() => {
         this.loading_payment = false;
@@ -131,5 +134,9 @@ export class DashboardComponent implements OnInit {
     console.log(this.contact.Section.aid);
     this.contract_moving_error_message =
       "Та тооцооны үлдэгдэлтэй байгаа тул таны гэрээг шилжүүлэх боломжгүй байна. Та тооцооны үлдэгдэлгүй болоод дараа шилжүүлэх боломжтой.";
+  }
+  pay() {
+    sessionStorage.setItem("Amount", this.amount.toString());
+    this.router.navigate(["main/view/payment"]);
   }
 }

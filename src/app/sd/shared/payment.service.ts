@@ -6,7 +6,8 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
   providedIn: "root"
 })
 export class PaymentService {
-  apiurl = "http://localhost:3000/";
+  apiurl = "http://localhost:10012/api/Transaction/";
+  // apiurl = "http://localhost:3000/";
   constructor(private http: HttpClient) {}
 
   Get(): Observable<any> {
@@ -18,12 +19,14 @@ export class PaymentService {
     return this.http.get(this.apiurl + "payment", httpOptions);
   }
   GetLastPayment(): Observable<any> {
+    let user = JSON.parse(localStorage.getItem("user"));
     const httpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user.token}`
       })
     };
-    return this.http.get(this.apiurl + "LastPayment", httpOptions);
+    return this.http.get(this.apiurl + "SdLastPayment", httpOptions);
   }
   GetTransac(CalYear: number, CalMonth: number): Observable<any> {
     const httpOptions = {

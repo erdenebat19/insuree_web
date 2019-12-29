@@ -1,35 +1,8 @@
-app-modal {
-  display: block;
-}
-
-app-modal .modal {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1000;
+.agreementContainer {
+  height: 60vh;
   overflow: auto;
+  font-size: 0.8em;
+  padding: 30px;
+  border: solid 1px #ccc;
+  background: #f8f9fa;
 }
-
-app-modal .modal .modal-body {
-  padding: 20px;
-  background: #fff;
-  margin: 40px;
-}
-
-/* 
-app-modal .modal-background {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: #000;
-  opacity: 0.75;
-  z-index: 900;
-}
-
-body.modal-open {
-  overflow: hidden;
-} */

@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ContractService } from "../../shared/contract.service";
 import { ErrorService } from "src/app/shared/shared/error.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-contract-register-payment",
@@ -16,7 +17,8 @@ export class ContractRegisterPaymentComponent implements OnInit {
 
   constructor(
     private contractService: ContractService,
-    private errorService: ErrorService
+    private errorService: ErrorService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -57,5 +59,9 @@ export class ContractRegisterPaymentComponent implements OnInit {
       this.payment[i].ischecked = true;
       this.amount = this.amount + this.payment[i].Amount;
     }
+  }
+  pay() {
+    sessionStorage.setItem("Amount", this.amount.toString());
+    this.router.navigate(["main/view/payment"]);
   }
 }
