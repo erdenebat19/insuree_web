@@ -12,7 +12,7 @@ export const routes: Routes = [
   },
   { path: "dashboard", component: DashboardComponent },
   { path: "create", component: CreateInvoiceComponent },
-  { path: "show", component: ShowQRComponent }
+  { path: "showqpay", component: ShowQRComponent }
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],

@@ -100,7 +100,7 @@
                     <div class="list-group-item-line">
                       <div class="row">
                         <div class="col-md-5">Бүртгэсэн огноо</div>
-                        <div class="col-md-7 font-weight-bold">{{contract.regDate | date}}</div>
+                        <div class="col-md-7 font-weight-bold">{{contract.regDate | date : 'yyyy-MM-dd'}}</div>
                       </div>
                     </div>
                     <div class="list-group-item-line">
@@ -251,6 +251,7 @@
               <br>
               <app-inline-loader *ngIf="loading_payment"></app-inline-loader>
               <div *ngIf="payment!=undefined">
+                  <ng5-slider [(value)]="PayMonth" [options]="options" (valueChange)='calc()'></ng5-slider>
                 <div class="table-responsive">
                   <table class="table table-bordered table-sm">
                     <thead>
@@ -265,20 +266,27 @@
                     <tbody>
                       <ng-template ngFor let-item [ngForOf]="payment">
                         <tr (click)='selectPayment(item)'>
-                          <td class="text-center" style="width: 50px;">{{item.CalYear}}</td>
-                          <td class="text-center" style="width: 50px;">{{item.CalMonth}}</td>
-                          <td class="text-right" style="min-width: 80px;">{{item.Amount}}</td>
-                          <td class="text-right" style="min-width: 80px;">{{item.Paid}}</td>
-                          <td class="text-center" style="max-width: 100px; min-width: 80px;"><span class='badge'
-                              [class.badge-primary]='item.Status.id==0' [class.badge-success]='item.Status.id==1'
-                              [class.badge-secondary]='item.Status.id==2'
-                              [class.badge-danger]='item.Status.id==3'>{{item.Status.name}}</span>
+                          <td class="text-center" style="width: 50px;">{{item.calYear}}</td>
+                          <td class="text-center" style="width: 50px;">{{item.calMonth}}</td>
+                          <td class="text-right" style="min-width: 80px;">{{item.amount}}</td>
+                          <td class="text-right" style="min-width: 80px;">{{item.paid}}</td>
+                          <!-- <td class="text-center" style="max-width: 100px; min-width: 80px;"><span class='badge'
+                              [class.badge-primary]='item.status==0' [class.badge-success]='item.status==1'
+                              [class.badge-secondary]='item.status==2'
+                              [class.badge-danger]='item.status==3'>{{item.statusName}}</span>
+                          </td> -->
+                          <td class="text-center" style="max-width: 70px; min-width: 70px;">
+                            <i class="icon ion-android-checkbox-outline text-success"
+                              *ngIf="item.status==1 || item.status==2"></i>
+                            <i class="icon ion-android-checkmark-circle text-primary" *ngIf="item.ischecked"></i>
+                            <!-- <input type="checkbox" name="payMonth" [(ngModel)]="item.ischecked" disabled> -->
                           </td>
+
                         </tr>
-                        <tr *ngIf='expanded && item==selectedPayment'>
+                        <tr *ngIf='expanded && item==selectedPayment && item.paid>0'>
                           <app-inline-loader *ngIf="loading_transac"></app-inline-loader>
                           <td colspan="6" style="padding: 0; margin: 0;">
-                            <div class="row" *ngIf='transac!=undefined'>
+                            <div class="row" *ngIf='transacs!=undefined'>
                               <div class="col-md-6" style="padding: 0; margin: 0;">
                                 <ul class="list-group" style="margin: 0;">
                                   <li class="list-group-item lightgray">
@@ -287,7 +295,7 @@
                                   <li class="list-group-item">
                                     <div class="row">
                                       <span class="col-md-8">Төлөх дүн</span>
-                                      <span class="col-md-4 text-right font-weight-bold">{{item.PayAmount}}</span>
+                                      <span class="col-md-4 text-right font-weight-bold">{{item.payAmount}}</span>
                                     </div>
                                   </li>
                                   <li class="list-group-item">
@@ -299,7 +307,7 @@
                                   <li class="list-group-item">
                                     <div class="row">
                                       <span class="col-md-8">Нийт дүн: </span>
-                                      <span class="col-md-4 text-right font-weight-bold">{{item.Amount}}</span>
+                                      <span class="col-md-4 text-right font-weight-bold">{{item.amount}}</span>
                                     </div>
                                   </li>
                                 </ul>
@@ -311,8 +319,8 @@
                                   </li>
                                   <li class="list-group-item" *ngFor='let transac of transacs'>
                                     <div class="row">
-                                      <span class="col-md-8">{{transac.RegDate}}</span>
-                                      <span class="col-md-4 text-right font-weight-bold">{{transac.Amount}}</span>
+                                      <span class="col-md-8">{{transac.regDate | date : 'yyyy-MM-dd'}}</span>
+                                      <span class="col-md-4 text-right font-weight-bold">{{transac.dun}}</span>
                                     </div>
                                   </li>
                                 </ul>

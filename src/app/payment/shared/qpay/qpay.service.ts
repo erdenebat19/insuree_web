@@ -10,7 +10,6 @@ export class QpayService {
   constructor(private http: HttpClient) {}
 
   Create(invoice: any): Observable<any> {
-    console.log(invoice);
     let user = JSON.parse(localStorage.getItem("user"));
     const httpOptions = {
       headers: new HttpHeaders({
@@ -20,15 +19,17 @@ export class QpayService {
     };
     return this.http.post(this.apiurl + "Invoice", invoice, httpOptions);
   }
-
-  // Get(): Observable<any> {
-  //   let user = JSON.parse(localStorage.getItem("user"));
-  //   const httpOptions = {
-  //     headers: new HttpHeaders({
-  //       "Content-Type": "application/json",
-  //       Authorization: `Bearer ${user.token}`
-  //     })
-  //   };
-  //   return this.http.get(this.apiurl + "SdContract", httpOptions);
-  // }
+  Check(paymentId: string): Observable<any> {
+    let user = JSON.parse(localStorage.getItem("user"));
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user.token}`
+      })
+    };
+    return this.http.get(
+      this.apiurl + "Invoice?paymentId=" + paymentId,
+      httpOptions
+    );
+  }
 }

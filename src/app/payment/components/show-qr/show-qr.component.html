@@ -1,3 +1,18 @@
-<p>
-  show-qr works!
-</p>
+<div class="row">
+  <div class="col-md-12">
+    <div class="content-container">
+      <div class="content-medium">
+        <div class="content-header">
+          Төлбөр төлөх
+        </div>
+        <div class="content-body">
+          <app-inline-loader *ngIf="loading"></app-inline-loader>
+          <div>
+            <img src="{{qrImage}}" alt="">
+          </div>
+          <app-alert-inline [message]="error_message"></app-alert-inline>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

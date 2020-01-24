@@ -67,31 +67,12 @@
           <div class="form-group form-check">
             <input type="checkbox" class="form-check-input" id="agree" [(ngModel)]="agree">
             <label class="form-check-label" for="agree">Үйлчилгээний нөхцөлийг зөвшөөрч байна.</label>
-          </div>
-          <app-inline-loader *ngIf="loading_message"></app-inline-loader>
-          <div class="form-group">
-            <button class="btn btn-primary" (click)="openModal('custom-modal-1')">Төлбөр төлөх</button>
+            <app-alert-inline [message]="error_message"></app-alert-inline>
+            <div class="form-group">
+              <button class="btn btn-primary" (click)="ShowQpay()">Төлбөр төлөх</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-
-<app-modal id="custom-modal-1">
-  <div class="imodal">
-    <div class="modal-body">
-      <div class="pull-right">
-        <button type="button" class="close" aria-label="Close" (click)="closeModal('custom-modal-1');">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <app-inline-loader *ngIf="loading"></app-inline-loader>
-        <img src="{{qrImage}}" alt="">
-      </div>
-      <div *ngIf='alert_error_message'>
-        {{alert_error_message}}
-      </div>
-    </div>
-  </div>
-  <div class="imodal-background"></div>
-</app-modal>

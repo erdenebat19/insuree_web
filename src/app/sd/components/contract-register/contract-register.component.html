@@ -22,7 +22,7 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label for="ddpLength" class="col-sm-5 col-form-label">Гэрээний урт</label>
+                <label for="ddpLength" class="col-sm-5 col-form-label">Хугацаа</label>
                 <div class="col-sm-4">
                   <select class="form-control" id="ddpLength" [(ngModel)]='contract.Length'>
                     <option value="12">12</option>
@@ -33,7 +33,7 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label for="ddpPeriod" class="col-sm-5 col-form-label">Давтамж</label>
+                <label for="ddpPeriod" class="col-sm-5 col-form-label">Төлбөр төлөх давтамж</label>
                 <div class="col-sm-5">
                   <select class="form-control" id="ddpPeriod" [(ngModel)]='contract.ContractPeriod'>
                     <option [ngValue]="item" *ngFor='let item of Periods'>{{item.name}}</option>

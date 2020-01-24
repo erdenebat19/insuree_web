@@ -13,6 +13,7 @@ export class MainPageComponent implements OnInit {
   title = "Даатгуулагчийн вэб";
   Logout() {
     localStorage.clear();
+    sessionStorage.clear();
     this.router.navigate(["/account/login"]);
   }
 }

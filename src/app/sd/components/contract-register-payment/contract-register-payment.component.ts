@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ContractService } from "../../shared/contract.service";
 import { ErrorService } from "src/app/shared/shared/error.service";
 import { Router } from "@angular/router";
+import { Options } from "ng5-slider";
 
 @Component({
   selector: "app-contract-register-payment",
@@ -14,6 +15,9 @@ export class ContractRegisterPaymentComponent implements OnInit {
   PayMonth: number;
   contract: any;
   error_message: any;
+  minPayMonth: number;
+  monthNum: number = 12;
+  options: Options;
 
   constructor(
     private contractService: ContractService,
@@ -22,6 +26,12 @@ export class ContractRegisterPaymentComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.options = {
+      ceil: 12,
+      floor: 1,
+      showSelectionBar: true,
+      showTicks: true
+    };
     this.contractService.Get().subscribe(result => {
       console.log(result);
       this.contract = result;

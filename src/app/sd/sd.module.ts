@@ -11,6 +11,7 @@ import { InlineLoaderModule } from "../shared/ui/inline-loader/inline-loader.mod
 import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { ContractRegisterPaymentComponent } from "./components/contract-register-payment/contract-register-payment.component";
 import { SharedModule } from "../shared/shared.module";
+import { Ng5SliderModule } from "ng5-slider";
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { SharedModule } from "../shared/shared.module";
     FormsModule,
     InlineLoaderModule,
     NgxMaskModule.forRoot(),
-    SharedModule
+    SharedModule,
+    Ng5SliderModule
   ],
   declarations: [
     DashboardComponent,

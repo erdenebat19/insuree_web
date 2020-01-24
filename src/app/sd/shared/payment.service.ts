@@ -11,12 +11,14 @@ export class PaymentService {
   constructor(private http: HttpClient) {}
 
   Get(): Observable<any> {
+    let user = JSON.parse(localStorage.getItem("user"));
     const httpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user.token}`
       })
     };
-    return this.http.get(this.apiurl + "payment", httpOptions);
+    return this.http.get(this.apiurl + "SdPayment", httpOptions);
   }
   GetLastPayment(): Observable<any> {
     let user = JSON.parse(localStorage.getItem("user"));
@@ -29,11 +31,16 @@ export class PaymentService {
     return this.http.get(this.apiurl + "SdLastPayment", httpOptions);
   }
   GetTransac(CalYear: number, CalMonth: number): Observable<any> {
+    let user = JSON.parse(localStorage.getItem("user"));
     const httpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user.token}`
       })
     };
-    return this.http.get(this.apiurl + "transacs", httpOptions);
+    return this.http.get(
+      this.apiurl + "SdTransacs?CalYear=" + CalYear + "&CalMonth=" + CalMonth,
+      httpOptions
+    );
   }
 }

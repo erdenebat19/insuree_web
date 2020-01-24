@@ -6,6 +6,7 @@ import { PaymentService } from "../../shared/payment.service";
 import { ContactService } from "../../shared/contact.service";
 import { ReferenceService } from "../../shared/reference.service";
 import { ErrorService } from "src/app/shared/shared/error.service";
+import { Options } from "ng5-slider";
 
 @Component({
   selector: "app-dashboard",
@@ -18,7 +19,7 @@ export class DashboardComponent implements OnInit {
   loading_payment = false;
   message: string;
   contract: any;
-  payment: any;
+  payment: any[];
   expanded: boolean = false;
   selectedPayment: any;
   lastPayment: any;
@@ -31,6 +32,10 @@ export class DashboardComponent implements OnInit {
   message_error_message: any;
   contract_error_message: string;
   amount: number;
+  PayMonth: number;
+  minPayMonth: number;
+  monthNum: number = 12;
+  options: Options;
 
   constructor(
     private contractService: ContractService,
@@ -80,6 +85,14 @@ export class DashboardComponent implements OnInit {
       .subscribe(result => {
         this.loading_payment = false;
         this.payment = result;
+        this.PayMonth = this.payment.find(x => x.status == 3).calMonth;
+        this.minPayMonth = this.PayMonth;
+        this.options = {
+          ceil: this.monthNum,
+          floor: this.minPayMonth,
+          showSelectionBar: true,
+          showTicks: true
+        };
       })
       .add(() => {
         this.loading_payment = false;
@@ -90,7 +103,7 @@ export class DashboardComponent implements OnInit {
       .subscribe(result => {
         this.loading_payment = false;
         this.lastPayment = result;
-        this.amount = this.lastPayment.amount;
+        this.amount = this.lastPayment.payAmount;
       })
       .add(() => {
         this.loading_payment = false;
@@ -113,21 +126,20 @@ export class DashboardComponent implements OnInit {
   selectPayment(item: any) {
     this.expanded = !this.expanded;
     this.selectedPayment = item;
-    console.log(this.expanded);
-    console.log(this.selectedPayment);
     this.loading_transac = true;
-    if (item.Paid > 0) {
-      this.paymentService.GetTransac(item.CalYear, item.CalMonth).subscribe(
+    if (item.paid > 0) {
+      this.paymentService.GetTransac(item.calYear, item.calMonth).subscribe(
         result => {
           this.loading_transac = false;
           this.transacs = result;
-          console.log(this.transacs);
         },
         error => {
           console.log(error);
           this.loading_transac = false;
         }
       );
+    } else {
+      this.expanded = false;
     }
   }
   ContractMove() {
@@ -138,5 +150,21 @@ export class DashboardComponent implements OnInit {
   pay() {
     sessionStorage.setItem("Amount", this.amount.toString());
     this.router.navigate(["main/view/payment"]);
+  }
+  calc() {
+    this.lastPayment.payAmount = this.amount;
+    this.lastPayment.amount = this.amount + this.lastPayment.ald;
+    this.payment.forEach(i => {
+      i.ischecked = false;
+    });
+    for (let i = 0; i < this.PayMonth; i++) {
+      if (this.payment[i].status != 1 && this.payment[i].status != 2) {
+        this.payment[i].ischecked = true;
+        this.lastPayment.payAmount =
+          this.lastPayment.payAmount + this.payment[i].amount;
+        this.lastPayment.amount =
+          this.lastPayment.payAmount + this.lastPayment.ald;
+      }
+    }
   }
 }
