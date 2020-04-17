@@ -7,8 +7,15 @@
         </div>
         <div class="content-body">
           <p>Та төлбөр төлөх хэлбэрээ сонгоно уу</p>
-          <ul>
-            <li><a [routerLink]="['/main/view/payment/create']">QPay</a></li>
+          <ul class="pay-dashboard">
+            <li><a [routerLink]="['/main/view/payment/create']">
+                <div><img src="/src/assets/img/qpay-logo.jpg" alt=""></div>
+                <div class="text-center">QPAY</div>
+              </a></li>
+            <li><a [routerLink]="['/main/view/payment/create']">
+                <div><img src="/src/assets/img/bank_card.png" alt=""></div>
+                <div class="text-center">КАРТ</div>
+              </a></li>
           </ul>
         </div>
       </div>

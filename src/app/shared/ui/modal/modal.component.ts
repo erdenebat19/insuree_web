@@ -35,7 +35,6 @@ export class ModalComponent implements OnInit, OnDestroy {
 
     // add self (this modal instance) to the modal service so it's accessible from controllers
     this.modalService.add(this);
-    console.log(this.element);
   }
 
   // remove self from modal service when directive is destroyed
@@ -46,7 +45,6 @@ export class ModalComponent implements OnInit, OnDestroy {
 
   // open modal
   open(): void {
-    console.log(this.element);
     this.element.style.display = "block";
     document.body.classList.add("modal-open");
   }

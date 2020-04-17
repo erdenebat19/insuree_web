@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { MessageService } from "src/app/notification/shared/message.service";
 
 @Component({
   selector: "app-main-page",
@@ -7,10 +8,17 @@ import { Router } from "@angular/router";
   styleUrls: ["./main-page.component.css", "./main-page-responsive.css"]
 })
 export class MainPageComponent implements OnInit {
-  constructor(private router: Router) {}
-
-  ngOnInit() {}
+  unreadNum: number;
   title = "Даатгуулагчийн вэб";
+
+  constructor(private router: Router, private messageService: MessageService) { }
+
+  ngOnInit() {
+    this.messageService.UnreadNum().subscribe(result => {
+      this.unreadNum = result;
+      this.messageService.SetUnreadNum(this.unreadNum);
+    });
+  }
   Logout() {
     localStorage.clear();
     sessionStorage.clear();

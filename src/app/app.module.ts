@@ -14,6 +14,8 @@ import { GlobalErrorHandler } from "./shared/shared/global-error-handle";
 import { ServerErrorInterceptor } from "./shared/shared/server-error.interceptor";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { SharedModule } from "./shared/shared.module";
+import { ShareDataService } from "./shared/shared/share-data.service";
+import { ModalService } from "./shared/ui/modal.service";
 
 @NgModule({
   declarations: [AppComponent, ErrorReportComponent],
@@ -26,6 +28,7 @@ import { SharedModule } from "./shared/shared.module";
     SharedModule
   ],
   providers: [
+    ShareDataService,
     JwtHelperService,
     GoogleAnalyticsServiceService,
     { provide: ErrorHandler, useClass: GlobalErrorHandler },

@@ -13,25 +13,52 @@
                   <i class="icon ion-search"></i>
                 </span>
               </div>
-              <input type="text" class="form-control" placeholder="Хайх" aria-label="Хайх"
-                aria-describedby="basic-addon1">
+              <input type="text" class="form-control" placeholder="Хайх" aria-label="Хайх" [(ngModel)]="searchText"
+                aria-describedby="basic-addon1" (keyup)="search()">
             </div>
           </div>
           <ul class="list-group list-group-flush rui-profile-activity-list">
             <li class="list-group-item" [class.unread]='!msg.isread'
-              *ngFor='let msg of messages | paginate: { itemsPerPage: 10, currentPage: p }'>
+              *ngFor='let msg of messages | paginate: { itemsPerPage: 30, currentPage: p }'>
               <div class="media media-retiring media-success">
                 <a class="media-link">
                   <span class="media-body">
-                    <span class="media-title">{{msg.title}}<div class="media-time">{{msg.regdate}}</div></span>
-                    <small class="media-subtitle">{{msg.desc}}</small></span>
+                    <a (click)='read(msg)'>
+                      <span class="media-title" [class.unread]='msg.status === 0'>{{msg.title}}<div class="media-time">
+                          {{msg.createdAt | date : 'yyyy-MM-dd'}}</div></span>
+                    </a>
+                    <small class="media-subtitle">{{msg.message.substring(0, 300)}} <span
+                        *ngIf='msg.message.length>300'>...</span> </small></span>
                 </a>
               </div>
             </li>
           </ul>
-          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          <pagination-controls maxSize="30" nextLabel=">" previousLabel="<" autoHide="true"(pageChange)="p = $event"></pagination-controls>
         </div>
       </div>
     </div>
   </div>
 </div>
+<app-modal id="messageModal">
+  <div class="imodal">
+    <div class="modal-body">
+      <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" (click)="close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div *ngIf="message">
+        <div class="message-title">
+          {{message.title}}
+        </div>
+        <div class="message-date">
+          {{message.createdAt | date : 'yyyy-MM-dd'}}
+        </div>
+        <div class="message-body">
+          {{message.message}}
+        </div>
+      </div>
+    </div>
+</div>
+<div class="imodal-background" ></div>
+</app-modal>

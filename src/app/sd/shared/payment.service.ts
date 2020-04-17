@@ -1,46 +1,44 @@
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root',
 })
 export class PaymentService {
-  apiurl = "http://localhost:10012/api/Transaction/";
+  apiurl = 'http://localhost:10012/api/Transaction/';
+  payment: any;
   // apiurl = "http://localhost:3000/";
   constructor(private http: HttpClient) {}
 
   Get(): Observable<any> {
-    let user = JSON.parse(localStorage.getItem("user"));
+    const user = JSON.parse(localStorage.getItem('user'));
     const httpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${user.token}`
-      })
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${user.token}`,
+      }),
     };
-    return this.http.get(this.apiurl + "SdPayment", httpOptions);
+    return this.http.get(this.apiurl + 'SdPayment', httpOptions);
   }
   GetLastPayment(): Observable<any> {
-    let user = JSON.parse(localStorage.getItem("user"));
+    const user = JSON.parse(localStorage.getItem('user'));
     const httpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${user.token}`
-      })
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${user.token}`,
+      }),
     };
-    return this.http.get(this.apiurl + "SdLastPayment", httpOptions);
+    return this.http.get(this.apiurl + 'SdLastPayment', httpOptions);
   }
   GetTransac(CalYear: number, CalMonth: number): Observable<any> {
-    let user = JSON.parse(localStorage.getItem("user"));
+    const user = JSON.parse(localStorage.getItem('user'));
     const httpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${user.token}`
-      })
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${user.token}`,
+      }),
     };
-    return this.http.get(
-      this.apiurl + "SdTransacs?CalYear=" + CalYear + "&CalMonth=" + CalMonth,
-      httpOptions
-    );
+    return this.http.get(this.apiurl + 'SdTransacs?CalYear=' + CalYear + '&CalMonth=' + CalMonth, httpOptions);
   }
 }

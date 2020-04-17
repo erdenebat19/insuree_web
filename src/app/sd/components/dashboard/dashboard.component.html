@@ -69,7 +69,7 @@
                     <div class="list-group-item-line">
                       <div class="row">
                         <div class="col-md-5">Төлбөр төлөх давтамж</div>
-                        <div class="col-md-7 font-weight-bold">{{contract.period}}</div>
+                        <div class="col-md-7 font-weight-bold">{{contract.periodName}}</div>
                       </div>
                     </div>
                     <div class="list-group-item-line">
@@ -95,6 +95,18 @@
                         <div class="col-md-5">Төлбөр төлөх банк</div>
                         <div class="col-md-7 font-weight-bold">{{contract.dans.account}} - {{contract.dans.bankName}}
                         </div>
+                      </div>
+                    </div>
+                    <div class="list-group-item-line">
+                      <div class="row">
+                        <div class="col-md-5">Эхэлсэн огноо</div>
+                        <div class="col-md-7 font-weight-bold">{{contract.beginDate | date : 'yyyy-MM-dd'}}</div>
+                      </div>
+                    </div>
+                    <div class="list-group-item-line">
+                      <div class="row">
+                        <div class="col-md-5">Дуусах огноо</div>
+                        <div class="col-md-7 font-weight-bold">{{contract.endDate | date : 'yyyy-MM-dd'}}</div>
                       </div>
                     </div>
                     <div class="list-group-item-line">
@@ -195,7 +207,7 @@
             </div>
             <div class="content-body">
               <app-alert></app-alert>
-              <div class="row" *ngIf='lastPayment!=undefined'>
+              <div class="row" *ngIf='lastPayment'>
                 <div class="col-md-7">
                   <div *ngIf='lastPayment.status==0'>
                     <div class="row">
@@ -203,9 +215,9 @@
                       <span class="col-md-6 text-left font-weight-bold">{{lastPayment.payAmount}}</span>
                     </div>
                   </div>
-                  <ul class="list-group" *ngIf='lastPayment.status==1'>
+                  <ul class="list-group" *ngIf='lastPayment.nextDate!=="0001-01-01T00:00:00" && lastPayment.status==1'>
                     <li class="list-group-item lightgray">
-                      {{lastPayment.calYear}} оны {{lastPayment.calMonth}} сар хүртэлх төлбөр
+                      {{lastPayment.calYear}} оны {{lastPayment.calMonth}} сар дуустал хийх төлбөр
                     </li>
                     <li class="list-group-item">
                       <div class="row">
@@ -226,7 +238,11 @@
                       </div>
                     </li>
                   </ul>
-                  <ul class="list-group" *ngIf='lastPayment.status==3'>
+                  <div *ngIf='lastPayment.nextDate==="0001-01-01T00:00:00"' class="alert alert-primary">
+                    Гэрээний тооцоо бодуулж дууссан байна. Гэрээ сунгах хүсэлтээ <a
+                      [routerLink]="['/main/view/sd/register/', contract.id]">энд дарж</a> өгнө үү
+                  </div>
+                  <!-- <ul class="list-group" *ngIf='lastPayment.nextDate==="0001-01-01T00:00:00"'>
                     <li class="list-group-item lightgray">
                       Өмнөх нөхцөлөөр сунгах
                     </li>
@@ -236,22 +252,22 @@
                         <span class="col-md-4 text-right font-weight-bold">{{lastPayment.amount}}</span>
                       </div>
                     </li>
-                  </ul>
+                  </ul> -->
                 </div>
                 <div class="col-md-5">
                   <button class="btn btn-default" (click)="pay()">Төлбөр төлөх</button>
                   <br>
                   <br>
                   <div class="alert alert-primary"
-                    *ngIf='lastPayment.nextDate!=null && lastPayment.nextDate!=undefined'>
-                    Дараагийн төлбөр төлөх хугацаа {{lastPayment.nextDate}}
+                    *ngIf='lastPayment.nextDate!=null && lastPayment.nextDate!=undefined && lastPayment.nextDate!=="0001-01-01T00:00:00"'>
+                    Дараагийн төлбөр төлөх сүүлийн хугацаа {{lastPayment.nextDate | date : 'yyyy-MM-dd'}}
                   </div>
                 </div>
               </div>
               <br>
               <app-inline-loader *ngIf="loading_payment"></app-inline-loader>
-              <div *ngIf="payment!=undefined">
-                  <ng5-slider [(value)]="PayMonth" [options]="options" (valueChange)='calc()'></ng5-slider>
+              <div *ngIf="payment!=undefined && payment.length>0">
+                <ng5-slider [(value)]="PayMonthNum" [options]="options" (valueChange)='calc($event)'></ng5-slider>
                 <div class="table-responsive">
                   <table class="table table-bordered table-sm">
                     <thead>

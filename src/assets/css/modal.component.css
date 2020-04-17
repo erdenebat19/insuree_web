@@ -11,10 +11,12 @@ app-modal .imodal {
   z-index: 1000;
   display: block !important;
   overflow: auto;
+  margin: 0;
+  padding: 0;
 }
 
 app-modal .imodal .modal-body {
-  padding: 20px;
+  padding: 0px;
   background: #fff;
   margin: 80px 30%;
 }

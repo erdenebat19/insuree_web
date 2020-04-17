@@ -1,10 +1,15 @@
 .message-title {
+  /* font-size: 1rem; */
+  /* font-weight: normal; */
+  color: #393f49;
+  /* margin-bottom: 10px; */
+}
+.unread {
   font-size: 1rem;
   font-weight: bold;
   color: #393f49;
   /* margin-bottom: 10px; */
 }
-
 .message-date {
   display: block;
   color: #a4a6a8;

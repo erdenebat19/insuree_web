@@ -39,6 +39,7 @@
   -ms-flex-align: start;
   align-items: flex-start;
   width: 100%;
+  cursor: pointer;
 }
 
 .media .media-img+.media-body {
@@ -57,6 +58,7 @@
   margin-top: -4px;
   font-size: 1.08rem;
   color: #393f49;
+  font-weight: normal;
 }
 
 .media .media-subtitle {
@@ -66,5 +68,26 @@
 }
 
 .unread {
+  font-weight: bold !important;
+}
+
+.media-time {
+  font-size: 0.7em;
+}
+
+.message-title {
+  padding: 15px 30px;
   font-weight: bold;
+  padding-bottom: 0px;  
+}
+
+.message-body {
+  padding: 15px 30px;
+  padding-bottom: 30px;  
+}
+
+.message-date {
+  padding: 0;
+  font-size: 0.7em;
+  padding-left: 30px;
 }

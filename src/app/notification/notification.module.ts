@@ -6,13 +6,17 @@ import { routes } from "./notification.routes";
 import { RouterModule } from "@angular/router";
 import { MessageComponent } from "./components/message/message.component";
 import { NgxPaginationModule } from "ngx-pagination";
+import { SharedModule } from "../shared/shared.module";
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
   imports: [
     CommonModule,
     InlineLoaderModule,
     RouterModule.forChild(routes),
-    NgxPaginationModule
+    NgxPaginationModule,
+    SharedModule,
+    FormsModule
   ],
   declarations: [MessageListComponent, MessageComponent]
 })

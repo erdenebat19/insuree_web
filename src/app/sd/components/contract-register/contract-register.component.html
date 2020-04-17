@@ -36,9 +36,10 @@
                 <label for="ddpPeriod" class="col-sm-5 col-form-label">Төлбөр төлөх давтамж</label>
                 <div class="col-sm-5">
                   <select class="form-control" id="ddpPeriod" [(ngModel)]='contract.ContractPeriod'>
+                    <option value="0">-</option>
                     <option [ngValue]="item" *ngFor='let item of Periods'>{{item.name}}</option>
                   </select>
-                  <div *ngIf="postback && contract.Length == 0" class="text-danger font-italic">
+                  <div *ngIf="postback && contract.ContractPeriod == 0" class="text-danger font-italic">
                     <small>*Төлбөр төлөх давтамж сонгоогүй байна.</small>
                   </div>
                 </div>
@@ -51,7 +52,7 @@
                   <div *ngIf="postback && (contract.Income == undefined || contract.Income == 0)"
                     class="text-danger font-italic">
                     <small>*Сарын орлого оруулаагүй байна.</small>
-                    <small *ngIf="contract.Income<MinSalary">*Сарын орлого хөлөлмөрийн хөлсний доод хэмжээ
+                    <small *ngIf="contract.Income">*Сарын орлого хөлөлмөрийн хөлсний доод хэмжээ
                       {{MinSalary}}-аас их байх ёстой.</small>
                   </div>
                   <div *ngIf="changedIncome" class="text-danger font-italic">
@@ -66,7 +67,7 @@
                     <option value="0">-</option>
                     <option [ngValue]="item" *ngFor='let item of Banks'>{{item.bankName}}</option>
                   </select>
-                  <div *ngIf="postback && contract.Bank == 0" class="text-danger font-italic">
+                  <div *ngIf="postback && contract.Account == 0" class="text-danger font-italic">
                     <small>*Төлбөр төлөх банкаа сонгоогүй байна.</small>
                   </div>
                 </div>

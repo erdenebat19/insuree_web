@@ -1,11 +1,13 @@
-import { Component, OnInit } from "@angular/core";
-import { ReferenceService } from "../../shared/reference.service";
-import { Router } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { ReferenceService } from '../../shared/reference.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ContractService } from '../../shared/contract.service';
+import { ErrorService } from 'src/app/shared/shared/error.service';
 
 @Component({
-  selector: "app-contract-register",
-  templateUrl: "./contract-register.component.html",
-  styleUrls: ["./contract-register.component.css"]
+  selector: 'app-contract-register',
+  templateUrl: './contract-register.component.html',
+  styleUrls: ['./contract-register.component.css'],
 })
 export class ContractRegisterComponent implements OnInit {
   AMClasses: any[];
@@ -13,46 +15,66 @@ export class ContractRegisterComponent implements OnInit {
   Periods: any[];
   contract: any;
   MinSalary: any;
-  postback: boolean = false;
-  changedIncome: boolean = false;
-  loading: boolean = true;
-  constructor(private refService: ReferenceService, private router: Router) {}
+  postback = false;
+  changedIncome = false;
+  loading = true;
+  errormessage: string;
+  constructor(
+    private refService: ReferenceService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private contractService: ContractService,
+    private errorService: ErrorService
+  ) {}
 
   ngOnInit() {
     this.contract = {
       Class: 0,
       Length: 12,
-      ContractPeriod: 1,
-      Account: 0
+      ContractPeriod: 0,
+      Account: 0,
     };
     this.loading = true;
-    this.refService.AMClassList().subscribe(result => {
+    this.refService.AMClassList().subscribe((result) => {
       this.AMClasses = result;
       this.loading = false;
     });
     this.loading = true;
-    this.refService.BankList().subscribe(result => {
+    this.refService.BankList().subscribe((result) => {
       this.Banks = result;
       this.loading = false;
     });
     this.loading = true;
-    this.refService.GetMinSalary().subscribe(result => {
+    this.refService.GetMinSalary().subscribe((result) => {
       this.MinSalary = result;
       this.loading = false;
     });
     this.loading = true;
-    this.refService.ContractPeriods().subscribe(result => {
+    this.refService.ContractPeriods().subscribe((result) => {
       this.Periods = result;
-      //this.contract.Period = this.Periods[0];
       this.loading = false;
+    });
+    this.route.paramMap.subscribe((params) => {
+      this.contractService.Get().subscribe(
+        (result) => {
+          console.log(result);
+          this.contract = result;
+          if (!this.contract) {
+            this.errormessage = 'Гэрээ бүртгэлгүй байна';
+          }
+        },
+        (error) => {
+          this.errormessage = this.errorService.getInlineError(error);
+        }
+      );
     });
   }
 
   register() {
     this.postback = true;
     if (this.validate()) {
-      localStorage.setItem("contract-register", JSON.stringify(this.contract));
-      this.router.navigate(["/main/view/sd/confirm"]);
+      localStorage.setItem('contract-register', JSON.stringify(this.contract));
+      this.router.navigate(['/main/view/sd/confirm']);
     }
   }
   onChangeIncome(newval) {
@@ -63,13 +85,13 @@ export class ContractRegisterComponent implements OnInit {
     }
   }
   validate(): boolean {
-    if (this.contract.Class == 0) {
+    if (!this.contract.Class || this.contract.Class === 0) {
       return false;
     }
-    if (this.contract.Account == 0) {
+    if (!this.contract.Account || this.contract.Account === 0) {
       return false;
     }
-    if (this.contract.Income < this.MinSalary) {
+    if (!this.contract.Income || this.contract.Income < this.MinSalary) {
       return false;
     }
     return true;
