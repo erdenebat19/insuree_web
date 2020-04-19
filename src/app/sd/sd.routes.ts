@@ -14,7 +14,7 @@ export const routes: Routes = [
   },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'register', component: ContractRegisterComponent },
-  { path: 'register/:id', component: ContractRegisterComponent },
+  { path: 'extend', component: ContractRegisterComponent },
   { path: 'register-payment', component: ContractRegisterPaymentComponent },
   { path: 'confirm', component: ConfirmContractRegisterComponent },
   { path: '404', component: NotFoundComponent },

@@ -3,7 +3,8 @@
     <div class="content-container">
       <div class="content-large">
         <div class="content-header">
-          Гэрээний бүртгэл
+          <span *ngIf="!extend">Гэрээний бүртгэл</span>
+          <span *ngIf="extend">Гэрээний сунгалт</span>
         </div>
         <div class="content-body">
           <app-inline-loader *ngIf="loading"></app-inline-loader>
@@ -12,9 +13,10 @@
               <div class="form-group row">
                 <label for="ddpAMClass" class="col-sm-5 col-form-label">Ажил, мэргэжил</label>
                 <div class="col-sm-7">
-                  <select class="form-control" id="ddpAMClass" [(ngModel)]='contract.Class'>
+                  <select class="form-control" id="ddpAMClass" [(ngModel)]='contract.Class' [compareWith]="byId">
                     <option value="0">-</option>
-                    <option [ngValue]="item" *ngFor='let item of AMClasses'>{{item.name}}</option>
+                    <option [ngValue]="item" *ngFor='let item of AMClasses'>
+                      {{item.name}}</option>
                   </select>
                   <div *ngIf="postback && contract.Class == 0" class="text-danger font-italic">
                     <small>*Ажил мэргэжил сонгоогүй байна.</small>
@@ -35,8 +37,8 @@
               <div class="form-group row">
                 <label for="ddpPeriod" class="col-sm-5 col-form-label">Төлбөр төлөх давтамж</label>
                 <div class="col-sm-5">
-                  <select class="form-control" id="ddpPeriod" [(ngModel)]='contract.ContractPeriod'>
-                    <option value="0">-</option>
+                  <select class="form-control" id="ddpPeriod" [(ngModel)]='contract.ContractPeriod'
+                    [compareWith]="byId">
                     <option [ngValue]="item" *ngFor='let item of Periods'>{{item.name}}</option>
                   </select>
                   <div *ngIf="postback && contract.ContractPeriod == 0" class="text-danger font-italic">
@@ -63,7 +65,7 @@
               <div class="form-group row">
                 <label for="ddpBank" class="col-sm-5 col-form-label">Банк</label>
                 <div class="col-sm-5">
-                  <select class="form-control" id="ddpBank" [(ngModel)]='contract.Account'>
+                  <select class="form-control" id="ddpBank" [(ngModel)]='contract.Account' [compareWith]="byCode">
                     <option value="0">-</option>
                     <option [ngValue]="item" *ngFor='let item of Banks'>{{item.bankName}}</option>
                   </select>
@@ -78,6 +80,9 @@
                 <div class="col-sm-5">
                   <button class="btn btn-primary" (click)='register()'>Хадгалах</button>
                 </div>
+              </div>
+              <div class="alert alert-danger" *ngIf="errormessage">
+                {{errormessage}}
               </div>
             </div>
           </div>

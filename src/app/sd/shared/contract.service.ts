@@ -31,6 +31,16 @@ export class ContractService {
     };
     return this.http.post(this.apiurl + 'SdContract', contract, httpOptions);
   }
+  Extend(contract: any): Observable<any> {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${user.token}`,
+      }),
+    };
+    return this.http.post(this.apiurl + 'SdContract/extend', contract, httpOptions);
+  }
   GetSchedule(): Observable<any> {
     const user = JSON.parse(localStorage.getItem('user'));
     const httpOptions = {

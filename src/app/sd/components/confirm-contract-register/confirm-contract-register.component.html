@@ -3,7 +3,8 @@
     <div class="content-container">
       <div class="content-large">
         <div class="content-header">
-          Гэрээний бүртгэл баталгаажуулах
+          <span *ngIf="!bextend">Гэрээний бүртгэл баталгаажуулах</span>
+          <span *ngIf="bextend">Гэрээний сунгалт баталгаажуулах</span>
         </div>
         <div class="content-body">
           <div class="col-md-6">

@@ -19,6 +19,7 @@ export class ContractRegisterComponent implements OnInit {
   changedIncome = false;
   loading = true;
   errormessage: string;
+  extend = false;
   constructor(
     private refService: ReferenceService,
     private router: Router,
@@ -34,6 +35,34 @@ export class ContractRegisterComponent implements OnInit {
       ContractPeriod: 0,
       Account: 0,
     };
+    this.LoadData().then(() => {
+      this.route.url.subscribe((url) => {
+        if (url[0].path === 'extend') {
+          this.extend = true;
+          this.contractService.Get().subscribe(
+            (result) => {
+              console.log(result);
+              this.contract = {
+                Id: result.id,
+                Class: result.class,
+                Income: result.income,
+                ContractPeriod: { id: result.period, name: result.periodName },
+                Length: result.length,
+                Account: result.dans,
+              };
+              if (!this.contract) {
+                this.errormessage = 'Гэрээ бүртгэлгүй байна';
+              }
+            },
+            (error) => {
+              this.errormessage = this.errorService.getInlineError(error);
+            }
+          );
+        }
+      });
+    });
+  }
+  async LoadData() {
     this.loading = true;
     this.refService.AMClassList().subscribe((result) => {
       this.AMClasses = result;
@@ -54,26 +83,15 @@ export class ContractRegisterComponent implements OnInit {
       this.Periods = result;
       this.loading = false;
     });
-    this.route.paramMap.subscribe((params) => {
-      this.contractService.Get().subscribe(
-        (result) => {
-          console.log(result);
-          this.contract = result;
-          if (!this.contract) {
-            this.errormessage = 'Гэрээ бүртгэлгүй байна';
-          }
-        },
-        (error) => {
-          this.errormessage = this.errorService.getInlineError(error);
-        }
-      );
-    });
   }
-
   register() {
     this.postback = true;
     if (this.validate()) {
-      localStorage.setItem('contract-register', JSON.stringify(this.contract));
+      if (this.extend) {
+        localStorage.setItem('contract-extend', JSON.stringify(this.contract));
+      } else {
+        localStorage.setItem('contract-register', JSON.stringify(this.contract));
+      }
       this.router.navigate(['/main/view/sd/confirm']);
     }
   }
@@ -95,5 +113,11 @@ export class ContractRegisterComponent implements OnInit {
       return false;
     }
     return true;
+  }
+  byId(item1: any, item2: any) {
+    return item1.id === item2.id;
+  }
+  byCode(item1: any, item2: any) {
+    return item1.code === item2.code;
   }
 }

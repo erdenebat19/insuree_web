@@ -178,14 +178,18 @@ export class DashboardComponent implements OnInit {
     });
     this.router.navigate(['main/view/payment']);
   }
+  ConvertToDate(year: number, month: number): Date {
+    return new Date(year, month, 1);
+  }
   calc(month) {
     this.lastPayment.payAmount = this.amount;
     this.lastPayment.amount = this.amount + this.lastPayment.ald;
     this.payment.forEach((i) => {
       i.ischecked = false;
     });
+    const current = this.ConvertToDate(this.payment[0].calYear, month + this.minPayMonth - 1);
     this.payment
-      .filter((x) => x.calMonth <= month + this.minPayMonth - 1 && (x.status === 0 || x.status === 3))
+      .filter((x) => this.ConvertToDate(x.calYear, x.calMonth) <= current && (x.status === 0 || x.status === 3))
       .forEach((item) => {
         item.ischecked = true;
         this.lastPayment.calMonth = item.calMonth;
