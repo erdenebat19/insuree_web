@@ -11,35 +11,35 @@
             </li>
             <li>
               <a [routerLink]="['/main/view/salary']">
-                <img src="../../../assets/img/salary.svg" alt="" width="20px" class='mx-2'>
+                <img src="assets/img/salary.svg" alt="" width="20px" class='mx-2'>
                 <span class="d-none d-md-inline">НД-ын шимтгэл</span>
               </a>
             </li>
             <li>
               <a [routerLink]="['/main/view/pention']">
                 <!-- <i class="ion-stats-bars"></i> -->
-                <img src="../../../assets/img/old-couple.svg" alt="" width="20px" class='mx-2'>
+                <img src="assets/img/old-couple.svg" alt="" width="20px" class='mx-2'>
                 <span class="d-none d-md-inline">Тэтгэвэр</span>
               </a>
             </li>
             <li>
               <a [routerLink]="['/main/view/benefit']">
                 <!-- <i class="ion-stats-bars"></i> -->
-                <img src="../../../assets/img/wallet.svg" alt="" width="20px" class='mx-2'>
+                <img src="assets/img/wallet.svg" alt="" width="20px" class='mx-2'>
                 <span class="d-none d-md-inline">Тэтгэмж</span>
               </a>
             </li>
             <li>
               <a [routerLink]="['/main/view/ndans']">
                 <!-- <i class="ion-stats-bars"></i> -->
-                <img src="../../../assets/img/accounting.svg" alt="" width="20px" class='mx-2'>
+                <img src="assets/img/accounting.svg" alt="" width="20px" class='mx-2'>
                 <span class="d-none d-md-inline">Нэрийн данс</span>
               </a>
             </li>
             <li>
               <a [routerLink]="['/main/view/sd']">
                 <!-- <i class="ion-stats-bars"></i> -->
-                <img src="../../../assets/img/accounting.svg" alt="" width="20px" class='mx-2'>
+                <img src="assets/img/accounting.svg" alt="" width="20px" class='mx-2'>
                 <span class="d-none d-md-inline">Сайн дурын даатгал</span>
               </a>
             </li>
@@ -56,7 +56,8 @@
                 <div class="btn-circle-label">
                   <i class="icon ion-android-notifications"></i>
                 </div>
-                <span class="badge badge-circle" *ngIf="messageService.GetUnreadNum()>0">{{messageService.GetUnreadNum()}}</span>
+                <span class="badge badge-circle"
+                  *ngIf="messageService.GetUnreadNum()>0">{{messageService.GetUnreadNum()}}</span>
               </a>
             </span>
           </li>

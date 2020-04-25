@@ -9,7 +9,7 @@ import { ErrorService } from 'src/app/shared/shared/error.service';
   styleUrls: ['./confirm-contract-register.component.css'],
 })
 export class ConfirmContractRegisterComponent implements OnInit {
-  contract: string;
+  contract: any;
   confirm_message: string;
   errormessage: any;
   bextend = false;

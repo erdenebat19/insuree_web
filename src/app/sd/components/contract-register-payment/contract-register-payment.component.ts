@@ -19,6 +19,7 @@ export class ContractRegisterPaymentComponent implements OnInit {
   minPayMonth: number;
   monthNum = 12;
   options: Options;
+  loading_payment = false;
 
   constructor(
     private contractService: ContractService,
@@ -34,8 +35,8 @@ export class ContractRegisterPaymentComponent implements OnInit {
       showSelectionBar: true,
       showTicks: true,
     };
+    this.loading_payment = true;
     this.contractService.Get().subscribe((result) => {
-      console.log(result);
       this.contract = result;
       if (!this.contract) {
         this.error_message = 'Гэрээ бүртгээгүй байна';
@@ -43,6 +44,7 @@ export class ContractRegisterPaymentComponent implements OnInit {
       this.payment = [];
       this.contractService.GetPreSchedule().subscribe(
         (resultSchedule) => {
+          this.loading_payment = false;
           resultSchedule.forEach((item) => {
             this.payment.push({
               PayDate: new Date(item.calYear, item.calMonth, 1),
@@ -56,6 +58,7 @@ export class ContractRegisterPaymentComponent implements OnInit {
           }
         },
         (error) => {
+          this.loading_payment = false;
           this.error_message = this.errorService.getInlineError(error);
         }
       );
