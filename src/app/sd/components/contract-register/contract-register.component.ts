@@ -20,6 +20,7 @@ export class ContractRegisterComponent implements OnInit {
   loading = true;
   errormessage: string;
   extend = false;
+  Countries: any;
   constructor(
     private refService: ReferenceService,
     private router: Router,
@@ -44,11 +45,11 @@ export class ContractRegisterComponent implements OnInit {
               console.log(result);
               this.contract = {
                 Id: result.id,
-                Class: result.class,
+                Class: { Id: result.class.id, Name: result.class.name },
                 Income: result.income,
-                ContractPeriod: { id: result.period, name: result.periodName },
+                ContractPeriod: { Id: result.period, Name: result.periodName },
                 Length: result.length,
-                Account: result.dans,
+                Account: { Code: result.dans.code, BankName: result.dans.bankName, Account: result.dans.account },
               };
               if (!this.contract) {
                 this.errormessage = 'Гэрээ бүртгэлгүй байна';
@@ -63,6 +64,12 @@ export class ContractRegisterComponent implements OnInit {
     });
   }
   async LoadData() {
+    this.loading = true;
+    this.refService.CountryList().subscribe((result) => {
+      this.Countries = result;
+      this.loading = false;
+      this.contract.CountryId = '001';
+    });
     this.loading = true;
     this.refService.AMClassList().subscribe((result) => {
       this.AMClasses = result;
@@ -85,6 +92,15 @@ export class ContractRegisterComponent implements OnInit {
     });
   }
   register() {
+    this.contract.Class = { Id: this.contract.Class.id, Name: this.contract.Class.name };
+    this.contract.ContractPeriod = { Id: this.contract.ContractPeriod.id, Name: this.contract.ContractPeriod.name };
+    this.contract.Account = {
+      Code: this.contract.Account.code,
+      BankName: this.contract.Account.bankName,
+      Account: this.contract.Account.account,
+    };
+    this.contract.Income = Number.parseFloat(this.contract.Income);
+    console.log(this.contract);
     this.postback = true;
     if (this.validate()) {
       if (this.extend) {

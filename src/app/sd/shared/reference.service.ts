@@ -30,6 +30,16 @@ export class ReferenceService {
     };
     return this.http.get(this.apiurl + 'Banks', httpOptions);
   }
+  CountryList(): Observable<any> {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${user.token}`,
+      }),
+    };
+    return this.http.get(this.apiurl + 'Countries', httpOptions);
+  }
   AimagList(): Observable<any> {
     const user = JSON.parse(localStorage.getItem('user'));
     const httpOptions = {

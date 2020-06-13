@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ContractService } from '../../shared/contract.service';
 import { Router } from '@angular/router';
 import { ErrorService } from 'src/app/shared/shared/error.service';
+import { ReferenceService } from '../../shared/reference.service';
 
 @Component({
   selector: 'app-confirm-contract-register',
@@ -11,10 +12,16 @@ import { ErrorService } from 'src/app/shared/shared/error.service';
 export class ConfirmContractRegisterComponent implements OnInit {
   contract: any;
   confirm_message: string;
+  countryName: string;
   errormessage: any;
   bextend = false;
 
-  constructor(private service: ContractService, private router: Router, private errorService: ErrorService) {}
+  constructor(
+    private service: ContractService,
+    private router: Router,
+    private errorService: ErrorService,
+    private refrenceService: ReferenceService
+  ) {}
 
   ngOnInit() {
     this.contract = JSON.parse(localStorage.getItem('contract-register'));
@@ -23,6 +30,7 @@ export class ConfirmContractRegisterComponent implements OnInit {
       this.bextend = true;
       this.contract = JSON.parse(localStorage.getItem('contract-extend'));
     }
+    this.countryName = this.CountryName(this.contract.CountryId);
   }
   register() {
     if (!this.bextend) {
@@ -48,5 +56,11 @@ export class ConfirmContractRegisterComponent implements OnInit {
         }
       );
     }
+  }
+  CountryName(Id: string): any {
+    this.refrenceService.CountryList().subscribe((result) => {
+      const countries: any[] = result;
+      this.countryName = countries.find((x) => x.id === Id).name;
+    });
   }
 }
