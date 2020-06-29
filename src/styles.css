@@ -1,7 +1,9 @@
 body {
   font-family: Roboto;
 }
-
+.cursor-pointer {
+  cursor: pointer;
+}
 .btn-primary {
   background: #14aaf5;
   border: none;

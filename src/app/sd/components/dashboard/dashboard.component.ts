@@ -71,6 +71,7 @@ export class DashboardComponent implements OnInit {
             .Get()
             .subscribe(
                 (result) => {
+                    console.log(result);
                     this.loading_contract = false;
                     this.contract = result;
                     this.contract.periodName =

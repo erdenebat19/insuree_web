@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { QpayService } from '../../shared/qpay/qpay.service';
-import { interval, timer, of, throwError } from 'rxjs';
-import { map, take, takeWhile, retryWhen, retry, delay, mergeMap, catchError } from 'rxjs/operators';
+import { of, throwError } from 'rxjs';
+import { retryWhen, delay, mergeMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { PaymentService } from 'src/app/sd/shared/payment.service';
 import { ShareDataService } from 'src/app/shared/shared/share-data.service';
 
 @Component({
@@ -20,7 +19,6 @@ export class ShowQRComponent implements OnInit {
   ngOnInit() {
     console.log(this.shareDataService.GetPayment());
     const payment = this.shareDataService.GetPayment();
-    console.log(payment);
     this.error_message = undefined;
     this.loading = true;
     // FIXME get invoice qpayimage from server
@@ -45,7 +43,6 @@ export class ShowQRComponent implements OnInit {
   private check() {
     this.loading = true;
     const paymentId = sessionStorage.getItem('paymentId');
-    // paymentId = "100000001709344";
     let retry = 3;
     const sub = this.qpService
       .Check(paymentId)

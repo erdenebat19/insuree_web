@@ -3,22 +3,66 @@
     <div class="content-container">
       <div class="content-medium">
         <div class="content-header">
-          Мэдэгдэл
+          Төлбөр төлөх
         </div>
         <div class="content-body">
-          <p>Та төлбөр төлөх хэлбэрээ сонгоно уу</p>
-          <ul class="pay-dashboard">
-            <li><a [routerLink]="['/main/view/payment/create']">
-                <div><img src="assets/img/qpay-logo.jpg" alt=""></div>
-                <div class="text-center">QPAY</div>
-              </a></li>
-            <li><a [routerLink]="['/main/view/payment/create']">
-                <div><img src="assets/img/bank_card.png" alt=""></div>
-                <div class="text-center">КАРТ</div>
-              </a></li>
-          </ul>
+          <div *ngIf="step===1">
+            <ul class="pay-dashboard">
+              <li class="cursor-pointer" title="ХААН БАНК" (click)="SelectBank(1)">
+                <div class="listicon"><img src="assets\img\khanbank.png" width="70"></div>
+              </li>
+              <li class="cursor-pointer" title="ТӨРИЙН БАНК" (click)="SelectBank(2)">
+                <div class="listicon"><img src="assets\img\statebank.jpg" width="70"></div>
+              </li>
+              <li class="cursor-pointer" title="ХУДАЛДАА ХӨГЖЛИЙН БАНК" (click)="SelectBank(3)">
+                <div class="listicon"><img src="assets\img\tdbbank.png" width="70"></div>
+              </li>
+              <li class="cursor-pointer" title="ХАС БАНК БАНК" (click)="SelectBank(4)">
+                <div class="listicon"><img src="assets\img\xacbank.jpg" width="70"></div>
+              </li>
+              <li class="cursor-pointer" title="УЛААНБААТАР ХОТЫН БАНК" (click)="SelectBank(5)">
+                <div class="listicon"><img src="assets\img\ubcbank.jpg" width="70"></div>
+              </li>
+              <li class="cursor-pointer" title="ҮНДЭСНИЙ ХӨРӨНГӨ ОРУУЛАЛТЫН БАНК" (click)="SelectBank(6)">
+                <div class="listicon"><img src="assets\img\nibank.jpg" width="70"></div>
+              </li>
+              <li class="cursor-pointer" title="ЧИНГИС БАНК" (click)="SelectBank(7)">
+                <div class="listicon"><img src="assets\img\chinggis.jpg" width="70"></div>
+              </li>
+              <li class="cursor-pointer" title="КАПИТРОН БАНК" (click)="SelectBank(8)">
+                <div class="listicon"><img src="assets\img\capitron.png" width="70"></div>
+              </li>
+              <li class="cursor-pointer" title="БОГД БАНК" (click)="SelectBank(9)">
+                <div class="listicon"><img src="assets\img\bogd.jpg" width="70"></div>
+              </li>
+              <li class="cursor-pointer" title="CANDY PAY" (click)="SelectBank(10)">
+                <div class="listicon"><img src="assets\img\candypay.png" width="70"></div>
+              </li>
+            </ul>
+          </div>
+          <div *ngIf="step===2">
+            <p>Та төлбөр төлөх хэлбэрээ сонгоно уу</p>
+            <ul class="pay-dashboard" >
+              <li><a class="cursor-pointer" (click)="qpay()">
+                  <div><img src="assets/img/qpay-logo.jpg" alt=""></div>
+                  <div class="text-center">QPAY</div>
+                </a>
+              </li>
+              <!-- <li><a [routerLink]="['/main/view/payment/create']">
+                  <div><img src="assets/img/bank_card.png" alt=""></div>
+                  <div class="text-center">КАРТ</div>
+                </a>
+              </li> -->
+            </ul>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
+</script>

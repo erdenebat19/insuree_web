@@ -1,0 +1,11 @@
+h5 {
+    font-size: 1em;
+    font-weight: bold;
+}
+.contact-clause {
+    font-size: 10pt;
+    height: 600px;
+    width: 700px;
+    overflow: scroll;
+    margin-top: 30px;
+}

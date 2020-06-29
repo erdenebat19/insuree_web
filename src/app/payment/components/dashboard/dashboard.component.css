@@ -1,13 +1,21 @@
 .pay-dashboard {
+    display: flex;
+    flex-flow: wrap;
     list-style: none;
     padding: 0;
     margin: 0;
 }
 .pay-dashboard li {
-    display: inline-block;
+    /* display: flex; */
     padding: 15px;
     padding-left: 30px;
 }
 .pay-dashboard li a img {
     height: 70px;
 }
+/* .pay-dashboard li .listname {
+    display: none;
+}
+.pay-dashboard li:hover > .listname {
+    display: block;
+} */
