@@ -10,9 +10,7 @@
                                     Мэдэгдэл
                                 </div>
                                 <div class="content-body">
-                                    <app-alert-inline
-                                        [message]="message_error_message"
-                                    ></app-alert-inline>
+                                    <app-alert-inline [message]="message_error_message"></app-alert-inline>
                                     <app-inline-loader *ngIf="loading_message"></app-inline-loader>
                                     <div *ngIf="message != undefined">
                                         <div class="message-title">
@@ -33,25 +31,12 @@
                                 <div class="content-header">
                                     Гэрээний мэдээлэл
                                     <span class="float-right">
-                                        <a
-                                            id="dropdownMenuButton2"
-                                            data-toggle="dropdown"
-                                            aria-haspopup="true"
-                                            aria-expanded="false"
-                                            class="btn-icon"
-                                        >
+                                        <a id="dropdownMenuButton2" class="btn-icon" (click)="printContract()">
                                             <div class="btn-circle-label">
                                                 <!-- <i class="icon ion-ios-more"></i> -->
                                                 <i class="icon ion-ios-printer-outline"></i>
                                             </div>
                                         </a>
-                                        <div
-                                            class="dropdown-menu"
-                                            aria-labelledby="dropdownMenuButton2"
-                                        >
-                                            <a class="dropdown-item">Гэрээний түүх</a>
-                                            <a class="dropdown-item">Гэрээ шилжүүлэх</a>
-                                        </div>
                                     </span>
                                 </div>
                                 <div class="content-body">
@@ -60,10 +45,7 @@
                                     ></app-alert-inline>
                                     <app-inline-loader *ngIf="loading_contract"></app-inline-loader>
                                     <div *ngIf="contract != undefined" class="list-group">
-                                        <div
-                                            class="list-group-item-line"
-                                            *ngIf="contract.bdate != undefined"
-                                        >
+                                        <div class="list-group-item-line" *ngIf="contract.bdate != undefined">
                                             <div class="row">
                                                 <div class="col-md-5">Гэрээний дугаар</div>
                                                 <div class="col-md-7 font-weight-bold">
@@ -79,23 +61,12 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div
-                                            class="list-group-item-line"
-                                            *ngIf="contract.bdate != undefined"
-                                        >
+                                        <div class="list-group-item-line" *ngIf="contract.bdate != undefined">
                                             <div class="row">
                                                 <div class="col-md-5">Гэрээний хугацаа</div>
                                                 <div class="col-md-7 font-weight-bold">
                                                     {{ contract.beginDate }} -
                                                     {{ contract.endDate }}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="list-group-item-line">
-                                            <div class="row">
-                                                <div class="col-md-5">Төлбөр төлөх давтамж</div>
-                                                <div class="col-md-7 font-weight-bold">
-                                                    {{ contract.periodName }}
                                                 </div>
                                             </div>
                                         </div>
@@ -165,9 +136,7 @@
                                     <div *ngIf="contract == undefined || contract == null">
                                         <div>
                                             Гэрээ байгуулаагүй байна. Гэрээ байгаалах бол
-                                            <a [routerLink]="['/main/view/sd/register']"
-                                                >энд дарж</a
-                                            >
+                                            <a [routerLink]="['/main/view/sd/register']">энд дарж</a>
                                             гэрээний байгуулах хүсэлтээ явуулна уу
                                         </div>
                                     </div>
@@ -182,9 +151,7 @@
                                     Холбоо барих
                                 </div>
                                 <div class="content-body">
-                                    <app-alert-inline
-                                        [message]="message_error_message"
-                                    ></app-alert-inline>
+                                    <app-alert-inline [message]="message_error_message"></app-alert-inline>
                                     <app-inline-loader *ngIf="loading_message"></app-inline-loader>
                                     <div class="list-group-item-line">
                                         <div class="row" *ngIf="contact">
@@ -192,14 +159,8 @@
                                                 Хэлтэс
                                             </div>
                                             <div class="col-md-7 font-weight-bold" *ngIf="aimags">
-                                                <select
-                                                    class="custom-select"
-                                                    [(ngModel)]="contact.id"
-                                                >
-                                                    <option
-                                                        [ngValue]="item.id"
-                                                        *ngFor="let item of aimags"
-                                                    >
+                                                <select class="custom-select" [(ngModel)]="contact.id">
+                                                    <option [ngValue]="item.id" *ngFor="let item of aimags">
                                                         {{ item.name }}
                                                     </option>
                                                 </select>
@@ -227,22 +188,13 @@
                                         </div>
                                     </div>
                                     <br />
-                                    <div
-                                        class="alert alert-warning"
-                                        *ngIf="contract_moving_error_message"
-                                    >
+                                    <div class="alert alert-warning" *ngIf="contract_moving_error_message">
                                         {{ contract_moving_error_message }}
                                     </div>
-                                    <div
-                                        class="row"
-                                        *ngIf="contact && contract && contract.status == 2"
-                                    >
+                                    <div class="row" *ngIf="contact && contract && contract.status == 2">
                                         <div class="col-md-5"></div>
                                         <div class="col-md-7">
-                                            <button
-                                                class="btn btn-default float-right"
-                                                (click)="ContractMove()"
-                                            >
+                                            <button class="btn btn-default float-right" (click)="ContractMove()">
                                                 Гэрээ шилжүүлэх
                                             </button>
                                         </div>
@@ -257,13 +209,7 @@
                         <div class="content-header">
                             Төлбөрийн мэдээлэл
                             <span class="float-right">
-                                <a
-                                    id="dropdownMenuButton2"
-                                    class="btn-icon"
-                                    data-toggle="dropdown"
-                                    aria-haspopup="true"
-                                    aria-expanded="false"
-                                >
+                                <a id="dropdownMenuButton2" class="btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <div class="btn-circle-label">
                                         <i class="icon ion-help"></i>
                                     </div>
@@ -304,125 +250,59 @@
                                                     <td class="text-right" style="min-width: 80px;">
                                                         {{ item.paid }}
                                                     </td>
-                                                    <td
-                                                        class="text-center"
-                                                        style="max-width: 70px; min-width: 70px;"
-                                                    >
-                                                        <i
-                                                            class="icon ion-android-checkbox-outline text-success"
-                                                            *ngIf="
-                                                                item.status == 1 || item.status == 2
-                                                            "
-                                                        ></i>
-                                                        <i
-                                                            class="icon ion-android-checkmark-circle text-primary"
-                                                            *ngIf="item.ischecked"
-                                                        ></i>
+                                                    <td class="text-center" style="max-width: 70px; min-width: 70px;">
+                                                        <i class="icon ion-android-checkbox-outline text-success" *ngIf="item.status == 1 || item.status == 2"></i>
+                                                        <i class="icon ion-android-checkmark-circle text-primary" *ngIf="item.ischecked"></i>
                                                     </td>
                                                 </tr>
-                                                <tr
-                                                    *ngIf="
-                                                        expanded &&
-                                                        item == selectedPayment &&
-                                                        item.paid > 0
-                                                    "
-                                                >
-                                                    <app-inline-loader
-                                                        *ngIf="loading_transac"
-                                                    ></app-inline-loader>
+                                                <tr *ngIf="expanded && item == selectedPayment && item.paid > 0">
+                                                    <app-inline-loader *ngIf="loading_transac"></app-inline-loader>
                                                     <td colspan="6" style="padding: 0; margin: 0;">
-                                                        <div
-                                                            class="row"
-                                                            *ngIf="transacs != undefined"
-                                                        >
-                                                            <div
-                                                                class="col-md-6"
-                                                                style="padding: 0; margin: 0;"
-                                                            >
-                                                                <ul
-                                                                    class="list-group"
-                                                                    style="margin: 0;"
-                                                                >
-                                                                    <li
-                                                                        class="list-group-item lightgray"
-                                                                    >
+                                                        <div class="row" *ngIf="transacs != undefined">
+                                                            <div class="col-md-6" style="padding: 0; margin: 0;">
+                                                                <ul class="list-group" style="margin: 0;">
+                                                                    <li class="list-group-item lightgray">
                                                                         Төлөх төлбөр
                                                                     </li>
                                                                     <li class="list-group-item">
                                                                         <div class="row">
-                                                                            <span class="col-md-8"
-                                                                                >Төлөх дүн</span
-                                                                            >
-                                                                            <span
-                                                                                class="col-md-4 text-right font-weight-bold"
-                                                                                >{{
-                                                                                    item.payAmount
-                                                                                }}</span
-                                                                            >
-                                                                        </div>
-                                                                    </li>
-                                                                    <li class="list-group-item">
-                                                                        <div class="row">
-                                                                            <span class="col-md-8"
-                                                                                >Алданги</span
-                                                                            >
-                                                                            <span
-                                                                                class="col-md-4 text-right font-weight-bold"
-                                                                                >{{
-                                                                                    item.ald
-                                                                                }}</span
-                                                                            >
-                                                                        </div>
-                                                                    </li>
-                                                                    <li class="list-group-item">
-                                                                        <div class="row">
-                                                                            <span class="col-md-8"
-                                                                                >Нийт дүн:
+                                                                            <span class="col-md-8">Төлөх дүн</span>
+                                                                            <span class="col-md-4 text-right font-weight-bold">
+                                                                                {{ item.payAmount }}
                                                                             </span>
-                                                                            <span
-                                                                                class="col-md-4 text-right font-weight-bold"
-                                                                                >{{
-                                                                                    item.amount
-                                                                                }}</span
-                                                                            >
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <div class="row">
+                                                                            <span class="col-md-8">Алданги</span>
+                                                                            <span class="col-md-4 text-right font-weight-bold">
+                                                                                {{ item.ald }}
+                                                                            </span>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <div class="row">
+                                                                            <span class="col-md-8">Нийт дүн:</span>
+                                                                            <span class="col-md-4 text-right font-weight-bold">
+                                                                                {{ item.amount }}
+                                                                            </span>
                                                                         </div>
                                                                     </li>
                                                                 </ul>
                                                             </div>
-                                                            <div
-                                                                class="col-md-6"
-                                                                style="padding: 0; margin: 0;"
-                                                            >
-                                                                <ul
-                                                                    class="list-group"
-                                                                    style="margin: 0;"
-                                                                >
-                                                                    <li
-                                                                        class="list-group-item lightgray"
-                                                                    >
+                                                            <div class="col-md-6" style="padding: 0; margin: 0;">
+                                                                <ul class="list-group" style="margin: 0;">
+                                                                    <li class="list-group-item lightgray">
                                                                         Төлсөн төлбөр
                                                                     </li>
-                                                                    <li
-                                                                        class="list-group-item"
-                                                                        *ngFor="
-                                                                            let transac of transacs
-                                                                        "
-                                                                    >
+                                                                    <li class="list-group-item" *ngFor="let transac of transacs">
                                                                         <div class="row">
-                                                                            <span
-                                                                                class="col-md-8"
-                                                                                >{{
-                                                                                    transac.regDate
-                                                                                        | date
-                                                                                            : 'yyyy-MM-dd'
-                                                                                }}</span
-                                                                            >
-                                                                            <span
-                                                                                class="col-md-4 text-right font-weight-bold"
-                                                                                >{{
-                                                                                    transac.dun
-                                                                                }}</span
-                                                                            >
+                                                                            <span class="col-md-8">
+                                                                                {{ transac.regDate | date : 'yyyy-MM-dd' }}
+                                                                            </span>
+                                                                            <span class="col-md-4 text-right font-weight-bold">
+                                                                                {{ transac.dun }}
+                                                                            </span>
                                                                         </div>
                                                                     </li>
                                                                 </ul>
@@ -434,14 +314,6 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <a><i class="icon ion-ios-arrow-left"></i></a>
-                                    </div>
-                                    <div class="col-6 text-right">
-                                        <a><i class="icon ion-ios-arrow-right pull right"></i></a>
-                                    </div>
-                                </div>
                             </div>
                             <app-alert></app-alert>
                             <div class="row" *ngIf="lastPayment">
@@ -449,18 +321,11 @@
                                     <div *ngIf="lastPayment.status == 0">
                                         <div class="row">
                                             <span class="col-md-6">Гэрээний төлбөр: </span>
-                                            <span class="col-md-6 text-left font-weight-bold">{{
-                                                lastPayment.payAmount
-                                            }}</span>
+                                            <span class="col-md-6 text-left font-weight-bold">
+                                                {{ lastPayment.payAmount }}</span>
                                         </div>
                                     </div>
-                                    <ul
-                                        class="list-group"
-                                        *ngIf="
-                                            lastPayment.nextDate !== '0001-01-01T00:00:00' &&
-                                            lastPayment.status == 1
-                                        "
-                                    >
+                                    <ul class="list-group" *ngIf="lastPayment.nextDate !== '0001-01-01T00:00:00' && lastPayment.status == 1">
                                         <li class="list-group-item lightgray">
                                             {{ lastPayment.calYear }} оны
                                             {{ lastPayment.calMonth }} сар дуустал хийх төлбөр
@@ -468,38 +333,31 @@
                                         <li class="list-group-item">
                                             <div class="row">
                                                 <span class="col-md-8">Төлөх дүн</span>
-                                                <span
-                                                    class="col-md-4 text-right font-weight-bold"
-                                                    >{{ lastPayment.payAmount }}</span
-                                                >
+                                                <span class="col-md-4 text-right font-weight-bold">
+                                                    {{ lastPayment.payAmount }}
+                                                </span>
                                             </div>
                                         </li>
                                         <li class="list-group-item">
                                             <div class="row">
                                                 <span class="col-md-8">Алданги</span>
-                                                <span
-                                                    class="col-md-4 text-right font-weight-bold"
-                                                    >{{ lastPayment.ald }}</span
-                                                >
+                                                <span class="col-md-4 text-right font-weight-bold">
+                                                    {{ lastPayment.ald }}
+                                                </span>
                                             </div>
                                         </li>
                                         <li class="list-group-item">
                                             <div class="row">
                                                 <span class="col-md-8">Нийт дүн: </span>
-                                                <span
-                                                    class="col-md-4 text-right font-weight-bold"
-                                                    >{{ lastPayment.amount }}</span
-                                                >
+                                                <span class="col-md-4 text-right font-weight-bold">
+                                                    {{ lastPayment.amount }}
+                                                </span>
                                             </div>
                                         </li>
                                     </ul>
-                                    <div
-                                        *ngIf="lastPayment.nextDate === '0001-01-01T00:00:00'"
-                                        class="alert alert-primary"
-                                    >
+                                    <div *ngIf="lastPayment.nextDate === '0001-01-01T00:00:00'" class="alert alert-primary">
                                         Гэрээний тооцоо бодуулж дууссан байна. Гэрээ сунгах хүсэлтээ
-                                        <a [routerLink]="['/main/view/sd/extend']">энд дарж</a> өгнө
-                                        үү
+                                        <a [routerLink]="['/main/view/sd/extend']">энд дарж</a> өгнө үү
                                     </div>
                                 </div>
                                 <div class="col-md-5">
@@ -508,14 +366,7 @@
                                     </button>
                                     <br />
                                     <br />
-                                    <div
-                                        class="alert alert-primary"
-                                        *ngIf="
-                                            lastPayment.nextDate != null &&
-                                            lastPayment.nextDate != undefined &&
-                                            lastPayment.nextDate !== '0001-01-01T00:00:00'
-                                        "
-                                    >
+                                    <div class="alert alert-primary" *ngIf="lastPayment.nextDate != null && lastPayment.nextDate != undefined && lastPayment.nextDate !== '0001-01-01T00:00:00'">
                                         Дараагийн төлбөр төлөх сүүлийн хугацаа
                                         {{ lastPayment.nextDate | date: 'yyyy-MM-dd' }}
                                     </div>

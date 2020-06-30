@@ -5,6 +5,7 @@ import { ContractRegisterComponent } from './components/contract-register/contra
 import { ConfirmContractRegisterComponent } from './components/confirm-contract-register/confirm-contract-register.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ContractRegisterPaymentComponent } from './components/contract-register-payment/contract-register-payment.component';
+import { ContractPrintComponent } from './components/contract-print/contract-print.component';
 
 export const routes: Routes = [
   {
@@ -17,6 +18,7 @@ export const routes: Routes = [
   { path: 'extend', component: ContractRegisterComponent },
   { path: 'register-payment', component: ContractRegisterPaymentComponent },
   { path: 'confirm', component: ConfirmContractRegisterComponent },
+  { path: 'print', component: ContractPrintComponent },
   { path: '404', component: NotFoundComponent },
 ];
 @NgModule({

@@ -61,18 +61,18 @@
                             <h5>Зургаа. Бусад</h5>
                             <p>6.1. Энэхүү гэрээг хоёр хувь үйлдэж нэг хувийг Нийгмийн даатгалын байгууллагад, нөгөө хувийг гэрээ байгуулсан даатгуулагчид өгөх ба хувь тус бүр хүчин төгөлдөр байна.</p>
                         </div>
+                        <br>
+                        <div class="alert alert-warning" style="max-width: 700px;">
+                            Та гэрээний мэдээллээ шалгана уу. Гэрээний төлбөр төлсний дараа таны
+                            гэрээ баталгаажих болно. Гэрээний загварыг <a href="http://www.ndaatgal.mn/NDM10a-jiremsen-amarjsanii-tetgemj.xls">энд дарж</a> татаж танилцана уу
+                        </div>
                         <div class="alert alert-danger" *ngIf="errormessage != undefined">
                             {{ errormessage }}
                         </div>
-                        <br>      
-                        <div class="alert alert-info">
-                            Та гэрээний мэдээллээ шалгана уу. Гэрээний төлбөр төлсний дараа таны
-                            гэрээ баталгаажих болно
-                        </div>
-                        <br>
+                        <app-inline-loader *ngIf="loading"></app-inline-loader>
                         <div class="form-group row">
                             <div class="col-sm-6">
-                                <button class="btn btn-primary mr-4" (click)="register()">
+                                <button class="btn btn-primary mr-4" (click)="register()" [disabled]='loading'>
                                     Зөвшөөрөх
                                 </button>
                                 <a class="btn btn-default" [routerLink]="['../register']">

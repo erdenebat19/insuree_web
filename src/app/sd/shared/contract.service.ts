@@ -61,4 +61,12 @@ export class ContractService {
     };
     return this.http.get(this.apiurl + 'SdContract/preschedule', httpOptions);
   }
+  GetPrint() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${user.token}`,
+      responseType: 'text'
+    });
+    return this.http.get(this.apiurl + 'SdContract/print', { headers: headers, responseType: 'text' });
+  }
 }

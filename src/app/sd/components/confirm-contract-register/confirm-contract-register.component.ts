@@ -15,6 +15,7 @@ export class ConfirmContractRegisterComponent implements OnInit {
   countryName: string;
   errormessage: any;
   bextend = false;
+  loading = false;
 
   constructor(
     private service: ContractService,
@@ -42,6 +43,9 @@ export class ConfirmContractRegisterComponent implements OnInit {
         },
         (error) => {
           this.errormessage = this.errorService.getInlineError(error);
+          if (!this.errormessage) {
+            this.errormessage = error.message;
+          }
         }
       );
     } else {

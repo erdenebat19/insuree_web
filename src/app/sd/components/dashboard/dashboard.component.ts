@@ -71,7 +71,6 @@ export class DashboardComponent implements OnInit {
             .Get()
             .subscribe(
                 (result) => {
-                    console.log(result);
                     this.loading_contract = false;
                     this.contract = result;
                     this.contract.periodName =
@@ -112,7 +111,6 @@ export class DashboardComponent implements OnInit {
         this.paymentService
             .GetLastPayment()
             .subscribe((result) => {
-                console.log(result);
                 this.loading_payment = false;
                 this.lastPayment = result;
                 this.amount = this.lastPayment.payAmount;
@@ -126,15 +124,12 @@ export class DashboardComponent implements OnInit {
             .subscribe((result) => {
                 this.loading_contact = false;
                 this.aimags = result;
-                console.log(this.aimags);
             })
             .add(() => {
                 this.loading_contact = false;
             });
-        // FIXME complate get Contact
         this.contactService.Get().subscribe((contact) => {
             this.contact = contact;
-            console.log(this.contact);
         });
     }
 
@@ -215,5 +210,26 @@ export class DashboardComponent implements OnInit {
                     this.lastPayment.amount = this.lastPayment.amount + item.amount;
                 }
             });
+    }
+    printContract() {
+        this.contractService.GetPrint().subscribe((printResult) => {
+            const restorepage = document.body.innerHTML;
+            const printcontent = printResult;
+            const printPreview = window.open('_blank', 'print_preview');
+            const printDocument = printPreview.document;
+            printDocument.open();
+            printDocument.write('<!doctype html>');
+            printDocument.write('<html>');
+            printDocument.write('<head>' + document.head.innerHTML + '</head>');
+            printDocument.write('<body onload="window.print();window.close();">');
+            printDocument.write(printcontent);
+            printDocument.write('</body>');
+            printDocument.write('</html>');
+            printDocument.close();
+            printPreview.focus();
+            document.body.innerHTML = restorepage;
+        }, err => {
+            console.error(err);
+        });
     }
 }

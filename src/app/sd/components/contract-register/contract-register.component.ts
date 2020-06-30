@@ -40,12 +40,15 @@ export class ContractRegisterComponent implements OnInit {
                     this.extend = true;
                     this.contractService.Get().subscribe(
                         (result) => {
+                            console.log(result);
                             this.contract = {
                                 Id: result.id,
                                 Class: { Id: result.class.id, Name: result.class.name },
                                 Income: result.income,
                                 Length: result.length,
+                                CountryId: result.countryId
                             };
+                            console.log(this.contract);
                             if (!this.contract) {
                                 this.errormessage = 'Гэрээ бүртгэлгүй байна';
                             }
