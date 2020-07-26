@@ -11,6 +11,16 @@ export class ContractService {
 
   constructor(private http: HttpClient) {}
 
+  Check(): Observable<any> {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${user.token}`,
+      }),
+    };
+    return this.http.get(this.apiurl + 'SdContract/check', httpOptions);
+  }
   Get(): Observable<any> {
     const user = JSON.parse(localStorage.getItem('user'));
     const httpOptions = {
@@ -69,4 +79,14 @@ export class ContractService {
     });
     return this.http.get(this.apiurl + 'SdContract/print', { headers: headers, responseType: 'text' });
   }
+  GetDom(): Observable<any> {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const httpOptions = {
+        headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${user.token}`,
+        }),
+    };
+    return this.http.get(this.apiurl + 'SdContract/dom', httpOptions);
+}
 }

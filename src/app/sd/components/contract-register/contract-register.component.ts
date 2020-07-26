@@ -12,13 +12,18 @@ import { ErrorService } from 'src/app/shared/shared/error.service';
 export class ContractRegisterComponent implements OnInit {
     AMClasses: any[];
     contract: any;
+    MaxSalary: any;
     MinSalary: any;
     postback = false;
     changedIncome = false;
-    loading = true;
+    loading = false;
     errormessage: string;
     extend = false;
     Countries: any;
+    AimagList: any[];
+    SomList: any;
+    dom: string;
+    valid = false;
     constructor(
         private refService: ReferenceService,
         private router: Router,
@@ -34,39 +39,63 @@ export class ContractRegisterComponent implements OnInit {
             ContractPeriod: 0,
             Account: 0,
         };
-        this.LoadData().then(() => {
-            this.route.url.subscribe((url) => {
-                if (url[0].path === 'extend') {
-                    this.extend = true;
-                    this.contractService.Get().subscribe(
-                        (result) => {
-                            console.log(result);
-                            this.contract = {
-                                Id: result.id,
-                                Class: { Id: result.class.id, Name: result.class.name },
-                                Income: result.income,
-                                Length: result.length,
-                                CountryId: result.countryId
-                            };
-                            console.log(this.contract);
-                            if (!this.contract) {
-                                this.errormessage = 'Гэрээ бүртгэлгүй байна';
-                            }
-                        },
-                        (error) => {
-                            this.errormessage = this.errorService.getInlineError(error);
+        this.contractService.Check().subscribe(isValid => {
+            this.valid = isValid;
+            console.log(isValid);
+            if (isValid) {
+                this.LoadData().then(() => {
+                    this.route.url.subscribe((url) => {
+                        if (url[0].path === 'extend') {
+                            this.extend = true;
+                            this.contractService.Get().subscribe(
+                                (result) => {
+                                    this.contract = {
+                                        Id: result.id,
+                                        Class: { Id: result.class.id, Name: result.class.name },
+                                        Income: result.income,
+                                        Length: result.length,
+                                        CountryId: result.countryId
+                                    };
+                                    if (!this.contract) {
+                                        this.errormessage = 'Гэрээ бүртгэлгүй байна';
+                                    }
+                                },
+                                (error) => {
+                                    this.errormessage = this.errorService.getInlineError(error);
+                                }
+                            );
                         }
-                    );
-                }
-            });
+                    });
+                });
+            }
+        }, error => {
+            this.errormessage = this.errorService.getInlineError(error);
+            if (!this.errormessage) {
+                this.errormessage = error.message;
+            }
         });
     }
     async LoadData() {
         this.loading = true;
-        this.refService.CountryList().subscribe((result) => {
-            this.Countries = result;
-            this.loading = false;
-            this.contract.CountryId = '001';
+        this.contractService.GetDom().subscribe(dom => {
+            this.dom = dom;
+            this.refService.CountryList().subscribe((result) => {
+                this.Countries = result;
+                this.contract.CountryId = '001';
+                this.refService.AimagList().subscribe(aimags => {
+                    this.AimagList = aimags;
+                    this.AimagList = this.AimagList.filter(x =>
+                        x.id >= '01' && x.id <= '22'
+                    );
+                    if (this.dom.toString().substring(0, 2) >= '23') {
+                        this.contract.AimagId = '22';
+                        this.onChangeAimag();
+                    } else {
+                        this.contract.AimagId = this.dom.toString().substring(0, 2);
+                    }
+                    this.loading = false;
+                });
+            });
         });
         this.loading = true;
         this.refService.AMClassList().subscribe((result) => {
@@ -78,6 +107,35 @@ export class ContractRegisterComponent implements OnInit {
             this.MinSalary = result;
             this.loading = false;
         });
+        this.refService.GetMaxSalary().subscribe((result) => {
+            this.MaxSalary = result;
+            this.loading = false;
+        });
+    }
+    onChangeContry() {
+        if (this.contract.CountryId !== '001') {
+            this.contract.AimagId = '22';
+            this.contract.SomId = '26';
+        }
+    }
+    onChangeAimag() {
+        this.loading = true;
+        if (this.contract.AimagId === '22') {
+            this.refService.AimagList().subscribe(aimags => {
+                this.SomList = aimags;
+                this.SomList = this.SomList.filter(x =>
+                    x.id >= '23' && x.id <= '31'
+                );
+                this.contract.SomId = this.dom.toString().substring(0, 2);
+                this.loading = false;
+            });
+        } else {
+            this.refService.SomList(this.contract.AimagId).subscribe(soms => {
+                this.SomList = soms;
+                this.contract.SomId = this.dom.toString().substring(2, 4);
+                this.loading = false;
+            });
+        }
     }
     register() {
         this.contract.Class = { Id: this.contract.Class.id, Name: this.contract.Class.name };
@@ -93,7 +151,7 @@ export class ContractRegisterComponent implements OnInit {
         }
     }
     onChangeIncome(newval) {
-        if (this.contract.Income < this.MinSalary) {
+        if (this.contract.Income < this.MinSalary || this.contract.Income > this.MaxSalary) {
             this.changedIncome = true;
         } else {
             this.changedIncome = false;
@@ -103,7 +161,7 @@ export class ContractRegisterComponent implements OnInit {
         if (!this.contract.Class || this.contract.Class === 0) {
             return false;
         }
-        if (!this.contract.Income || this.contract.Income < this.MinSalary) {
+        if (!this.contract.Income || this.contract.Income < this.MinSalary || this.contract.Income > this.MinSalary) {
             return false;
         }
         return true;

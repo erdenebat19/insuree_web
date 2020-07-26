@@ -10,7 +10,7 @@ export class ContactService {
     apiurl = environment.apiurl + 'api/';
     constructor(private http: HttpClient) {}
 
-    Get(): Observable<any> {
+    Get(dom: string): Observable<any> {
         const user = JSON.parse(localStorage.getItem('user'));
         const httpOptions = {
             headers: new HttpHeaders({
@@ -18,6 +18,6 @@ export class ContactService {
                 Authorization: `Bearer ${user.token}`,
             }),
         };
-        return this.http.get(this.apiurl + 'SdContract/OfficeContact', httpOptions);
+        return this.http.get(this.apiurl + 'SdContract/OfficeContact?dom=' + dom, httpOptions);
     }
 }

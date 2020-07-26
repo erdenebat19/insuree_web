@@ -30,4 +30,14 @@ export class QpayService {
     };
     return this.http.get(this.apiurl + 'Invoice?paymentId=' + paymentId, httpOptions);
   }
+  BankList(dom: string): Observable<any> {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${user.token}`,
+      }),
+    };
+    return this.http.get(this.apiurl + 'Invoice/banks?dom=' + dom, httpOptions);
+  }
 }

@@ -79,6 +79,55 @@ export class DashboardComponent implements OnInit {
                             : this.contract.periodName === 'QuarterYear'
                             ? 'Улирлаар'
                             : 'Хагс жилээр';
+
+                    console.log(this.contract);
+                    if (this.contract) {
+                        this.loading_payment = true;
+                        this.paymentService
+                            .Get()
+                            .subscribe((payment) => {
+                                console.log(payment);
+                                this.loading_payment = false;
+                                this.payment = payment;
+                                this.PayMonthNum = 1;
+                                this.payment.find((x) => x.status === 3).ischecked = true;
+                                this.minPayMonth = this.payment.find((x) => x.status === 3).calMonth;
+                                this.monthNum = this.payment.filter((x) => x.status === 3 || x.status === 0).length;
+                                this.options = {
+                                    ceil: this.monthNum,
+                                    floor: 1,
+                                    showSelectionBar: true,
+                                    showTicks: true,
+                                };
+                            })
+                            .add(() => {
+                                this.loading_payment = false;
+                            });
+                        this.loading_payment = true;
+                        this.paymentService
+                            .GetLastPayment()
+                            .subscribe((lastPayment) => {
+                                this.loading_payment = false;
+                                this.lastPayment = lastPayment;
+                                this.amount = this.lastPayment.payAmount;
+                            })
+                            .add(() => {
+                                this.loading_payment = false;
+                            });
+                            this.loading_contact = true;
+                            this.referenceService
+                                .AimagList()
+                                .subscribe((aimags) => {
+                                    this.loading_contact = false;
+                                    this.aimags = aimags;
+                                })
+                                .add(() => {
+                                    this.loading_contact = false;
+                                });
+                            this.contactService.Get(this.contract.serverId).subscribe((contact) => {
+                                this.contact = contact;
+                            });
+                    }
                 },
                 (error) => {
                     this.contract_error_message = this.errorService.getInlineError(error);
@@ -87,50 +136,6 @@ export class DashboardComponent implements OnInit {
             .add(() => {
                 this.loading_contract = false;
             });
-        this.loading_payment = true;
-        this.paymentService
-            .Get()
-            .subscribe((result) => {
-                this.loading_payment = false;
-                this.payment = result;
-                this.PayMonthNum = 1;
-                this.payment.find((x) => x.status === 3).ischecked = true;
-                this.minPayMonth = this.payment.find((x) => x.status === 3).calMonth;
-                this.monthNum = this.payment.filter((x) => x.status === 3 || x.status === 0).length;
-                this.options = {
-                    ceil: this.monthNum,
-                    floor: 1,
-                    showSelectionBar: true,
-                    showTicks: true,
-                };
-            })
-            .add(() => {
-                this.loading_payment = false;
-            });
-        this.loading_payment = true;
-        this.paymentService
-            .GetLastPayment()
-            .subscribe((result) => {
-                this.loading_payment = false;
-                this.lastPayment = result;
-                this.amount = this.lastPayment.payAmount;
-            })
-            .add(() => {
-                this.loading_payment = false;
-            });
-        this.loading_contact = true;
-        this.referenceService
-            .AimagList()
-            .subscribe((result) => {
-                this.loading_contact = false;
-                this.aimags = result;
-            })
-            .add(() => {
-                this.loading_contact = false;
-            });
-        this.contactService.Get().subscribe((contact) => {
-            this.contact = contact;
-        });
     }
 
     selectPayment(item: any) {

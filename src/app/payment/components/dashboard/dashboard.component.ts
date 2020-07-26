@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { QpayService } from '../../shared/qpay/qpay.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,9 +10,14 @@ import { Router } from '@angular/router';
 export class DashboardComponent implements OnInit {
   bankid = 0;
   step = 1;
-  constructor(private router: Router) { }
+  banks: any;
+  constructor(private router: Router, private qpayService: QpayService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.qpayService.BankList('2300').subscribe(banks => {
+      this.banks = banks;
+    });
+  }
   SelectBank(bankid) {
     this.bankid = bankid;
     this.step = 2;
