@@ -4,6 +4,7 @@ import { of, throwError } from 'rxjs';
 import { retryWhen, delay, mergeMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ShareDataService } from 'src/app/shared/shared/share-data.service';
+import { ErrorService } from 'src/app/shared/shared/error.service';
 
 @Component({
   selector: 'app-show-qr',
@@ -14,7 +15,11 @@ export class ShowQRComponent implements OnInit {
   error_message: any;
   loading: boolean;
   qrImage: string;
-  constructor(private qpService: QpayService, private router: Router, private shareDataService: ShareDataService) {}
+  constructor(
+    private qpService: QpayService,
+    private router: Router,
+    private shareDataService: ShareDataService,
+    private errorService: ErrorService) {}
 
   ngOnInit() {
     console.log(this.shareDataService.GetPayment());
@@ -27,10 +32,16 @@ export class ShowQRComponent implements OnInit {
       this.qpService
         .Create(payment)
         .subscribe((result) => {
-          this.qrImage = 'data:image/png;base64,' + result.qPay_QRimage;
+          console.log(result);
+          this.qrImage = 'data:image/png;base64,' + result.json_data.qPay_QRimage;
           sessionStorage.setItem('qpayImage', this.qrImage);
           sessionStorage.setItem('paymentId', result.payment_id);
           this.check();
+        }, error => {
+          this.error_message = this.errorService.getInlineError(error);
+          if (!this.error_message) {
+            this.error_message = error.message;
+          }
         })
         .add(() => {
           this.loading = false;

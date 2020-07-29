@@ -80,25 +80,12 @@ export class ContractRegisterPaymentComponent implements OnInit {
     console.log(checkedList);
     const bdate = checkedList[0].PayDate;
     const edate = checkedList[checkedList.length - 1].PayDate;
-    console.log({
-      BeginDate: bdate,
-      EndDate: edate,
-      Amount: this.amount,
-      Class: {
-        id: 1,
-        name: 'Сайн дурын даатгал',
-      },
-      Description: 'Даатгалын гэрээний төлбөр',
-    });
     this.shareDataService.SetPayment({
-      BeginDate: bdate,
-      EndDate: edate,
+      CountryId: this.contract.countryId,
+      BranchCode: this.contract.dom,
+      RegID: this.contract.regID,
+      Class: 0,
       Amount: this.amount,
-      Class: {
-        id: 1,
-        name: 'Сайн дурын даатгал',
-      },
-      Description: 'Даатгалын гэрээний төлбөр',
     });
     this.router.navigate(['main/view/payment']);
   }

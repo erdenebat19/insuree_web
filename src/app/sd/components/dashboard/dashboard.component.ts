@@ -180,14 +180,11 @@ export class DashboardComponent implements OnInit {
             );
         }
         this.shareDataService.SetPayment({
-            BeginDate: bdate,
-            EndDate: edate,
-            Amount: this.lastPayment.amount,
-            Class: {
-                id: 1,
-                name: 'Сайн дурын даатгал',
-            },
-            Description: 'Даатгалын гэрээний төлбөр',
+            CountryId: this.contract.countryId,
+            BranchCode: this.contract.dom,
+            RegID: this.contract.regID,
+            Class: 0,
+            Amount: this.amount,
         });
         this.router.navigate(['main/view/payment']);
     }
