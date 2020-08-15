@@ -8,16 +8,19 @@
         <div class="content-body">
           <div *ngIf="step===1">
             <ul class="pay-dashboard">
-              <li class="cursor-pointer" title="{{bank.name}}" (click)="SelectBank(bank.code)"
+              <li class="cursor-pointer" title="{{bank.name}}" (click)="SelectBank(bank)"
                 *ngFor="let bank of banks">
                 <div class="listicon"><img src="assets\img\{{bank.url}}" width="70"></div>
               </li>
             </ul>
           </div>
           <div *ngIf="step===2">
-            <p>Та төлбөр төлөх хэлбэрээ сонгоно уу</p>
+            <p>
+              Та {{ payment.Amount }} төгрөгийг {{ bank.name }}-ний {{ bank.account }} тоот дансанд төлнө. Төлбөр төлөх хэлбэрээ сонгоно уу. 
+            </p>
             <ul class="pay-dashboard" >
-              <li><a class="cursor-pointer" (click)="qpay()">
+              <li>
+                <a class="cursor-pointer" (click)="qpay()">
                   <div><img src="assets/img/qpay-logo.jpg" alt=""></div>
                   <div class="text-center">QPAY</div>
                 </a>

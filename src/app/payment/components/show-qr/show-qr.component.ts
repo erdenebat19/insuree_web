@@ -26,8 +26,7 @@ export class ShowQRComponent implements OnInit {
     const payment = this.shareDataService.GetPayment();
     this.error_message = undefined;
     this.loading = true;
-    // FIXME get invoice qpayimage from server
-    // this.qrImage = sessionStorage.getItem("qpayImage");
+
     if (this.qrImage == null) {
       this.qpService
         .Create(payment)

@@ -18,7 +18,7 @@ export class QpayService {
         Authorization: `Bearer ${user.token}`,
       }),
     };
-    return this.http.post(this.apiurl + 'Invoice', invoice, httpOptions);
+    return this.http.post(this.apiurl + 'Invoice/qpay', invoice, httpOptions);
   }
   Check(paymentId: string): Observable<any> {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -28,7 +28,7 @@ export class QpayService {
         Authorization: `Bearer ${user.token}`,
       }),
     };
-    return this.http.get(this.apiurl + 'Invoice?paymentId=' + paymentId, httpOptions);
+    return this.http.get(this.apiurl + 'Invoice/qpay?paymentId=' + paymentId, httpOptions);
   }
   BankList(dom: string): Observable<any> {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -38,6 +38,16 @@ export class QpayService {
         Authorization: `Bearer ${user.token}`,
       }),
     };
-    return this.http.get(this.apiurl + 'Invoice/banks?dom=' + dom, httpOptions);
+    return this.http.get(this.apiurl + 'Invoice/qpay/banks?dom=' + dom, httpOptions);
+  }
+  BankAccount(dom: string, BankCode: string): Observable<any> {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${user.token}`,
+      }),
+    };
+    return this.http.get(this.apiurl + 'Invoice/qpay/BankAccount?dom=' + dom + '&BankCode=' + BankCode, httpOptions);
   }
 }
