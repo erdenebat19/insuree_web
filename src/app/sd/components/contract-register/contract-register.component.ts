@@ -32,40 +32,40 @@ export class ContractRegisterComponent implements OnInit {
         private errorService: ErrorService
     ) {}
 
-    ngOnInit() {
+    async ngOnInit() {
         this.contract = {
             Class: 0,
             Length: 12,
             ContractPeriod: 0,
             Account: 0,
         };
-        this.contractService.Check().subscribe(isValid => {
+        this.contractService.Check().subscribe(async isValid => {
             this.valid = isValid;
-            console.log(isValid);
             if (isValid) {
-                this.LoadData().then(() => {
-                    this.route.url.subscribe((url) => {
-                        if (url[0].path === 'extend') {
-                            this.extend = true;
-                            this.contractService.Get().subscribe(
-                                (result) => {
-                                    this.contract = {
-                                        Id: result.id,
-                                        Class: { Id: result.class.id, Name: result.class.name },
-                                        Income: result.income,
-                                        Length: result.length,
-                                        CountryId: result.countryId
-                                    };
-                                    if (!this.contract) {
-                                        this.errormessage = 'Гэрээ бүртгэлгүй байна';
-                                    }
-                                },
-                                (error) => {
-                                    this.errormessage = this.errorService.getInlineError(error);
+                await this.LoadData();
+                this.route.url.subscribe((url) => {
+                    if (url[0].path === 'extend') {
+                        this.extend = true;
+                        this.contractService.Get().subscribe(
+                            (result) => {
+                                this.contract = {
+                                    Id: result.id,
+                                    Class: { id: result.class.id, name: result.class.name },
+                                    Income: result.income,
+                                    Length: result.length,
+                                    CountryId: result.countryId,
+                                    AimagId: result.dom.substring(0, 2),
+                                    SomId: result.dom.substring(2, 4)
+                                };
+                                if (!this.contract) {
+                                    this.errormessage = 'Гэрээ бүртгэлгүй байна';
                                 }
-                            );
-                        }
-                    });
+                            },
+                            (error) => {
+                                this.errormessage = this.errorService.getInlineError(error);
+                            }
+                        );
+                    }
                 });
             }
         }, error => {

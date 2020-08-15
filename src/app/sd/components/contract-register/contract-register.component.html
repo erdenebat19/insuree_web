@@ -11,7 +11,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <ng-container *ngIf="valid">
-                                <div class="alert alert-info">
+                                <div class="alert alert-info" *ngIf="!extend && contract.CountryId === '001'">
                                     Гэрээ байгуулах аймаг, хот, сум, дүүргээ зөв сонгоно уу. Уг
                                     сонгосон нийгмийн даатгалын байгууллагатай та тооцоо хийх болно.
                                 </div>
