@@ -34,8 +34,10 @@ export class ShowQRComponent implements OnInit {
           console.log(result);
           this.qrImage = 'data:image/png;base64,' + result.json_data.qPay_QRimage;
           sessionStorage.setItem('qpayImage', this.qrImage);
-          sessionStorage.setItem('paymentId', result.payment_id);
-          this.check();
+          sessionStorage.setItem('paymentId', result.json_data.invoice_id);
+          this.qpService.startConnection();
+          this.qpService.addCheckPaymentListener();
+          // this.check();
         }, error => {
           this.error_message = this.errorService.getInlineError(error);
           if (!this.error_message) {
@@ -47,7 +49,7 @@ export class ShowQRComponent implements OnInit {
         });
     } else {
       this.loading = false;
-      this.check();
+      // this.check();
     }
   }
   private check() {

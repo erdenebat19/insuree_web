@@ -52,7 +52,7 @@ export class ContractRegisterComponent implements OnInit {
                                     Id: result.id,
                                     Class: { id: result.class.id, name: result.class.name },
                                     Income: result.income,
-                                    Length: result.length,
+                                    Length: Number.parseInt(result.length, 10),
                                     CountryId: result.countryId,
                                     AimagId: result.dom.substring(0, 2),
                                     SomId: result.dom.substring(2, 4)
@@ -140,6 +140,7 @@ export class ContractRegisterComponent implements OnInit {
     register() {
         this.contract.Class = { Id: this.contract.Class.id, Name: this.contract.Class.name };
         this.contract.Income = Number.parseFloat(this.contract.Income);
+        this.contract.Length = Number.parseInt(this.contract.Length, 10);
         this.postback = true;
         if (this.validate()) {
             if (this.extend) {

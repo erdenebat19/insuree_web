@@ -17,7 +17,6 @@ export class DashboardComponent implements OnInit {
   constructor(private router: Router, private qpayService: QpayService, private shareDataService: ShareDataService ) { }
 
   ngOnInit() {
-    // DONE fix 2300 to dom from param
     this.payment = this.shareDataService.GetPayment();
     console.log(this.payment);
     if (!this.payment) {

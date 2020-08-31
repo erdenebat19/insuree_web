@@ -183,7 +183,9 @@ export class DashboardComponent implements OnInit {
             CountryId: this.contract.countryId,
             BranchCode: this.contract.dom,
             RegID: this.contract.regID,
-            Class: 0,
+            BenID: this.contract.benID,
+            ContractId: this.contact.id,
+            Class: 1,
             Amount: this.amount,
         });
         this.router.navigate(['main/view/payment']);

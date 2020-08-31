@@ -84,6 +84,8 @@ export class ContractRegisterPaymentComponent implements OnInit {
       CountryId: this.contract.countryId,
       BranchCode: this.contract.dom,
       RegID: this.contract.regID,
+      BenID: this.contract.benID,
+      ContractId: this.contract.id,
       Class: 0,
       Amount: this.amount,
     });
