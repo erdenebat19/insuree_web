@@ -138,6 +138,7 @@ export class ContractRegisterComponent implements OnInit {
         }
     }
     register() {
+        console.log(Number.parseFloat(this.contract.Income));
         this.contract.Class = { Id: this.contract.Class.id, Name: this.contract.Class.name };
         this.contract.Income = Number.parseFloat(this.contract.Income);
         this.contract.Length = Number.parseInt(this.contract.Length, 10);
@@ -162,7 +163,8 @@ export class ContractRegisterComponent implements OnInit {
         if (!this.contract.Class || this.contract.Class === 0) {
             return false;
         }
-        if (!this.contract.Income || this.contract.Income < this.MinSalary || this.contract.Income > this.MinSalary) {
+        console.log(this.MaxSalary);
+        if (!this.contract.Income || this.contract.Income < this.MinSalary || this.contract.Income > this.MaxSalary) {
             return false;
         }
         return true;

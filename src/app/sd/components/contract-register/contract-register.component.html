@@ -12,8 +12,8 @@
                         <div class="col-md-6">
                             <ng-container *ngIf="valid">
                                 <div class="alert alert-info" *ngIf="!extend && contract.CountryId === '001'">
-                                    Гэрээ байгуулах аймаг, хот, сум, дүүргээ зөв сонгоно уу. Уг
-                                    сонгосон нийгмийн даатгалын байгууллагатай та тооцоо хийх болно.
+                                    Та гэрээний мэдээллээ үнэн зөв оруулна уу. Сонгосон сум, дүүргийн нийгмийн даатгалын байгууллагатай таны гэрээ байгуулагдах болно.
+                                    Гадаадад оршин суугаа бол Хан-Уул дүүргийн нийгмийн даатгалын хэлтэстэй гэрээ байгуулагдана.
                                 </div>
                                 <div class="form-group row">
                                     <label for="ddpCountry" class="col-sm-5 col-form-label">
@@ -124,7 +124,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <label for="ddpLength" class="col-sm-5 col-form-label">
-                                        Хугацаа
+                                        Хугацаа (сараар)
                                     </label>
                                     <div class="col-sm-7">
                                         <select
@@ -177,16 +177,16 @@
                                         >
                                             <small>*Сарын орлого оруулаагүй байна.</small>
                                             <small *ngIf="contract.Income">
-                                                *Сарын орлого хөлөлмөрийн хөлсний доод хэмжээ
-                                                {{ MinSalary }}-аас их, дээд хэмжээ
-                                                {{ MaxSalary }}-аас бага байх ёстой.
+                                                *Сарын орлого нь хөдөлмөрийн хөлсний доод хэмжээ
+                                                ({{ MinSalary | currency: '':'' }})-ээс их, дээд хэмжээ
+                                                ({{ MaxSalary | currency: '':'' }})-ээс бага байна.
                                             </small>
                                         </div>
                                         <div *ngIf="changedIncome" class="text-danger font-italic">
                                             <small>
-                                                *Сарын орлого хөлөлмөрийн хөлсний доод хэмжээ
-                                                {{ MinSalary }}-аас их, дээд хэмжээ
-                                                {{ MaxSalary }}-аас бага байх ёстой.
+                                                *Сарын орлого нь хөдөлмөрийн хөлсний доод хэмжээ
+                                                ({{ MinSalary | currency: '':'' }})-ээс их, дээд хэмжээ
+                                                ({{ MaxSalary | currency: '':'' }})-ээс бага байна.
                                             </small>
                                         </div>
                                     </div>

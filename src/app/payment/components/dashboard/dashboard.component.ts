@@ -37,7 +37,7 @@ export class DashboardComponent implements OnInit {
     this.step = 2;
   }
   qpay() {
-    this.router.navigate(['/main/view/payment/create']);
+    this.router.navigate(['/main/view/payment/showqpay']);
   }
   private getBankAccount(BranchCode, BankCode) {
     this.qpayService.BankAccount(BranchCode, BankCode).subscribe(account => {
