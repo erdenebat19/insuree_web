@@ -6,6 +6,7 @@ export const environment = {
     production: false,
     apiurl: 'http://localhost:10012/',
     // apiurl: 'http://local.ndaatgal.mn:808/userwebapi/',
+    huburl: 'https://data.ndaatgal.mn:8081/sdqpapi/'
 };
 
 /*

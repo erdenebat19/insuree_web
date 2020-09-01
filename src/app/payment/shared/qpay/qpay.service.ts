@@ -11,6 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class QpayService {
   private hubConnection: signalR.HubConnection;
   apiurl = environment.apiurl + 'api/';
+  huburl = environment.huburl;
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) {}
 
   Create(invoice: any): Observable<any> {
@@ -54,8 +55,9 @@ export class QpayService {
     return this.http.get(this.apiurl + 'Invoice/qpay/BankAccount?dom=' + dom + '&BankCode=' + BankCode, httpOptions);
   }
   public startConnection = () => {
+    console.log(this.huburl);
     this.hubConnection = new signalR.HubConnectionBuilder()
-                            .withUrl('http://localhost:5000/payment-hub')
+                            .withUrl(this.huburl + 'payment-hub')
                             .build();
     this.hubConnection
       .start()

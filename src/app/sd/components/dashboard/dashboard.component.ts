@@ -184,7 +184,7 @@ export class DashboardComponent implements OnInit {
             BranchCode: this.contract.dom,
             RegID: this.contract.regID,
             BenID: this.contract.benID,
-            ContractId: this.contact.id,
+            ContractId: Number.parseInt(this.contact.id, 10),
             Class: 1,
             Amount: this.amount,
         });
