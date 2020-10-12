@@ -7,6 +7,7 @@ import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { SharedModule } from "../shared/shared.module";
 import { InlineLoaderModule } from "../shared/ui/inline-loader/inline-loader.module";
 import { FormsModule } from "@angular/forms";
+import { CheckComponent } from './components/check/check.component';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { FormsModule } from "@angular/forms";
     InlineLoaderModule,
     SharedModule
   ],
-  declarations: [CreateInvoiceComponent, ShowQRComponent, DashboardComponent]
+  declarations: [CreateInvoiceComponent, ShowQRComponent, DashboardComponent, CheckComponent]
 })
 export class PaymentModule {}

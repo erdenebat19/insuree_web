@@ -80,13 +80,11 @@ export class DashboardComponent implements OnInit {
                             ? 'Улирлаар'
                             : 'Хагс жилээр';
 
-                    console.log(this.contract);
                     if (this.contract) {
                         this.loading_payment = true;
                         this.paymentService
                             .Get()
                             .subscribe((payment) => {
-                                console.log(payment);
                                 this.loading_payment = false;
                                 this.payment = payment;
                                 this.PayMonthNum = 1;
@@ -109,7 +107,7 @@ export class DashboardComponent implements OnInit {
                             .subscribe((lastPayment) => {
                                 this.loading_payment = false;
                                 this.lastPayment = lastPayment;
-                                this.amount = this.lastPayment.payAmount;
+                                this.amount = this.lastPayment.amount;
                             })
                             .add(() => {
                                 this.loading_payment = false;
@@ -185,7 +183,7 @@ export class DashboardComponent implements OnInit {
             RegID: this.contract.regID,
             BenID: this.contract.benID,
             ContractId: Number.parseInt(this.contract.id, 10),
-            Class: 1,
+            Class: this.contract.status === 0 ? 0 : 1,
             Amount: this.amount,
         });
         this.router.navigate(['main/view/payment']);

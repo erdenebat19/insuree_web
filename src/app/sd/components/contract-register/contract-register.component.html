@@ -103,12 +103,7 @@
                                         Ажил, мэргэжил
                                     </label>
                                     <div class="col-sm-7">
-                                        <select
-                                            class="form-control"
-                                            id="ddpAMClass"
-                                            [(ngModel)]="contract.Class"
-                                            [compareWith]="byId"
-                                        >
+                                        <select class="form-control" id="ddpAMClass" [(ngModel)]="contract.Class" [compareWith]="byId" (change)="onChangeAMClass()">
                                             <option value="0">-</option>
                                             <option [ngValue]="item" *ngFor="let item of AMClasses">
                                                 {{ item.name }}

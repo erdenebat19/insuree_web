@@ -42,7 +42,10 @@ export class ContractRegisterComponent implements OnInit {
         this.contractService.Check().subscribe(async isValid => {
             this.valid = isValid;
             if (isValid) {
-                await this.LoadData();
+                this.loading = true;
+                await this.LoadData().then(() => {
+                    this.loading = false;
+                });
                 this.route.url.subscribe((url) => {
                     if (url[0].path === 'extend') {
                         this.extend = true;
@@ -61,23 +64,23 @@ export class ContractRegisterComponent implements OnInit {
                                     this.errormessage = 'Гэрээ бүртгэлгүй байна';
                                 }
                             },
-                            (error) => {
-                                this.errormessage = this.errorService.getInlineError(error);
+                            (err) => {
+                                this.errormessage = this.errorService.getInlineError(err);
                             }
                         );
                     }
                 });
             }
-        }, error => {
-            this.errormessage = this.errorService.getInlineError(error);
+        }, err => {
+            this.errormessage = this.errorService.getInlineError(err);
             if (!this.errormessage) {
-                this.errormessage = error.message;
+                this.errormessage = err.message;
             }
         });
     }
     async LoadData() {
-        this.loading = true;
         this.contractService.GetDom().subscribe(dom => {
+            console.log(dom);
             this.dom = dom;
             this.refService.CountryList().subscribe((result) => {
                 this.Countries = result;
@@ -92,24 +95,25 @@ export class ContractRegisterComponent implements OnInit {
                         this.onChangeAimag();
                     } else {
                         this.contract.AimagId = this.dom.toString().substring(0, 2);
+                        this.onChangeAimag();
                     }
-                    this.loading = false;
                 });
             });
+        }, err => {
+            console.log(err);
+            this.errormessage = this.errorService.getInlineError(err);
+            if (!this.errormessage) {
+                this.errormessage = err.message;
+            }
         });
-        this.loading = true;
         this.refService.AMClassList().subscribe((result) => {
             this.AMClasses = result;
-            this.loading = false;
         });
-        this.loading = true;
         this.refService.GetMinSalary().subscribe((result) => {
             this.MinSalary = result;
-            this.loading = false;
         });
         this.refService.GetMaxSalary().subscribe((result) => {
             this.MaxSalary = result;
-            this.loading = false;
         });
     }
     onChangeContry() {
@@ -135,6 +139,12 @@ export class ContractRegisterComponent implements OnInit {
                 this.contract.SomId = this.dom.toString().substring(2, 4);
                 this.loading = false;
             });
+        }
+    }
+    onChangeAMClass() {
+        if (this.contract.Class.id === 12) {
+            // tslint:disable-next-line: max-line-length
+            this.errormessage = 'Хүүхдээ асарч буй сайн дураар даатгуулагч эхийн сайн дурын даатгалаа цахимаар төлөх, гэрээ байгуулах програмын өөрчлөлт хийгдэж байна. Уг үйлчилгээг одоогоор цахимаар авах боломжгүй тул та Нийгмийн даатгалын хэлтсээр  үйлчлүүлнэ үү. Уг үйлчилгээг цахимаар авах боломж бүрдэхээр танд мэдэгдэх болно.';
         }
     }
     register() {
@@ -163,8 +173,10 @@ export class ContractRegisterComponent implements OnInit {
         if (!this.contract.Class || this.contract.Class === 0) {
             return false;
         }
-        console.log(this.MaxSalary);
         if (!this.contract.Income || this.contract.Income < this.MinSalary || this.contract.Income > this.MaxSalary) {
+            return false;
+        }
+        if (this.contract.Class.id === 12) {
             return false;
         }
         return true;

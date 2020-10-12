@@ -139,7 +139,7 @@
                                         <div>
                                             Та сайн дурын гэрээ байгуулаагүй байна. Гэрээ байгуулах бол
                                             <a [routerLink]="['/main/view/sd/register']">энд дарна</a> уу.
-                                            Гэрээний загварыг харах бол <a href="">энд дарна</a> уу.
+                                            Гэрээний загварыг харах бол <a target="_blank" href="http://www.ndaatgal.mn/sdgeree.pdf">энд дарна</a> уу.
                                         </div>
                                     </div>
                                 </div>
@@ -276,6 +276,14 @@
                                                                     </li>
                                                                     <li class="list-group-item">
                                                                         <div class="row">
+                                                                            <span class="col-md-8">Чөлөөлсөн дүн</span>
+                                                                            <span class="col-md-4 text-right font-weight-bold">
+                                                                                {{ item.exAmount }}
+                                                                            </span>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <div class="row">
                                                                             <span class="col-md-8">Алданги</span>
                                                                             <span class="col-md-4 text-right font-weight-bold">
                                                                                 {{ item.ald }}
@@ -337,6 +345,14 @@
                                                 <span class="col-md-8">Төлөх дүн</span>
                                                 <span class="col-md-4 text-right font-weight-bold">
                                                     {{ lastPayment.payAmount }}
+                                                </span>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <div class="row">
+                                                <span class="col-md-8">Чөлөөлсөн дүн</span>
+                                                <span class="col-md-4 text-right font-weight-bold">
+                                                    {{ lastPayment.exAmount }}
                                                 </span>
                                             </div>
                                         </li>

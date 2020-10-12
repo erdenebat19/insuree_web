@@ -64,3 +64,18 @@ tr {
   margin-top: -10px;
   font-weight: bold;
 }
+
+table {
+  border: none;
+}
+table td {
+  border: none;
+}
+@media print {
+  table {
+      border: none !important; 
+  }
+  table td {
+      border: none !important;
+  }   
+}

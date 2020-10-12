@@ -81,12 +81,17 @@ export class ContractService {
   }
   GetDom(): Observable<any> {
     const user = JSON.parse(localStorage.getItem('user'));
-    const httpOptions = {
-        headers: new HttpHeaders({
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${user.token}`,
-        }),
-    };
-    return this.http.get(this.apiurl + 'SdContract/dom', httpOptions);
-}
+    // const httpOptions = {
+    //     headers: new HttpHeaders({
+    //         'Content-Type': 'application/text',
+    //         Authorization: `Bearer ${user.token}`,
+    //     }),
+    // };
+    // return this.http.get(this.apiurl + 'SdContract/dom', httpOptions);
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${user.token}`,
+      responseType: 'text'
+    });
+    return this.http.get(this.apiurl + 'SdContract/dom', { headers: headers, responseType: 'text' });
+  }
 }

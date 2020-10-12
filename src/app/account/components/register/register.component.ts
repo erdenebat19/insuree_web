@@ -20,8 +20,8 @@ export class RegisterComponent implements OnInit {
   constructor(private router: Router, private _service: AccountService) {}
 
   ngOnInit() {
-    this.info_message =
-      'Бүртгэл, баталгаажуулалт хийгдсэний дараа таны цахим шуудан руу холбогдох мэдээллийг илгээх тул та өөрийн мэдээллээ үнэн, зөв оруулна уу!';
+    // tslint:disable-next-line: max-line-length
+    this.info_message = 'Бүртгэл, баталгаажуулалт хийгдсэний дараа таны цахим шуудан руу холбогдох мэдээллийг илгээх тул та өөрийн мэдээллээ үнэн, зөв оруулна уу!';
   }
 
   register() {
@@ -41,14 +41,14 @@ export class RegisterComponent implements OnInit {
             }
             if (item.infoid === 1) {
               this.success_message = undefined;
-              this.errormessage =
-                'Таны оруулсан мэдээлэл Улсын бүртгэлийн мэдээллээс зөрүүтэй байна. Та мэдээллээ шалгаад дахин оруулна уу!';
+              // tslint:disable-next-line: max-line-length
+              this.errormessage = 'Таны оруулсан мэдээлэл Улсын бүртгэлийн мэдээллээс зөрүүтэй байна. Та мэдээллээ шалгаад дахин оруулна уу!';
             }
           });
           if (r === 0) {
             this.errormessage = undefined;
-            this.success_message =
-              'Амжилттай бүртгэгдлээ. Таны бүртгүүлсэн цахим шуудан руу баталгаажуулалтын хаяг илгээгдсэн тул та уг хаягаар орон өөрийн нэвтрэх эрхээ баталгаажуулж нууц үгээ авна уу. /Хэрэв ирээгүй бол SPAM дотроо шалгана уу/';
+            // tslint:disable-next-line: max-line-length
+            this.success_message = 'Амжилттай бүртгэгдлээ. Таны бүртгүүлсэн цахим шуудан руу баталгаажуулалтын хаяг илгээгдсэн тул та уг хаягаар орон өөрийн нэвтрэх эрхээ баталгаажуулж нууц үгээ авна уу. /Хэрэв ирээгүй бол SPAM дотроо шалгана уу/';
           }
         }
       },

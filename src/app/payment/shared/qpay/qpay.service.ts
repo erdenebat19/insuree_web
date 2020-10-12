@@ -32,7 +32,7 @@ export class QpayService {
         Authorization: `Bearer ${user.token}`,
       }),
     };
-    return this.http.get(this.apiurl + 'Invoice/qpay?paymentId=' + paymentId, httpOptions);
+    return this.http.get(this.apiurl + 'Invoice/qpay?invoiceNumber=' + paymentId, httpOptions);
   }
   BankList(dom: string): Observable<any> {
     const user = JSON.parse(localStorage.getItem('user'));

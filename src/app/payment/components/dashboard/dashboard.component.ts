@@ -29,11 +29,9 @@ export class DashboardComponent implements OnInit {
   }
   SelectBank(bank) {
     this.bank = bank;
-    console.log(bank);
     this.getBankAccount(this.payment.BranchCode, this.bank.code);
     this.payment.BankCode = bank.code;
     this.shareDataService.SetPayment(this.payment);
-    console.log(this.payment);
     this.step = 2;
   }
   qpay() {
@@ -41,7 +39,6 @@ export class DashboardComponent implements OnInit {
   }
   private getBankAccount(BranchCode, BankCode) {
     this.qpayService.BankAccount(BranchCode, BankCode).subscribe(account => {
-      console.log(account);
       this.account = account[0];
     });
   }

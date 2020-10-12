@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-6">
     <div class="content-container">
       <div class="content-medium">
         <div class="content-header">
@@ -7,11 +7,8 @@
         </div>
         <div class="content-body">
           <app-inline-loader *ngIf="loading"></app-inline-loader>
-          <div>
-            <img src="{{qrImage}}" alt="">
-          </div>
-          <a class="btn btn-primary" [routerLink]="['../check']">Төлбөр төлөгдсөн эсхийг шалгах</a>
-          <app-alert-inline [message]="error_message"></app-alert-inline>
+          <div class="alert alert-success" *ngIf="successmessage">{{successmessage}}</div>
+          <div class="alert alert-danger" *ngIf="errormessage">{{errormessage}}</div>
         </div>
       </div>
     </div>

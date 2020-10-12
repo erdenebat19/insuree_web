@@ -1,0 +1,14 @@
+table {
+    border: none;
+}
+table td {
+    border: none;
+}
+@media print {
+    table {
+        border: none !important; 
+    }
+    table td {
+        border: none !important;
+    }   
+}

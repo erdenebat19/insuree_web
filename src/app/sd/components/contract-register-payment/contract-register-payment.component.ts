@@ -77,7 +77,6 @@ export class ContractRegisterPaymentComponent implements OnInit {
   pay() {
     // sessionStorage.setItem('Amount', this.amount.toString());
     const checkedList = this.payment.filter((x) => x.ischecked);
-    console.log(checkedList);
     const bdate = checkedList[0].PayDate;
     const edate = checkedList[checkedList.length - 1].PayDate;
     this.shareDataService.SetPayment({
