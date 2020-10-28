@@ -12,6 +12,7 @@ import { QpayService } from '../../shared/qpay/qpay.service';
 export class CheckComponent implements OnInit {
   errormessage: any;
   successmessage: string;
+  loading: boolean;
 
   constructor(
     private qpService: QpayService,
@@ -25,7 +26,9 @@ export class CheckComponent implements OnInit {
   }
   check() {
     console.log(this.sharedData.GetInvoice());
+    this.loading = true;
     this.qpService.Check(this.sharedData.GetInvoice()).subscribe(result => {
+      this.loading = false;
       console.log(result);
       if (result) {
         this.successmessage = 'Төлбөр төлөгдсөн байна';
@@ -33,6 +36,7 @@ export class CheckComponent implements OnInit {
         this.errormessage = 'Төлбөр төлөгдөөгүй байна';
       }
     }, error => {
+      this.loading = false;
       this.errormessage = this.errorService.getInlineError(error);
       if (this.errormessage) {
         this.errormessage = error.message;
