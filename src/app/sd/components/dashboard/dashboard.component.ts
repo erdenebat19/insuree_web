@@ -168,14 +168,16 @@ export class DashboardComponent implements OnInit {
             edate = this.lastPayment.nextDate;
         } else {
             const checkedList = this.payment.filter((x) => x.ischecked);
-            bdate = new Date(checkedList[0].calYear + '-' + checkedList[0].calMonth + '-' + '01');
-            edate = new Date(
-                checkedList[checkedList.length - 1].calYear +
-                    '-' +
-                    checkedList[checkedList.length - 1].calMonth +
-                    '-' +
-                    '01'
-            );
+            if (checkedList && checkedList.length > 0) {
+                bdate = new Date(checkedList[0].calYear + '-' + checkedList[0].calMonth + '-' + '01');
+                edate = new Date(
+                    checkedList[checkedList.length - 1].calYear +
+                        '-' +
+                        checkedList[checkedList.length - 1].calMonth +
+                        '-' +
+                        '01'
+                );
+            }
         }
         this.shareDataService.SetPayment({
             CountryId: this.contract.countryId,

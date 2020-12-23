@@ -58,4 +58,18 @@ export class MessageService {
   SetUnreadNum(unread) {
     this.Unread = unread;
   }
+  Confirm(message): Observable<any> {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${user.token}`,
+      }),
+    };
+    const data = {
+      Id: message.id,
+      Confirm: true
+    };
+    return this.http.post(this.apiurl + message.confirmUrl, data, httpOptions);
+  }
 }

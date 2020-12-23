@@ -56,6 +56,14 @@
         </div>
         <div class="message-body">
           {{message.message}}
+          <div class="alert alert-danger" *ngIf="errormessage">
+            {{errormessage}}
+          </div>  
+        </div>
+      </div>
+      <div *ngIf="message && message.confirmTitle && message.confirmStatus !== '1'">
+        <div class="modal-footer">
+          <button class="btn btn-success" (click)="confirm(message)">{{message.confirmTitle}}</button>
         </div>
       </div>
     </div>

@@ -1,10 +1,10 @@
-import { Injectable } from "@angular/core";
-import { Router, NavigationStart } from "@angular/router";
-import { Observable, Subject } from "rxjs";
-import { filter } from "rxjs/operators";
-import { Alert, AlertType } from "../ui/alert/alert.model";
+import { Injectable } from '@angular/core';
+import { Router, NavigationStart } from '@angular/router';
+import { Observable, Subject } from 'rxjs';
+import { filter } from 'rxjs/operators';
+import { Alert, AlertType } from '../ui/alert/alert.model';
 
-@Injectable({ providedIn: "root" })
+@Injectable({ providedIn: 'root' })
 export class AlertService {
   private subject = new Subject<Alert>();
   private keepAfterRouteChange = false;

@@ -13,21 +13,20 @@ export class AuthorizedComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    var token = this.route.snapshot.queryParamMap.get('Token');
-    var userID = this.route.snapshot.queryParamMap.get('UserID');
-    if (token != "") {
-      let user = {
+    const token = this.route.snapshot.queryParamMap.get('Token');
+    const userID = this.route.snapshot.queryParamMap.get('UserID');
+    if (token !== '') {
+      const user = {
         token: token,
         userID: userID,
 
       }
-      var currentDate = new Date();
+      const currentDate = new Date();
       localStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('startTime', currentDate.toString());
       this.router.navigate(['/']);
-    }
-    else {
-      this.errormessage = "Нэвтрэх эрхгүй байна!";
+    } else {
+      this.errormessage = 'Нэвтрэх эрхгүй байна!';
     }
   }
 }
