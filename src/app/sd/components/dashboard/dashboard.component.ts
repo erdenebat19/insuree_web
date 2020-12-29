@@ -32,12 +32,12 @@ export class DashboardComponent implements OnInit {
     loading_transac: boolean;
     message_error_message: any;
     contract_error_message: string;
-    amount: number;
     PayMonth: number;
     minPayMonth: number;
     monthNum = 12;
     options: Options;
     PayMonthNum: number;
+    lastPayment1: any;
 
     constructor(
         private contractService: ContractService,
@@ -107,7 +107,12 @@ export class DashboardComponent implements OnInit {
                             .subscribe((lastPayment) => {
                                 this.loading_payment = false;
                                 this.lastPayment = lastPayment;
-                                this.amount = this.lastPayment.amount;
+                                this.lastPayment1 = {
+                                    payAmount: lastPayment.payAmount,
+                                    exAmount: lastPayment.exAmount,
+                                    ald: lastPayment.ald,
+                                    amount: lastPayment.amount
+                                };
                             })
                             .add(() => {
                                 this.loading_payment = false;
@@ -186,7 +191,7 @@ export class DashboardComponent implements OnInit {
             BenID: this.contract.benID,
             ContractId: Number.parseInt(this.contract.id, 10),
             Class: this.contract.status === 0 ? 0 : 1,
-            Amount: this.amount,
+            Amount: this.lastPayment.amount,
         });
         this.router.navigate(['main/view/payment']);
     }
@@ -194,8 +199,10 @@ export class DashboardComponent implements OnInit {
         return new Date(year, month, 1);
     }
     calc(month) {
-        this.lastPayment.payAmount = this.amount;
-        this.lastPayment.amount = this.amount + this.lastPayment.ald;
+        this.lastPayment.payAmount = this.lastPayment1.payAmount;
+        this.lastPayment.amount = this.lastPayment1.amount;
+        this.lastPayment.ald = this.lastPayment1.ald;
+        this.lastPayment.exAmount = this.lastPayment1.exAmount;
         this.payment.forEach((i) => {
             i.ischecked = false;
         });
@@ -212,6 +219,8 @@ export class DashboardComponent implements OnInit {
                 if (item.status !== 3) {
                     this.lastPayment.payAmount = this.lastPayment.payAmount + item.payAmount;
                     this.lastPayment.amount = this.lastPayment.amount + item.amount;
+                    this.lastPayment.ald = this.lastPayment.ald + item.ald;
+                    this.lastPayment.exAmount = this.lastPayment.exAmount + item.exAmount;
                 }
             });
     }
