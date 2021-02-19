@@ -1,0 +1,23 @@
+<link href='http://app.ndaatgal.mn/css/tet01.css' rel='stylesheet' type='text/css' />
+<div class="row">
+  <div class="col-md-12">
+      <div class="content-container">
+          <div class="content-large">
+              <div class="content-header">
+                  Нийгмийн даатгалын дэвтэр
+                  <span class="float-right">
+                    <a id="ddpPrint" class="cursor-pointer" (click)="print()"style="font-size: 20px;">
+                      <i class="icon ion-ios-printer-outline"></i>
+                    </a>
+                  </span>
+              </div>
+              <div class="content-body">
+                <button class="btn btn-primary" (click)="print()"></button>
+                <div class="alert alert-danger" *ngIf="errormessage">{{errormessage}}</div>
+                <app-inline-loader *ngIf="loading"></app-inline-loader>
+                <div [innerHTML]='statement_html'></div>
+              </div>              
+          </div>
+      </div>
+  </div>
+</div>

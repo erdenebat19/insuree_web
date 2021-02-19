@@ -8,6 +8,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FormsModule } from '@angular/forms';
 import { PentionRoutingModule } from './pention.routes';
 import { InlineLoaderModule } from '../shared/ui/inline-loader/inline-loader.module';
+import { PentionStatementComponent } from './components/pention-statement/pention-statement.component';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { InlineLoaderModule } from '../shared/ui/inline-loader/inline-loader.mod
     OlgoltComponent,
     HistoryComponent,
     SalaryComponent,
-    DashboardComponent
+    DashboardComponent,
+    PentionStatementComponent
   ],
   exports: [
     InfoComponent,
