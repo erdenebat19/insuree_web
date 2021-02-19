@@ -20,6 +20,11 @@
                 *ngIf='this.org.oid!=0' [(ngModel)]='dun'>
             </span>
           </div>
+          <div class="alert alert-warning">
+              Та {{date.getFullYear()}} оны {{(date.getMonth() + 1)}} сарын цалингаа <a target="_blank" 
+              href="https://sso.gov.mn/oauth2/authorize?response_type=code&client_id=39f6829bb99927ab2caf5772-1b8fecc9c85c5316880aa8ae68b35f57&scope=W3sic2VydmljZXMiOlsiV1MxMDAxMDFfZ2V0Q2l0aXplbklEQ2FyZEluZm8iXSwid3NkbCI6Imh0dHBzOi8veHlwLmdvdi5tbi9jaXRpemVuLTEuMi4wL3dzP1dTREwifV0=&redirect_uri=https://data.ndaatgal.mn:8081/userwebapi/api/auth/authorized&state=YjI3MjE2N2Q1MmM3MWMwZDZmOTJmYjAxNjgwNmQ3ZjQ5NTZkNDlhOTdmMGI2NjFlZGI1ODQwY2I2MTc2NzI0M2Y5NmI5MWZkODExMDQ1NTUyNWFiYTJmNzIxYmQ2MGVkYWMzZjZjNzlkZDA2MmM2YmZlMDc0MTMwOWY5ZWQ1YTM=">ЭНД ДАРЖ</a> 
+              нэвтрэлтийн систем "ДАН"-аар нэвтэрч "НД-ын шимтгэл" цэсээс харах боломжтой.
+          </div>
           <div class="alert alert-danger" *ngIf="errormessage!=undefined">{{errormessage}}
           </div>
           <div class="alert alert-success" *ngIf="success_message!=undefined">

@@ -1,0 +1,23 @@
+<link href="https://www.ndaatgal.mn/v1/css/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="https://www.ndaatgal.mn/v1/css/electronnote.css" rel="stylesheet" type="text/css">
+<div class="row">
+  <div class="col-md-12">
+      <div class="content-container">
+          <div class="content-large">
+              <div class="content-header">
+                  Нийгмийн даатгалын дэвтэр
+                  <span class="float-right">
+                    <a id="ddpPrint" class="cursor-pointer" (click)="print()"style="font-size: 20px;">
+                      <i class="icon ion-ios-printer-outline"></i>
+                    </a>
+                  </span>
+              </div>
+              <div class="content-body">
+                <div class="alert alert-danger" *ngIf="errormessage">{{errormessage}}</div>
+                <app-inline-loader *ngIf="loading"></app-inline-loader>
+                <div [innerHTML]='book_html'></div>
+              </div>              
+          </div>
+      </div>
+  </div>
+</div>
