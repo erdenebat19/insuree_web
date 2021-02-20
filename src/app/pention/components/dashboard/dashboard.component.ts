@@ -17,7 +17,7 @@ export class DashboardComponent implements OnInit {
     { id: 2, name: 'Тэтгэвэр тогтоолгосон цалин' },
     { id: 3, name: 'Тэтгэврийн олголт' },
     { id: 4, name: 'Тэтгэврийн түүх' },
-  ]
+  ];
 
   menu: number[] = [0, 1];
 
@@ -29,8 +29,8 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.menu[0] = 0;
     this.menu[1] = 2;
-    this.GetComponent(0, this.menu[0])
-    this.GetComponent(1, this.menu[1])
+    this.GetComponent(0, this.menu[0]);
+    this.GetComponent(1, this.menu[1]);
   }
 
   selectMenu(menuindex: number, index: Components) {
@@ -39,31 +39,31 @@ export class DashboardComponent implements OnInit {
   }
 
   GetComponent(dashindex: number, componentName: Components): any {
-    var factory: any;
+    let factory: any;
     switch (componentName) {
       case 0:
-        factory = this.componentFactoryResolver.resolveComponentFactory(InfoComponent)
+        factory = this.componentFactoryResolver.resolveComponentFactory(InfoComponent);
         break;
       case 1:
-        factory = this.componentFactoryResolver.resolveComponentFactory(SalaryComponent)
+        factory = this.componentFactoryResolver.resolveComponentFactory(SalaryComponent);
         break;
       case 2:
-        factory = this.componentFactoryResolver.resolveComponentFactory(OlgoltComponent)
+        factory = this.componentFactoryResolver.resolveComponentFactory(OlgoltComponent);
         break;
       case 3:
-        factory = this.componentFactoryResolver.resolveComponentFactory(HistoryComponent)
+        factory = this.componentFactoryResolver.resolveComponentFactory(HistoryComponent);
         break;
       default:
-        factory = this.componentFactoryResolver.resolveComponentFactory(InfoComponent)
+        factory = this.componentFactoryResolver.resolveComponentFactory(InfoComponent);
 
         break;
     }
-    if (dashindex == 0) {
+    if (dashindex === 0) {
       this.viewContainerRef1.clear();
       const component = this.viewContainerRef1.createComponent(factory);
       component.changeDetectorRef.detectChanges();
     }
-    if (dashindex == 1) {
+    if (dashindex === 1) {
       this.viewContainerRef2.clear();
       const component = this.viewContainerRef2.createComponent(factory);
       component.changeDetectorRef.detectChanges();
