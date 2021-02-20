@@ -232,7 +232,8 @@
                                             <tr>
                                                 <th scope="col" class="text-center">Он</th>
                                                 <th scope="col" class="text-center">Сар</th>
-                                                <th scope="col" class="text-center">Төлөх дүн</th>
+                                                <th scope="col" class="text-center">Төлбөл зохих</th>
+                                                <th scope="col" class="text-center">Чөлөөлсөн</th>
                                                 <th scope="col" class="text-center">Төлсөн</th>
                                                 <th scope="col" class="text-center">Төлөв</th>
                                             </tr>
@@ -246,10 +247,13 @@
                                                     <td class="text-center" style="width: 50px;">
                                                         {{ item.calMonth }}
                                                     </td>
-                                                    <td class="text-right" style="min-width: 80px;">
-                                                        {{ item.amount }}
+                                                    <td class="text-right" style="min-width: 70px;">
+                                                        {{ item.payAmount }}
                                                     </td>
-                                                    <td class="text-right" style="min-width: 80px;">
+                                                    <td class="text-right" style="min-width: 70px;">
+                                                        {{ item.exAmount }}
+                                                    </td>
+                                                    <td class="text-right" style="min-width: 70px;">
                                                         {{ item.paid }}
                                                     </td>
                                                     <td class="text-center" style="max-width: 70px; min-width: 70px;">
@@ -268,7 +272,7 @@
                                                                     </li>
                                                                     <li class="list-group-item">
                                                                         <div class="row">
-                                                                            <span class="col-md-8">Төлөх дүн</span>
+                                                                            <span class="col-md-8">Төлбөл зохих</span>
                                                                             <span class="col-md-4 text-right font-weight-bold">
                                                                                 {{ item.payAmount }}
                                                                             </span>
@@ -292,7 +296,7 @@
                                                                     </li>
                                                                     <li class="list-group-item">
                                                                         <div class="row">
-                                                                            <span class="col-md-8">Нийт дүн:</span>
+                                                                            <span class="col-md-8">Төлөх дүн:</span>
                                                                             <span class="col-md-4 text-right font-weight-bold">
                                                                                 {{ item.amount }}
                                                                             </span>
