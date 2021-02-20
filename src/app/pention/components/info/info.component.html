@@ -3,6 +3,9 @@
   Тэтгэвэр тогтоолгосон талаар мэдээлэл алга
 </div>
 <ul *ngIf='info!=undefined' class="pention-info">
+  <button class="btn btn-primary" [routerLink]='["/main/view/pention/statement"]'>
+    Тэтгэвэр тогтоолтын хуудас хэвлэх
+  </button>
   <li class="row">
     <div class="col-8">Аймаг</div>
     <div class="col-4">{{info.aimagName}}</div>
@@ -72,9 +75,8 @@
     <div class="col-4">{{info.workYearTS}}</div>
   </li>
 </ul>
-<button class="btn btn-primary" (click)="printStatement()">Тэтгэвэр тогтоолтын хуудас хэвлэх</button>
 <br>
-<div style="width: 100%" *ngIf='pentionInfo!=undefined && pentionInfo.length>1'>
+<div style="width: 100%;" *ngIf='pentionInfo!=undefined && pentionInfo.length>1'>
   <nav aria-label="...">
     <ul class="pagination pagination-sm justify-content-end">
       <li [ngClass]="(i==current_index)?'page-item active':'page-item'" *ngFor="let page of pentionInfo; index as i">

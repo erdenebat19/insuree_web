@@ -54,7 +54,7 @@ export class InfoComponent implements OnInit {
     }
   }
   printStatement() {
-    const printcontent = this.statement_html;
+    const printcontent = '<div style="position: relative;">' + this.statement_html + '</div>';
     const printPreview = window.open('_blank', 'print_preview');
     const printDocument = printPreview.document;
     printDocument.open();

@@ -15,7 +15,7 @@ export class PentionStatementService {
       const headers = new HttpHeaders({
           responseType: 'text'
       });
-      RegID = 'АА62082009';
+      // RegID = 'АА62082009';
       return this.http.get(this.apiurl + 'tetbook?regID=' + RegID, { headers: headers, responseType: 'text' });
   }
 }

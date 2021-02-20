@@ -51,6 +51,7 @@
 }
 
 .topbar-left {
+  list-style: none;
   padding: 10px 30px;
   float: left;
 }
@@ -157,4 +158,8 @@
   color: #fff;
   border-radius: 50%;
   z-index: 1000;
+}
+
+.list-unstyled {
+  padding-left: 25px;
 }

@@ -10,7 +10,7 @@ import { MessageService } from 'src/app/notification/shared/message.service';
 export class MainPageComponent implements OnInit {
   unreadNum: number;
   title = 'Даатгуулагчийн вэб';
-
+  sidebar_collapsed = true;
   constructor(private router: Router, public messageService: MessageService) {}
 
   ngOnInit() {
@@ -23,5 +23,11 @@ export class MainPageComponent implements OnInit {
     localStorage.clear();
     sessionStorage.clear();
     this.router.navigate(['/account/login']);
+  }
+  goto(path) {
+    this.router.navigate([path]);
+  }
+  toggleSidebar() {
+    document.getElementsByClassName('sidebar').item(0).classList.toggle('collapsed');
   }
 }

@@ -1,0 +1,127 @@
+<div class="container-fluid">
+  <div class="row min-vh-100">
+    <div class="col-12 col-md-2 p-0">
+      <nav id="sidebar" class="navbar navbar-expand flex-md-column flex-row align-items-start">
+        <div class="collapse navbar-collapse">
+          <ul class="flex-md-column flex-row navbar-nav w-100 justify-content-between">
+            <li class="d-none d-md-block">
+              <div class="sidebar-header">
+                <h3 class="d-none d-md-inline">Нийгмийн даатгал</h3>
+              </div>
+            </li>
+            <li>
+              <a [routerLink]="['/main/view/salary']">
+                <img src="assets/img/salary.svg" alt="" width="20px" class='mx-1'>
+                <span class="d-none d-md-inline">НД-ын шимтгэл</span>
+              </a>
+            </li>
+            <li>
+              <a [routerLink]="['/main/view/pention']">
+                <!-- <i class="ion-stats-bars"></i> -->
+                <img src="assets/img/old-couple.svg" alt="" width="20px" class='mx-1'>
+                <span class="d-none d-md-inline">Тэтгэвэр</span>
+              </a>
+            </li>
+            <li>
+              <a [routerLink]="['/main/view/pention/statement']">
+                <!-- <i class="ion-stats-bars"></i> -->
+                <img src="assets/img/old-couple.svg" alt="" width="20px" class='mx-1'>
+                <span class="d-none d-md-inline">Тогтоолтын хуудас</span>
+              </a>
+            </li>
+            <li>
+              <a [routerLink]="['/main/view/benefit']">
+                <!-- <i class="ion-stats-bars"></i> -->
+                <img src="assets/img/wallet.svg" alt="" width="20px" class='mx-1'>
+                <span class="d-none d-md-inline">Тэтгэмж</span>
+              </a>
+            </li>
+            <li>
+              <a [routerLink]="['/main/view/ndans']">
+                <!-- <i class="ion-stats-bars"></i> -->
+                <img src="assets/img/accounting.svg" alt="" width="20px" class='mx-1'>
+                <span class="d-none d-md-inline">Нэрийн данс</span>
+              </a>
+            </li>
+            <li>
+              <a [routerLink]="['/main/view/sd']">
+                <!-- <i class="ion-stats-bars"></i> -->
+                <img src="assets/img/sdd.png" alt="" width="20px" class='mx-1'>
+                <span class="d-none d-md-inline">Сайн дурын даатгал</span>
+              </a>
+            </li>
+            <li>
+              <a [routerLink]="['/main/view/socialbook']">
+                <!-- <i class="ion-stats-bars"></i> -->
+                <img src="assets/img/salary.svg" alt="" width="20px" class='mx-1'>
+                <span class="d-none d-md-inline">НД дэвтэр</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="col-md-10 wrapper">
+      <div class="topbar">
+        <ul class="topbar-right float-right">
+          <li>
+            <span>
+              <a [routerLink]="['/main/view/message']" class="btn-circle">
+                <div class="btn-circle-label">
+                  <i class="icon ion-android-notifications"></i>
+                </div>
+                <span class="badge badge-circle"
+                  *ngIf="messageService.GetUnreadNum()>0">{{messageService.GetUnreadNum()}}</span>
+              </a>
+            </span>
+          </li>
+          <li>
+            <span>
+              <a href="" class="btn-circle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                <div class="btn-circle-label">
+                  <i class="icon ion-ios-gear-outline"></i>
+                </div>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" [routerLink]="['change_password']">
+                  <i class="icon ion-ios-locked"></i>Нууц үг солих</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" (click)='Logout()'>
+                  <i class="icon ion-android-exit"></i>Програмаас гарах</a>
+              </div>
+            </span>
+          </li>
+        </ul>
+        <!-- <span class="topbar-right float-right">
+          <div>
+            <a href="" class="btn-circle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
+              <div class="btn-circle-label">
+                <i class="icon ion-android-notifications"></i>
+              </div>
+            </a>
+            <span class="badge badge-circle">4</span>
+          </div>
+          <a href="" class="btn-circle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            <div class="btn-circle-label">
+              <i class="icon ion-ios-gear-outline"></i>
+            </div>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" [routerLink]="['change_password']">
+              <i class="icon ion-ios-locked"></i>Нууц үг солих</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#" (click)='Logout()'>
+              <i class="icon ion-android-exit"></i>Програмаас гарах</a>
+          </div>
+        </span> -->
+      </div>
+      <!-- <div class="topbar1"></div> -->
+      <div class="content-container">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

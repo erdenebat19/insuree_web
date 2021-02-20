@@ -26,6 +26,7 @@
               "node_modules/bootstrap/dist/css/bootstrap.css",
               "src/assets/css/modal.component.css",
               "src/assets/css/ionicons.min.css",
+              "src/assets/css/light.css",
               "src/styles.css"
             ],
             "scripts": [

@@ -10,7 +10,7 @@ import { ChartModule } from 'angular-highcharts';
     CommonModule,
     InlineLoaderModule,
     PentionAccountRoutingModule,
-    ChartModule 
+    ChartModule
   ],
   declarations: [DashboardComponent],
   exports: [DashboardComponent]

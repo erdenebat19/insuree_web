@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { PentionRoutingModule } from './pention.routes';
 import { InlineLoaderModule } from '../shared/ui/inline-loader/inline-loader.module';
 import { PentionStatementComponent } from './components/pention-statement/pention-statement.component';
+import { SafeHtmlPipe } from './shared/safe-html.pipe';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { PentionStatementComponent } from './components/pention-statement/pentio
     HistoryComponent,
     SalaryComponent,
     DashboardComponent,
-    PentionStatementComponent
+    PentionStatementComponent,
+    SafeHtmlPipe
   ],
   exports: [
     InfoComponent,
