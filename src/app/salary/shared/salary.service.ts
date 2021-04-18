@@ -6,17 +6,17 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SalaryService {
-  apiurl = "https://data.ndaatgal.mn:8081/userwebapi/api/";
+  apiurl = 'https://data.ndaatgal.mn:8081/userwebapi/api/';
   constructor(private http: HttpClient) { }
 
-  getSalary(byear: number, eyear: number, captchaResponse: string): Observable<any> {
-    let user = JSON.parse(localStorage.getItem('user'));
+  getSalary(byear: number, eyear: number): Observable<any> {
+    const user = JSON.parse(localStorage.getItem('user'));
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${user.token}`
       }),
     };
-    return this.http.get(this.apiurl + "InsureeInfo/salary?byear=" + byear + "&eyear=" + eyear + "&captchaResponse=" + captchaResponse, httpOptions);
+    return this.http.get(this.apiurl + 'InsureeInfo/salary?byear=' + byear + '&eyear=' + eyear, httpOptions);
   }
 }

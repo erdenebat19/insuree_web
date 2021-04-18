@@ -14,18 +14,15 @@ export class SalaryListComponent implements OnInit {
   eyear: number;
   isvalid: boolean;
   salaries: any[];
-  reCaptcha: any;
   person: any;
-  isloading: boolean = false;
-  isFirstLoad: boolean = false;
+  isloading = false;
+  isFirstLoad = false;
   today: Date;
-  @ViewChild('captchaRef')
-  captchaRef: RecaptchaComponent;
   errormassage: string;
   qrCode: any;
   qrCodeData: any;
   pages: number[];
-  pagesize: number = 24;
+  pagesize = 24;
 
   constructor(private route: Router, private _service: SalaryService, private _insureeService: InsureeService) { }
 
@@ -36,35 +33,32 @@ export class SalaryListComponent implements OnInit {
     this.today = new Date();
   }
 
-  getSalary(CaptchaResponse: string) {
+  getSalary() {
     this.isloading = true;
     this.salaries = undefined;
     this._insureeService.getPerson().subscribe(response => {
       this.isloading = false;
       this.person = response;
     }, error => {
-      if (error.status == 0) {
+      if (error.status === 0) {
         this.route.navigate(['/error']);
-      }
-      else {
+      } else {
         this.errormassage = error.message;
       }
       this.isloading = false;
     });
-    this._service.getSalary(this.byear, this.eyear, CaptchaResponse).subscribe(response => {
-      this.qrCode = response.qrCode
+    this._service.getSalary(this.byear, this.eyear).subscribe(response => {
+      this.qrCode = response.qrCode;
       this.qrCodeData = response.qrCodeData;
       this.isFirstLoad = false;
       this.isloading = false;
-      let result = response;
+      const result = response;
       this.salaries = result.salaries;
       this.pages = this.SplitByPage(this.salaries, this.pagesize);
-      this.captchaRef.reset();
     }, error => {
-      if (error.status == 0) {
+      if (error.status === 0) {
         this.route.navigate(['/error']);
-      }
-      else {
+      } else {
         this.errormassage = error.message;
       }
       this.isloading = false;
@@ -72,10 +66,10 @@ export class SalaryListComponent implements OnInit {
   }
 
   SplitByPage(data: any[], pagesize: number): any[] {
-    let ipage = 0;
+    const ipage = 0;
     let irow = 0;
     let lastindex = 0;
-    let pages = [];
+    const pages = [];
     for (let i = 0; i < data.length; i++) {
       if (irow >= pagesize) {
         lastindex = i;
@@ -97,12 +91,12 @@ export class SalaryListComponent implements OnInit {
     return Math.trunc(pagenum);
   }
   printContent() {
-    var restorepage = document.body.innerHTML;
-    var restoreBYear = this.byear;
-    var restoreEYear = this.eyear;
-    var printcontent = document.getElementById('printArea').innerHTML;
-    var printPreview = window.open('_blank', 'print_preview');
-    var printDocument = printPreview.document;
+    const restorepage = document.body.innerHTML;
+    const restoreBYear = this.byear;
+    const restoreEYear = this.eyear;
+    const printcontent = document.getElementById('printArea').innerHTML;
+    const printPreview = window.open('_blank', 'print_preview');
+    const printDocument = printPreview.document;
     printDocument.open();
     printDocument.write("<!doctype html>");
     printDocument.write("<html>");

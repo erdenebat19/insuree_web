@@ -253,7 +253,10 @@
                                                     <td class="text-right" style="min-width: 70px;">
                                                         {{ item.exAmount }}
                                                     </td>
-                                                    <td class="text-right" style="min-width: 70px;">
+                                                    <td class="text-right" style="min-width: 70px;" *ngIf="item.status == 1 || item.status == 2">
+                                                        {{ item.paid - item.exAmount }}
+                                                    </td>
+                                                    <td class="text-right" style="min-width: 70px;" *ngIf="item.ischecked">
                                                         {{ item.paid }}
                                                     </td>
                                                     <td class="text-center" style="max-width: 70px; min-width: 70px;">

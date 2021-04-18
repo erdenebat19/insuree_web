@@ -17,7 +17,10 @@ export class RegisterComponent implements OnInit {
   info_message: string;
   isedit = false;
 
-  constructor(private router: Router, private _service: AccountService) {}
+  constructor(
+      private router: Router,
+      private _service: AccountService
+    ) {}
 
   ngOnInit() {
     // tslint:disable-next-line: max-line-length
@@ -28,7 +31,6 @@ export class RegisterComponent implements OnInit {
     this.loading = true;
     this._service.editregister(this.user).subscribe(
       (result) => {
-        console.log(result);
         this.loading = false;
         if (result !== undefined && result !== null) {
           let r = 0;
