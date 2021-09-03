@@ -1,0 +1,117 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="content-container">
+            <div class="content-large">
+                <div class="content-header">Нөхөн даатгал</div>
+                <div class="content-body">
+                  <div>
+                    <!-- <ul class="list-group-horizontal">
+                      <li><strong>н</strong> - Ажилсан жил, тэтгэврийн даатгалын шимтгэлийг нөхөн даатгал</li>
+                      <li><strong>нн</strong> - Хөнгөлөлттэй нөхцлөөр тэтгэвэрт гарсан иргэдийн нөхөн даатгал</li>
+                      <li><strong>м</strong> - Малчины тэтгэврийн даатгалын шимтгэлийг нөхөн даатгал</li>
+                      <li><strong>х</strong> - Хувиараа хөдөлмөр эрхлэгчийн тэтгэврийн даатгалын шимтгэлийг нөхөн даатгал</li>
+                    </ul> -->
+                    <table class="table table-bordered col-xl-6 col-md-12">
+                      <tbody>
+                        <tr *ngFor="let item of refundGroup">
+                          <td *ngIf="item.id===1">Хувиараа хөдөлмөр эрхлэгчийн тэтгэврийн даатгалын шимтгэлийг нөхөн даатгал /х/:</td>
+                          <td *ngIf="item.id===2">Малчины тэтгэврийн даатгалын шимтгэлийг нөхөн даатгал /м/:</td>
+                          <td *ngIf="item.id===4">Ажилсан жил, тэтгэврийн даатгалын шимтгэлийг нөхөн даатгал /н/:</td>
+                          <td *ngIf="item.id===5">Хөнгөлөлттэй нөхцлөөр тэтгэвэрт гарсан иргэдийн нөхөн даатгал /т/:</td>
+                          <td *ngIf="item.id===0">Нийт:</td>
+                          <!-- <td> - </td> -->
+                          <td class="text-right">{{item.num}} сар</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="table-responsive">
+                    <table *ngIf="refund" class="table table-bordered text-center">
+                        <thead>
+                            <tr>
+                                <th>Он</th>
+                                <th>1</th>
+                                <th>2</th>
+                                <th>3</th>
+                                <th>4</th>
+                                <th>5</th>
+                                <th>6</th>
+                                <th>7</th>
+                                <th>8</th>
+                                <th>9</th>
+                                <th>10</th>
+                                <th>11</th>
+                                <th>12</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of refund">
+                                <td>{{ item.calYear }}</td>
+                                <td>
+                                  <app-refund-indicator [type]="item.calMonth1">
+                                  </app-refund-indicator>
+                                </td>
+                                <td>
+                                  <app-refund-indicator [type]="item.calMonth2"
+                                    [class.t1] = "item.calMonth2 === '1'" [class.t2] = "item.calMonth2 === '2'" [class.t3] = "item.calMonth2 === '4'" [class.t4] = "item.calMonth2 === '5'">
+                                  </app-refund-indicator>
+                                </td>
+                                <td>
+                                  <app-refund-indicator [type]="item.calMonth3"
+                                    [class.t1] = "item.calMonth3 === '1'" [class.t2] = "item.calMonth3 === '2'" [class.t3] = "item.calMonth3 === '4'" [class.t4] = "item.calMonth3 === '5'">
+                                  </app-refund-indicator>
+                                </td>
+                                <td>
+                                  <app-refund-indicator [type]="item.calMonth4"
+                                  [class.t1] = "item.calMonth4 === '1'" [class.t2] = "item.calMonth4 === '2'" [class.t3] = "item.calMonth4 === '4'" [class.t4] = "item.calMonth4 === '5'">
+                                  </app-refund-indicator>
+                                </td>
+                                <td>
+                                  <app-refund-indicator [type]="item.calMonth5"
+                                  [class.t1] = "item.calMonth5 === '1'" [class.t2] = "item.calMonth5 === '2'" [class.t3] = "item.calMonth5 === '4'" [class.t4] = "item.calMonth5 === '5'">
+                                  </app-refund-indicator>
+                                </td>
+                                <td>
+                                  <app-refund-indicator [type]="item.calMonth6"
+                                  [class.t1] = "item.calMonth6 === '1'" [class.t2] = "item.calMonth6 === '2'" [class.t3] = "item.calMonth6 === '4'" [class.t4] = "item.calMonth6 === '5'">
+                                  </app-refund-indicator>
+                                </td>
+                                <td>
+                                  <app-refund-indicator [type]="item.calMonth7"
+                                  [class.t1] = "item.calMonth7 === '1'" [class.t2] = "item.calMonth7 === '2'" [class.t3] = "item.calMonth7 === '4'" [class.t4] = "item.calMonth7 === '5'">
+                                  </app-refund-indicator>
+                                </td>
+                                <td>
+                                  <app-refund-indicator [type]="item.calMonth8"
+                                  [class.t1] = "item.calMonth8 === '1'" [class.t2] = "item.calMonth8 === '2'" [class.t3] = "item.calMonth8 === '4'" [class.t4] = "item.calMonth8 === '5'">
+                                  </app-refund-indicator>
+                                </td>
+                                <td>
+                                  <app-refund-indicator [type]="item.calMonth9"
+                                  [class.t1] = "item.calMonth9 === '1'" [class.t2] = "item.calMonth9 === '2'" [class.t3] = "item.calMonth9 === '4'" [class.t4] = "item.calMonth9 === '5'">
+                                  </app-refund-indicator>
+                                </td>
+                                <td>
+                                  <app-refund-indicator [type]="item.calMonth10"
+                                  [class.t1] = "item.calMonth10 === '1'" [class.t2] = "item.calMonth10 === '2'" [class.t3] = "item.calMonth10 === '4'" [class.t4] = "item.calMonth10 === '5'">
+                                  </app-refund-indicator>
+                                </td>
+                                <td>
+                                  <app-refund-indicator [type]="item.calMonth11"
+                                  [class.t1] = "item.calMonth11 === '1'" [class.t2] = "item.calMonth11 === '2'" [class.t3] = "item.calMonth11 === '4'" [class.t4] = "item.calMonth11 === '5'">
+                                  </app-refund-indicator>
+                                </td>
+                                <td>
+                                  <app-refund-indicator [type]="item.calMonth12"
+                                  [class.t1] = "item.calMonth12 === '1'" [class.t2] = "item.calMonth12 === '2'" [class.t3] = "item.calMonth12 === '4'" [class.t4] = "item.calMonth12 === '5'">
+                                  </app-refund-indicator>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

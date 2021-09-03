@@ -108,6 +108,7 @@
 }
 
 #sidebar ul li a {
+  margin-left: 15px;
   vertical-align: top;
   text-align: left;
   color: #fff;

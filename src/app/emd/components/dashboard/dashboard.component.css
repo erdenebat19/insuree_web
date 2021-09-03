@@ -1,0 +1,17 @@
+.pention-info {
+    list-style: none;
+    font-size: 10pt;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .pention-info li:nth-child(odd) {
+    background: #f8f9fa;
+  }
+  
+  .pention-info li {
+    color: #333;
+    height: 40px;
+    border-bottom: 1px dotted #ccc;  
+  }
+  

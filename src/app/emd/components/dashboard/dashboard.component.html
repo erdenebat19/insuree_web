@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="content-container">
+            <div class="content-large">
+                <div class="content-header">Эрүүл мэндийн даатгал</div>
+                <div class="content-body">
+                    <app-inline-loader *ngIf='loading'></app-inline-loader>
+                    <div *ngIf='list==undefined && !loading' class="alert alert-warning">
+                      Эрүүл мэндийн даатгалын мэдээлэл алга
+                    </div>
+                    <div *ngIf='errormessage!=undefined' class="alert alert-danger">
+                      {{errormessage}}
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <ul *ngIf="list != undefined" class="pention-info">
+                            <ng-container *ngFor="let emd of list">
+                                <li class="row">
+                                    <div class="col-md-2"><strong>Эхэлсэн огноо:</strong></div>
+                                    <div class="col-md-10">{{ emd.begDate | date: 'yyyy-MM-dd' }}</div>
+                                </li>
+                                <li class="row">
+                                  <div class="col-md-2"><strong>Дуусах огноо:</strong></div>
+                                  <div class="col-md-10">{{ emd.endDate | date: 'yyyy-MM-dd' }}</div>
+                                </li>
+                                <li class="row">
+                                  <div class="col-md-2"><strong>Бүртгэсэн огноо:</strong></div>
+                                  <div class="col-md-10">{{ emd.regDate | date: 'yyyy-MM-dd' }}</div>
+                                </li>
+                                <li class="row" *ngIf="emd.dun>0">
+                                  <div class="col-md-2"><strong>Төлсөн дүн:</strong></div>
+                                  <div class="col-md-10">{{ emd.dun }}</div>
+                                </li>
+                                <li class="row">
+                                  <div class="col-md-2"><strong>ЭМД-ийн төрөл</strong></div>
+                                  <div class="col-md-10">{{ emd.type }}</div>
+                                </li>
+                            </ng-container>
+                        </ul>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

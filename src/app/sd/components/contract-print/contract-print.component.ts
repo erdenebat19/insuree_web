@@ -14,7 +14,6 @@ export class ContractPrintComponent implements OnInit {
     ngOnInit() {
         this.contractService.GetPrint().subscribe((printResult) => {
             console.log('print');
-            console.log(printResult);
             this.printFile = printResult;
             this.printContent();
         });
