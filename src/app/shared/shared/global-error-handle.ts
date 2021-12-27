@@ -12,7 +12,7 @@ import { Router } from "@angular/router";
 export class GlobalErrorHandler implements ErrorHandler {
   // Error handling is important and needs to be loaded first.
   // Because of this we should manually inject the services with Injector.
-  constructor(private injector: Injector) {}
+  constructor(private injector: Injector) { }
 
   handleError(error: Error | HttpErrorResponse) {
     // const errorService = this.injector.get(ErrorService);
@@ -24,6 +24,7 @@ export class GlobalErrorHandler implements ErrorHandler {
     let stackTrace;
 
     if (error instanceof HttpErrorResponse) {
+      console.log(error);
       // Server Error
       // message = errorService.getServerMessage(error);
       // stackTrace = errorService.getServerStack(error);

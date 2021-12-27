@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SalaryService {
-  apiurl = 'https://data.ndaatgal.mn:8081/userwebapi/api/';
+  apiurl = environment.apiurl + 'api/';
   constructor(private http: HttpClient) { }
 
   getSalary(byear: number, eyear: number): Observable<any> {
