@@ -1,0 +1,157 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="content-container">
+      <div class="content-large">
+        <div class="content-header">Жирэмсэн, амаржсны тэтгэмж авах хүсэлт</div>
+        <div class="content-body">
+          <div>
+            <app-inline-loader *ngIf="isloading"></app-inline-loader>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Эмнэлгийн хуудсны дугаар</th>
+                  <th scope="col">Аймаг, дүүрэг</th>
+                  <th scope="col">Байгууллага</th>
+                  <th scope="col">Овог</th>
+                  <th scope="col">Нэр</th>
+                  <th scope="col">Эхлэх огноо</th>
+                  <th scope="col">Дуусах огноо</th>
+                  <th scope="col">Тэтгэмжийн төрөл</th>
+                  <th scope="col">Эмнэлэг</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of list; let i=index">
+                  <th scope="row">{{i+1}}</th>
+                  <td>{{ item.medicalCertNum }}</td>
+                  <td>{{ item.aimagName }}</td>
+                  <td>{{ item.orgName }}</td>
+                  <td>{{ item.fatName }}</td>
+                  <td>{{ item.benName }}</td>
+                  <td>{{item.startDate | date: 'yyyy-MM-dd'}}</td>
+                  <td>{{item.endDate | date: 'yyyy-MM-dd'}}</td>
+                  <td>{{ item.typeName }}</td>
+                  <td>{{ item.hospitalName }}</td>
+                  <td>
+                    <button *ngIf="item.status===0" (click)="createRequest(item)"
+                      class="btn btn-sm btn-link bg-info text-white" [disabled]="btnRequest">Хүсэлт гаргах</button>
+                    <label class="bg-success text-white p-1" *ngIf="item.status===1">Хүсэлт илгээгдсэн</label>
+                    <label class="bg-success text-white p-1" *ngIf="item.status===2">Тэтгэмж бодогдсон</label>
+                    <label class="bg-danger text-white p-1" *ngIf="item.status===3">Хүсэлт буцаасан</label>
+                    <label (click)="showprint(item)" class="btn btn-sm btn-link">хэвлэх</label>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<app-modal id="messageModal">
+  <div class="imodal">
+    <div class="modal-body">
+      <div class="modal-header">
+        Мэдэгдэл
+        <button type="button" class="close" aria-label="Close" (click)="close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="message-body p-3 text-center">
+        {{errormessage}}
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-sm btn-primary" (click)="close()">Ok</button>
+      </div>
+    </div>
+  </div>
+  <div class="imodal-background"></div>
+</app-modal>
+<!-- Modal  -->
+
+
+<!-- Medical Cert -->
+<app-modal id="medicalModal">
+  <div class="imodal">
+    <div class="modal-body">
+      <div class="modal-header">
+        Эмнэлгийн хуудас
+        <button type="button" class="close" aria-label="Close" (click)="close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="message-body p-3" id="printBody">
+        <div class="row">
+          <div class="col-5">Үндэсний Статистикийн хорооны даргын 2020 оны 12 дугаар сарын 28-ны өдрийн А/73 дугаар
+            тушаалаар зөвшөөрснөөр, Сангийн сайд, Хөдөлмөр, нийгмийн хамгааллын сайдын 20.... оны ..... сарын .....
+            өдрийн ..... удгаар хамтарсан тушаалаар батлав.</div>
+          <div class="col-5"></div>
+          <div class="col-2">Б-НД-3</div>
+        </div>
+        <div class="row">
+          <div class="col-12 p-3 text-center">
+            <strong>ЖИРЭМСНИЙ БОЛОН АМАРЖСАНЫ ЭМНЭЛГИЙН ХУУДАС</strong>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            1. <img src="D:/Ajil/qrcode.png" alt="" height="100">
+          </div>
+          <div class="col-12">
+            2. Ургийн овог: {{people.surName}} Эцэг /эх/-ийн нэр {{people.fatName}} Нэр {{people.benName}}
+          </div>
+          <div class="col-12">
+            3. Оршин суугаа хаяг: {{people.address}}
+          </div>
+          <div class="col-12">
+            4. Аж ахуйн нэгж, байгууллагын нэр: {{printdata.orgName}}
+          </div>
+          <div class="col-12">
+            <div>5. Тохирохыг сонгох: </div>
+            <div class="pl-5">1. Жирэмсний</div>
+            <div class="pl-5">2. Амаржсаны</div>
+          </div>
+          <div class="col-12">
+            6. Хугацаа
+            <div class="pl-5">Эхэлсэн: {{printdata.startDate | date : 'yyyy-MM-dd'}}</div>
+            <div class="pl-5">Дууссан: {{printdata.endDate | date : 'yyyy-MM-dd'}}</div>
+          </div>
+          <div class="col-12">
+            7. Эмнэлгийн хуудас олгосон эмнэлгийн нэр: {{printdata.hospitalName}}
+            <div class="pl-5">Ерөнхий эмч /эмчийн код/: ............................. /{{printdata.generalDoctorName}}/
+            </div>
+            <div class="pl-5">Баталгаажуулалт</div>
+            <div class="pl-5">Эмчлэгч эмч /эмчийн код/: ............................. /{{printdata.confirmDoctorName}}/
+            </div>
+          </div>
+          <div class="col-12">
+            Эмнэлгийн хуудас бичсэн: {{printdata.createdAt | date : 'yyyy-MM-dd'}}
+          </div>
+          <div class="col-12">
+            8. Нийгмийн даатгалын байгууллагын тодорхойлолт:
+            <div class="pl-5">Эмнэлгийн хуудас хүлээн авсан: {{printdata.createdAt | date : 'yyyy-MM-dd'}}</div>
+            <div class="pl-5">Хянасан {{printdata.createdAt | date : 'yyyy-MM-dd'}}</div>
+            <div class="pl-5">Тэтгэмж авах эрх үүссэн эсэх 1. Тийм 2. Үгүй</div>
+          </div>
+          <div class="col-12">
+            {{printdata.aimagName}}-н Нийгмийн даатгалын хэлтсийн магадлагч эмч ............................. /
+            ___________________________ /
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-sm btn-primary" (click)="print()">хэвлэх</button>
+      </div>
+    </div>
+  </div>
+  <div class="imodal-background"></div>
+</app-modal>
+<!-- Medical Cert  -->

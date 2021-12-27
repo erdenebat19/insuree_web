@@ -15,29 +15,21 @@ import { SharedModule } from './shared/shared.module';
 import { ShareDataService } from './shared/shared/share-data.service';
 
 @NgModule({
-  declarations: [AppComponent, ErrorReportComponent],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    RouterModule.forRoot(routes, { useHash: true }),
-    BrowserAnimationsModule,
-    SharedModule
-  ],
-  providers: [
-    ShareDataService,
-    JwtHelperService,
-    GoogleAnalyticsServiceService,
-    { provide: ErrorHandler, useClass: GlobalErrorHandler },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ServerErrorInterceptor,
-      multi: true
-    }
-  ],
-  bootstrap: [AppComponent]
+ declarations: [AppComponent, ErrorReportComponent],
+ imports: [BrowserModule, HttpClientModule, RouterModule.forRoot(routes, { useHash: true }), BrowserAnimationsModule, SharedModule],
+ providers: [
+  ShareDataService,
+  JwtHelperService,
+  GoogleAnalyticsServiceService,
+  { provide: ErrorHandler, useClass: GlobalErrorHandler },
+  {
+   provide: HTTP_INTERCEPTORS,
+   useClass: ServerErrorInterceptor,
+   multi: true,
+  },
+ ],
+ bootstrap: [AppComponent],
 })
 export class AppModule {
-  constructor(
-    protected _googleAnalyticsService: GoogleAnalyticsServiceService
-  ) {}
+ constructor(protected _googleAnalyticsService: GoogleAnalyticsServiceService) {}
 }

@@ -26,10 +26,27 @@
           </ul>
         </li>
         <li class="sidebar-item">
-          <a [routerLink]="['/main/view/benefit']">
+          <a href="#benefit-statement" data-toggle="collapse" class="sidebar-link" (click)="goto('/main/view/benefit')">
             <!-- <img src="assets/img/wallet.svg" alt="" width="15px" class='mx-1'> -->
             <span class="align-middle">Тэтгэмж</span>
           </a>
+          <ul id="benefit-statement" class="sidebar-dropdown list-unstyled collapse hide" data-parent="#sidebar">
+            <li class="sidebar-item active">
+              <a class="sidebar-link" [routerLink]="['/main/view/unemployment']">
+                Ажилгүйдлийн тэтгэмж
+              </a>
+            </li>
+            <li class="sidebar-item active">
+              <a class="sidebar-link" [routerLink]="['/main/view/medicalcert/hchta']">
+                Хөдөлмөрийн чадвар түр алдсан
+              </a>
+            </li>
+            <li class="sidebar-item active">
+              <a class="sidebar-link" [routerLink]="['/main/view/medicalcert/ja']">
+                Жирэмсэн, амаржсан
+              </a>
+            </li>
+          </ul>
         </li>
         <li class="sidebar-item">
           <a [routerLink]="['/main/view/ndans']">
@@ -61,6 +78,11 @@
             <span class="align-middle">Нөхөн даатгал</span>
           </a>
         </li>
+        <!-- <li class="sidebar-item">
+          <a [routerLink]="['/main/view/unemployment']">
+            <span class="align-middle">Ажилгүйдлийн тэтгэмж</span>
+          </a>
+        </li> -->
       </ul>
     </div>
   </nav>

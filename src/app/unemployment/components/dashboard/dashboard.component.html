@@ -1,0 +1,211 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="content-container">
+      <div class="content-large">
+        <div class="content-header">Ажилгүйдлийн тэтгэмж авах хүсэлт</div>
+        <div class="content-body">
+          <div class="row">
+            <small class="text-justify">
+              <i>
+                <ul>
+                  <li>
+                    Та ажилгүйдлийн даатгалын санд нийт 24 сар, үүнээс сүүлийн 9 сар тасралтгүй
+                    шимтгэл төлсөн, хөдөлмөр эрхлэлтийн байгууллагад “Ажил хайгч иргэн”-ээр бүртгүүлсэн тохиолдолд
+                    энэхүү үйлчилгээг авах эрх үүснэ.
+                  </li>
+                  <li>
+                    Мөн өмнө нь ажилгүйдлийн тэтгэмж авсан бол түүнээс хойш 12 сар шимтгэл төлсөн байх нөхцлийг
+                    хангасан тохиолдолд эрх үүснэ.
+                  </li>
+                  <li>
+                    Ажлаас чөлөөлөгдсөнөөс хойш 14 хоног хэтэрсэн, хүндэтгэн үзэх шалтгаантай бол өөрийн
+                    биеэр харъяа нийгмийн даатгалын хэлтэст нотлох бичиг баримттайгаа ирнэ үү.
+                  </li>
+                </ul>
+              </i>
+            </small>
+            <div class=" col-12 mb-4 mt-4 ml-auto mr-auto">
+              <button class="btn btn-sm btn-link bg-info text-white" (click)="createRequest()"
+                [disabled]="btnRequest">Тэтгэмж авах хүсэлт</button>
+              <app-inline-loader *ngIf="isloading"></app-inline-loader>
+              <span class="ml-3" *ngIf="isloading">Хөдөлмөр зохицуулалтын албанд бүртгүүлсэн эсэхийг шалгаж байна</span>
+
+            </div>
+            <div class="col-12">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Овог</th>
+                    <th scope="col">Нэр</th>
+                    <th scope="col">Чөлөөлөгдсөн огноо</th>
+                    <th scope="col">Ажил хүлээлцсэн огноо</th>
+                    <th scope="col">Бүртгүүлсэн огноо</th>
+                    <th scope="col">Утас</th>
+                    <th scope="col">И-Мэйл хаяг</th>
+                    <th scope="col">Төлөв</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of unemployment; let i=index">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{ item.fatName }}</td>
+                    <td>{{ item.benName }}</td>
+                    <td>{{item.halagdsanOgnoo | date: 'yyyy-MM-dd'}}</td>
+                    <td>{{item.huleeltssenOgnoo | date: 'yyyy-MM-dd'}}</td>
+                    <td>{{item.burtgesenOgnoo | date: 'yyyy-MM-dd'}}</td>
+                    <td>{{ item.phone }}</td>
+                    <td>{{ item.email }}</td>
+                    <td>{{ statusname(item.requestStat) }}
+                      <div>
+                        <label for="" *ngIf='item.requestStat===2'>{{item.statusDesc}}</label>
+                      </div>
+                    </td>
+                    <td>
+                      <label (click)="showprint(item)" class="btn btn-sm btn-link">хэвлэх</label>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<app-modal id="messageModal">
+  <div class="imodal">
+    <div class="modal-body">
+      <div class="modal-header">
+        Мэдэгдэл
+        <button type="button" class="close" aria-label="Close" (click)="close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="message-body p-3 text-center">
+        {{errormessage}}
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-sm btn-primary" (click)="close()">Ok</button>
+      </div>
+    </div>
+  </div>
+  <div class="imodal-background"></div>
+</app-modal>
+<!-- Modal  -->
+
+<!-- Ajilguideliin tetgemj -->
+<app-modal id="medicalModal">
+  <div class="imodal">
+    <div class="modal-body">
+      <div class="modal-header">
+        АЖИЛГҮЙДЛИЙН ТЭТГЭМЖ АВАХ ӨРГӨДӨЛ
+        <button type="button" class="close" aria-label="Close" (click)="close1()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="message-body p-3" id="printBody">
+        <div class="row">
+          <div class="col-5">
+            <!-- <div>
+              Үндэсний Статистикийн хорооны даргын 2020 оны 12 дугаар сарын 28-ны өдрийн А/73 дугаар
+              тушаалаар зөвшөөрснөөр, Сангийн сайд, Хөдөлмөр, нийгмийн хамгааллын сайдын 20.... оны ..... сарын .....
+              өдрийн ..... удгаар хамтарсан тушаалаар батлав.</div> -->
+          </div>
+          <div class="col-5"></div>
+          <div class="col-2"></div>
+        </div>
+        <div class="row">
+          <div class="col-12 p-3 text-center">
+            <strong>АЖИЛГҮЙДЛИЙН ТЭТГЭМЖ АВАХ ӨРГӨДӨЛ</strong>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 mb-3">
+            Даатгуулагч: <label for="">{{printdata.fatName}}</label> овогтой <label for="">{{printdata.benName}}</label>
+            миний бие <label for="">{{printdata.halagdsanOgnoo | date: 'yyyy-MM-dd'}}</label> өдрөөс эхлэн ажлаас
+            чөлөөлөгдсөн. Би 1995 оноос хойш нийгмийн даатгалын ажилгүйдлийн даатгалын санд нийт
+            <label for="">{{ ((printdata.workMonth - (printdata.workMonth % 12)) / 12) }}</label> жил
+            <label for="">{{ printdata.workMonth - ((printdata.workMonth - (printdata.workMonth % 12)) / 12) * 12
+              }}</label> сар шимтгэл төлсөн тул ажилгүйдлийн тэтгэмж тогтоож өгнө үү.
+          </div>
+          <table class="table table-bordered mb-3">
+            <tr class="bg-light">
+              <td colspan="2" class="text-center">
+                <label class="text-uppercase">Даатгуулагчийн ерөнхий мэдээлэл</label>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-left">1. Даатгуулагчийн ургийн овог: <label>{{printdata.surName}}</label> </td>
+              <td class="text-left">2. Даатгуулагчийн эцэг/эх/-ийн нэр: <label>{{printdata.fatName}}</label></td>
+            </tr>
+            <tr>
+              <td class="text-left">3. Даатгуулагчийн нэр: <label for="">{{printdata.benName}}</label></td>
+              <td class="text-left">4. Регистрийн дугаар: <label for="">{{printdata.regID}}</label> </td>
+            </tr>
+            <tr>
+              <td colspan="2" class="text-left">5. Оршин суугаа хаяг: <label for="">{{printdata.addr}}</label> </td>
+            </tr>
+            <tr>
+              <td class="text-left">6. Холбогдох утасны дугаар: <label for="">{{printdata.phone}}</label></td>
+              <td class="text-left">7. Цахим шуудан /e-mail хаяг/: <label for="">{{printdata.email}}</label> </td>
+            </tr>
+            <tr class="bg-light">
+              <td colspan="2" class="text-center">
+                <label class="text-uppercase">Тэтгэмж авах банк, дансны мэдээлэл</label>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-left">8. Харилцах банкны нэр: <label for="">{{bname}}</label></td>
+              <td class="text-left">9. Дансын дугаар: <label for="">{{printdata.bankAccount}}</label></td>
+            </tr>
+            <tr class="bg-light">
+              <td colspan="4" class="text-center">
+                <label class="text-uppercase">4. Хавсаргах баримт бичгүүд</label>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-left">
+                1. Ажлаас чөлөөлөгдсөн огноо: <label for="">{{printdata.halagdsanOgnoo | date: 'yyyy-MM-dd'}}</label>
+              </td>
+              <td class="text-left">
+                2. Ажил олгогчтой тооцоо хийж дууссан огноо: <label for="">{{printdata.huleeltssenOgnoo | date:
+                  'yyyy-MM-dd'}}</label>
+              </td>
+              <!-- <td colspan="4">
+                1. Ажлаас чөлөөлөгдсөн тухай шийдвэр (Үүнд: тушаал, хугацаа нь дуусгавар болж буй ажил гүйцэтгэх гэрээ
+                эвсэл хөлсөөр ажиллах гэрээ зэргийн аль нэг хамаарна)-ийн зургийг авч
+                энд дарж оруулна уу.
+              </td> -->
+              <!-- <td colspan="4">
+                1. Ажлаас чөлөөлөгдсөн тухай шийдвэр (Үүнд: тушаал, хугацаа нь дуусгавар болж буй ажил гүйцэтгэх гэрээ
+                эвсэл хөлсөөр ажиллах гэрээ зэргийн аль нэг хамаарна)-ийн зургийг авч
+                энд дарж оруулна уу.
+              </td> -->
+            </tr>
+            <tr>
+              <td colspan="2" class="text-left">
+                3. Хөдөлмөр зохицуулалтын албанд бүртгүүлсэн: <label for="">{{printdata.burtgesenOgnoo | date:
+                  'yyyy-MM-dd'}}</label>
+              </td>
+            </tr>
+          </table>
+          <div class="mt-5 text-center w-100">
+            <div>Өргөдөл гаргасан огноо</div>
+            <div>{{printdata.requestDate | date: 'yyyy-MM-dd'}}</div>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-sm btn-primary" (click)="print()">хэвлэх</button>
+      </div>
+    </div>
+  </div>
+  <div class="imodal-background"></div>
+</app-modal>
+<!-- Ajilguideliin tetgemj  -->

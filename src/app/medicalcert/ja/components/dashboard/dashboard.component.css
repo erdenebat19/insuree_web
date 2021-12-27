@@ -1,0 +1,31 @@
+table tr td,
+table tr th {
+ font-size: 12px;
+ vertical-align: middle;
+ text-align: center;
+}
+
+.btn {
+ font-size: 12px;
+}
+
+app-modal .imodal .modal-body {
+ margin: 80px 20% !important;
+ font-size: 10px;
+}
+
+#printBody {
+ line-height: 2;
+ max-height: 500px;
+ overflow: auto;
+ padding: 50px !important;
+}
+
+@media print {
+ div {
+  line-height: 2.5;
+ }
+ .col-5 {
+  line-height: 1;
+ }
+}

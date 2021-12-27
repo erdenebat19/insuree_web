@@ -1,1 +1,25 @@
+.manual {
+ z-index: 999;
+ display: block;
+ text-decoration: none;
+ position: fixed;
+ bottom: 100px;
+ right: 50px;
+ width: 50px;
+ height: 50px;
+ line-height: 50px;
+ font-size: 26px;
+ text-align: center;
+ color: #ffffff;
+}
 
+.manualtext {
+ font-size: 12px;
+ font-weight: 600;
+ line-height: 1;
+ color: #000;
+ margin: 0 15px;
+}
+a:hover {
+ text-decoration: none;
+}

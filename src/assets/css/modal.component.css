@@ -1,38 +1,42 @@
 app-modal {
-  display: none;
+ display: none;
 }
 
 app-modal .imodal {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1000;
-  display: block !important;
-  overflow: auto;
-  margin: 0;
-  padding: 0;
+ position: fixed;
+ top: 0;
+ right: 0;
+ bottom: 0;
+ left: 0;
+ z-index: 1000;
+ display: block !important;
+ overflow: auto;
+ margin: 0;
+ padding: 0;
 }
 
 app-modal .imodal .modal-body {
-  padding: 0px;
-  background: #fff;
-  margin: 80px 30%;
+ padding: 0px;
+ background: #fff;
+ margin: 80px 30%;
 }
 
-
 app-modal .imodal-background {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: #000;
-  opacity: 0.75;
-  z-index: 900;
+ position: fixed;
+ top: 0;
+ right: 0;
+ bottom: 0;
+ left: 0;
+ background-color: #000;
+ opacity: 0.75;
+ z-index: 900;
 }
 
 body.modal-open {
-  overflow: hidden;
+ overflow: hidden;
+}
+
+.row {
+ margin-left: 0px !important;
+ margin-right: 0px !important;
 }

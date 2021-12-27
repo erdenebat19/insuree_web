@@ -1,0 +1,295 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="content-container">
+      <div class="content-large">
+        <div class="content-header">Ажилгүйдлийн тэтгэмж авах хүсэлт</div>
+        <div class="content-body">
+          <div class="row">
+            <div class="col"></div>
+            <div class="col-md-8 col-sm-12">
+              <div>
+                <div class="border-bottom mb-3 border-info">
+                  <label class="text-uppercase">Даатгуулагчийн ерөнхий мэдээлэл</label>
+                </div>
+
+                <div class="form-row mb-2">
+                  <div class="col-md-6 col-sm-12">
+                    <label>Ургийн овог:
+                      <div class="font-weight-bold">
+                        <app-inline-loader *ngIf="isloading"></app-inline-loader>
+                        {{people.surName}}
+                      </div>
+                    </label>
+                  </div>
+                  <div class="col-md-6 col-sm-12">
+                    <label>Эцэг/эх/-ийн нэр:
+                      <div class="font-weight-bold">
+                        <app-inline-loader *ngIf="isloading"></app-inline-loader>
+                        {{people.fatName}}
+                      </div>
+                    </label>
+                  </div>
+                </div>
+                <div class="form-row mb-2">
+                  <div class="col-md-6 col-sm-12">
+                    <label>Даатгуулагчийн нэр:
+                      <div class="font-weight-bold">
+                        <app-inline-loader *ngIf="isloading"></app-inline-loader>
+                        {{people.benName}}
+                      </div>
+                    </label>
+                  </div>
+                  <div class="col-md-6 col-sm-12">
+                    <label>Регистрийн дугаар:
+                      <div class="font-weight-bold">
+                        <app-inline-loader *ngIf="isloading"></app-inline-loader>
+                        {{people.regID}}
+                      </div>
+                    </label>
+                  </div>
+                </div>
+                <div class="form-row mb-2">
+                  <div class="col-sm-12">
+                    <label>Хаяг:
+                      <div class="font-weight-bolder">
+                        <app-inline-loader *ngIf="isloading"></app-inline-loader>
+                        {{people.address}}
+                      </div>
+                    </label>
+                  </div>
+                </div>
+                <div class="form-row mb-2">
+                  <div class="col-md-6 col-sm-12">
+                    <label>Утас:</label>
+                    <input type="number" [(ngModel)]="phone" class="form-control form-control-sm" placeholder="Утас" />
+                  </div>
+                  <div class="col-md-6 col-sm-12">
+                    <label>Цахим шуудан:</label>
+                    <input type="email" [(ngModel)]="email" class="form-control form-control-sm"
+                      placeholder="Цахим шуудан" />
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div class="border-bottom mb-3 mt-4 border-info">
+                  <label class="text-uppercase">Даатгуулагчийн шимтгэл төлсөн мэдээлэл</label>
+                </div>
+                <div class="col-sm-12 pl-0">
+                  <label>
+                    1. <strong>Ажилгүйдлийн даатгалын санд</strong> шимтгэл төлсөн:
+                    <span class="font-weight-bold">
+                      <app-inline-loader *ngIf="isloading"></app-inline-loader>
+                      {{ ((workInfo.totalMonth - (workInfo.totalMonth % 12)) / 12) }}
+                    </span> жил
+                    <span class="font-weight-bold">
+                      <app-inline-loader *ngIf="isloading"></app-inline-loader>
+                      {{ workInfo.totalMonth - ((workInfo.totalMonth - (workInfo.totalMonth % 12)) / 12) * 12 }}
+                    </span> сар
+                  </label>
+                </div>
+                <div class="form-row mb-2" *ngIf="!workInfoEdit">
+                  <div class="col-sm-12 text-right">
+                    <p class="monthMore" (click)="totalMonthMore()"><small>Ажилгүйдлийн даатгалын санд шимтгэл төлсөн
+                        жилийн дэлгэрэнгүй {{infotext}} бол энд дар</small></p>
+                    <table class="table table-sm table-striped tableborder" *ngIf="monthMore">
+                      <thead>
+                        <tr class="text-center">
+                          <th class="align-middle">
+                            <small>Он</small>
+                          </th>
+                          <th><small>1</small></th>
+                          <th><small>2</small></th>
+                          <th><small>3</small></th>
+                          <th><small>4</small></th>
+                          <th><small>5</small></th>
+                          <th><small>6</small></th>
+                          <th><small>7</small></th>
+                          <th><small>8</small></th>
+                          <th><small>9</small></th>
+                          <th><small>10</small></th>
+                          <th><small>11</small></th>
+                          <th><small>12</small></th>
+                          <th><small>Нийт</small></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of workInfo.monthList" class="text-center">
+                          <td><small>{{ item.calYear }}</small></td>
+                          <td><small>{{ item.month1 ===1 ? '+': '' }}</small></td>
+                          <td><small>{{ item.month2 ===1 ? '+': '' }}</small></td>
+                          <td><small>{{ item.month3 ===1 ? '+': '' }}</small></td>
+                          <td><small>{{ item.month4 ===1 ? '+': '' }}</small></td>
+                          <td><small>{{ item.month5 ===1 ? '+': '' }}</small></td>
+                          <td><small>{{ item.month6 ===1 ? '+': '' }}</small></td>
+                          <td><small>{{ item.month7 ===1 ? '+': '' }}</small></td>
+                          <td><small>{{ item.month8 ===1 ? '+': '' }}</small></td>
+                          <td><small>{{ item.month9 ===1 ? '+': '' }}</small></td>
+                          <td><small>{{ item.month10 ===1 ? '+': '' }}</small></td>
+                          <td><small>{{ item.month11 ===1 ? '+': '' }}</small></td>
+                          <td><small>{{ item.month12 ===1 ? '+': '' }}</small></td>
+                          <td><small>{{ item.total }}</small></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div class="mb-3 text-justify">
+                      <small><i>Дээрх шимтгэл төлсөн хугацаанд сайн дураар даатгуулсан, холбогдох хуулиудын дагуу
+                          тэтгэврийн даатгалд нөхөн даатгуулсан, БНСУ-д ажиллаж байхдаа тэтгэврийн даатгал нөхөн төлсөн
+                          хугацааг оруулж тооцохгүй.</i></small>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-12">
+                    <label>Тэтгэмж тооцох хувь:
+                      <span class="font-weight-bold">
+                        <app-inline-loader *ngIf="isloading"></app-inline-loader>
+                        {{think_percent}}%
+                      </span>
+                      <div class="mt-1">Тэтгэмж бодох хувийн мэдээллийг
+                        <span class="monthMore"><a href="http://www.ndaatgal.mn/v1/info/ajilguidel" target="_blank">энд
+                            дарж</a></span> харна уу.
+                      </div>
+                    </label>
+                  </div>
+                  <div class="col-sm-12">
+                    <p>
+                      <label class="mt-1">
+                        <strong>Таны ажилгүйдлийн даатгалын санд шимтгэл төлсөн жил болон тэтгэмж бодох хувь зөрүүтэй
+                          бол харъяа нийгмийн даатгалын хэлтэст нотлох бичиг баримттайгаа ирнэ үү.</strong>
+                      </label>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class=" border-bottom mb-3 mt-4 border-info">
+                <label class="text-uppercase">Тэтгэмж авах нийгмийн даатгалын хэлтэс болон банк, дансы
+                  мэдээлэл</label>
+              </div>
+              <div class="form-row mb-2">
+                <div class="col-sm-12">
+                  <label>Тэтгэмж авах нийгмийн даатгалын хэлтэс:</label>
+                  <select class="form-control form-control-sm" [(ngModel)]="Aimag">
+                    <option [ngValue]="item.id" *ngFor="let item of AimagList">
+                      {{ item.name }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row mb-2">
+                <div class="col-md-6 col-sm-12">
+                  <label>Банк:</label>
+                  <select class="form-control form-control-sm" [(ngModel)]="Bank">
+                    <option value="14">Терийн банк</option>
+                    <option value="17">Хаан банк</option>
+                    <option value="04">Худалдаа хөгжлийн банк</option>
+                    <option value="05">Голомт банк</option>
+                    <option value="11">Капитрон Банк</option>
+                    <option value="12">Хас банк</option>
+                    <option value="10">Үндэсний Хөрөнгө Оруулалтын Банк</option>
+                    <option value="13">Чингис Хаан Банк</option>
+                    <option value="18">Богд банк</option>
+                  </select>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  <label>Дансын дугаар:</label>
+                  <input type="number" [(ngModel)]="Account" class="form-control form-control-sm"
+                    placeholder="Дансын дугаар">
+                </div>
+                <label class="text-danger"><strong>АНХААРУУЛГА:</strong> Мөнгө хүлээн авах данс нь таны нэр дээрх,
+                  төгрөгийн данс байх
+                  ёстой.
+                </label>
+              </div>
+              <div class="border-bottom mb-3 mt-4 border-info">
+                <label class="text-uppercase">Хавсаргах баримт бичгүүд</label>
+              </div>
+              <div class="form-row mb-2">
+                <div class="col-md-6 col-sm-12">
+                  <label>Ажлаас чөлөөлөгдсөн тушаал:<span class="text-danger">*</span> </label>
+                  <input type="file" [(ngModel)]="dismissFile" (change)="onFile($event)"
+                    class="form-control form-control-sm">
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  <label>Ажил олгогчтой тооцоо хийж дууссан баримт:</label>
+                  <input type="file" [(ngModel)]="finishFile" (change)="onFile1($event)"
+                    class="form-control form-control-sm">
+                </div>
+              </div>
+              <div class="form-row mb-2">
+                <div class="col-md-6 col-sm-12">
+                  <label>Ажлаас чөлөөлөгдсөн огноо</label>
+                  <input type="date" [(ngModel)]="dismissDate" class="form-control form-control-sm"
+                    placeholder="Ажлаас чөлөөлөгдсөн огноо">
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  <label>Ажил олгогчтой тооцоо хийж дууссан огноо:</label>
+                  <input type="date" [(ngModel)]="finishDate" class="form-control form-control-sm"
+                    placeholder="Ажил хүлээлцсэн огноо">
+                </div>
+              </div>
+              <div class="form-row mb-2">
+                <div class="col-sm-12">
+                  <label>Хөдөлмөр зохицуулалтын албанд бүртгүүлсэн огноо:</label>
+                  <input type="date" [(ngModel)]="registerDate" class="form-control form-control-sm"
+                    placeholder="Хөдөлмөр зохицуулалтын албанд бүртгүүлсэн" disabled>
+                </div>
+              </div>
+              <div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" (click)="isAgree()" id="checkbox1">
+                  <label class="form-check-label" for="checkbox1">
+                    Мэдээллээ үнэн зөв бөглөсөн болно.
+                  </label>
+                </div>
+              </div>
+              <div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" (click)="isAgree1()" id="checkbox2">
+                  <label class="form-check-label" for="checkbox2">
+                    Ажилгүйдлийн тэтгэмж авах өргөдлийг цахимаар гаргахыг зөвшөөрч байна.
+                  </label>
+                </div>
+              </div>
+
+              <!-- <img [src]="imageData" width="100%" />
+              <img [src]="imageData1" width="100%" /> -->
+              <div class="mt-3 mb-5 pb-5">
+                <button class="btn btn-primary" type="submit" [disabled]="!isAgreed" (click)="onSave()">Хүсэлт
+                  илгээх</button>
+              </div>
+            </div>
+
+            <div class="col"></div>
+
+          </div>
+          <div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<app-modal id="messageModal">
+  <div class="imodal">
+    <div class="modal-body">
+      <div class="modal-header">
+        Мэдэгдэл
+        <button type="button" class="close" aria-label="Close" (click)="close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="message-body p-3 text-center">
+        {{errormessage}}
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-sm btn-primary" (click)="Ok()">Ok</button>
+      </div>
+    </div>
+  </div>
+  <div class="imodal-background"></div>
+</app-modal>
+<!-- Modal  -->

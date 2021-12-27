@@ -3,11 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-    production: false,
-    apiurl: 'http://localhost:10012/',
-    // apiurl: 'https://data.ndaatgal.mn:8081/userwebapi/',
-    huburl: 'https://data.ndaatgal.mn:8081/sdqpapi/',
-    socialbookurl: 'https://data.ndaatgal.mn:8081/electnbook/'
+ production: false,
+ // apiurl: 'http://localhost:10012/',
+ apiurl: 'https://data.ndaatgal.mn:8081/userwebapi/',
+ huburl: 'https://data.ndaatgal.mn:8081/sdqpapi/',
+ socialbookurl: 'https://data.ndaatgal.mn:8081/electnbook/',
 };
 
 /*

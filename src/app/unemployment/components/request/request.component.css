@@ -1,0 +1,15 @@
+label {
+ font-size: 12px;
+ margin-bottom: 0.3rem;
+}
+.monthMore {
+ color: blue;
+ cursor: pointer;
+}
+.tableborder {
+ border: 1px solid #dee2e6;
+}
+
+button {
+ font-size: 12px;
+}
