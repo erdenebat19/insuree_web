@@ -60,11 +60,11 @@
                 </div>
                 <div class="form-row mb-2">
                   <div class="col-md-6 col-sm-12">
-                    <label>Утас:</label>
+                    <label>Утас: <span class="text-danger">*</span></label>
                     <input type="number" [(ngModel)]="phone" class="form-control form-control-sm" placeholder="Утас" />
                   </div>
                   <div class="col-md-6 col-sm-12">
-                    <label>Цахим шуудан:</label>
+                    <label>Цахим шуудан: <span class="text-danger">*</span></label>
                     <input type="email" [(ngModel)]="email" class="form-control form-control-sm"
                       placeholder="Цахим шуудан" />
                   </div>
@@ -169,7 +169,7 @@
               <div class="form-row mb-2">
                 <div class="col-sm-12">
                   <label>Тэтгэмж авах нийгмийн даатгалын хэлтэс:</label>
-                  <select class="form-control form-control-sm" [(ngModel)]="Aimag">
+                  <select class="form-control form-control-sm" [(ngModel)]="Aimag" disabled>
                     <option [ngValue]="item.id" *ngFor="let item of AimagList">
                       {{ item.name }}
                     </option>
@@ -178,7 +178,7 @@
               </div>
               <div class="form-row mb-2">
                 <div class="col-md-6 col-sm-12">
-                  <label>Банк:</label>
+                  <label>Банк: <span class="text-danger">*</span></label>
                   <select class="form-control form-control-sm" [(ngModel)]="Bank">
                     <option value="14">Терийн банк</option>
                     <option value="17">Хаан банк</option>
@@ -192,7 +192,7 @@
                   </select>
                 </div>
                 <div class="col-md-6 col-sm-12">
-                  <label>Дансын дугаар:</label>
+                  <label>Дансын дугаар: <span class="text-danger">*</span></label>
                   <input type="number" [(ngModel)]="Account" class="form-control form-control-sm"
                     placeholder="Дансын дугаар">
                 </div>
@@ -206,7 +206,7 @@
               </div>
               <div class="form-row mb-2">
                 <div class="col-md-6 col-sm-12">
-                  <label>Ажлаас чөлөөлөгдсөн тушаал:<span class="text-danger">*</span> </label>
+                  <label>Ажлаас чөлөөлөгдсөн тушаал: <span class="text-danger">*</span> </label>
                   <input type="file" [(ngModel)]="dismissFile" (change)="onFile($event)"
                     class="form-control form-control-sm">
                 </div>
@@ -218,7 +218,7 @@
               </div>
               <div class="form-row mb-2">
                 <div class="col-md-6 col-sm-12">
-                  <label>Ажлаас чөлөөлөгдсөн огноо</label>
+                  <label>Ажлаас чөлөөлөгдсөн огноо <span class="text-danger">*</span></label>
                   <input type="date" [(ngModel)]="dismissDate" class="form-control form-control-sm"
                     placeholder="Ажлаас чөлөөлөгдсөн огноо">
                 </div>
@@ -286,7 +286,8 @@
         {{errormessage}}
       </div>
       <div class="modal-footer">
-        <button class="btn btn-sm btn-primary" (click)="Ok()">Ok</button>
+        <button class="btn btn-sm btn-primary" *ngIf='required' (click)="Ok()">Ok</button>
+        <button class="btn btn-sm btn-primary" *ngIf='!required' (click)="close()">Ok</button>
       </div>
     </div>
   </div>

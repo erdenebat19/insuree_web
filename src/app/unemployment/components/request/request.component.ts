@@ -45,6 +45,7 @@ export class RequestComponent implements OnInit {
  isAgreed: boolean = false;
  isAgreed1: boolean = false;
  isAgreed2: boolean = false;
+ required: boolean = false;
 
  constructor(
   private srv: UnemploymentService,
@@ -55,7 +56,7 @@ export class RequestComponent implements OnInit {
  ) {}
 
  ngOnInit() {
-  console.log(JSON.parse(localStorage.getItem('user')));
+  //   console.log(JSON.parse(localStorage.getItem('user')));
   const dd = new Date(localStorage.getItem('RegisterDate'));
   //   console.log(dd);
 
@@ -65,7 +66,7 @@ export class RequestComponent implements OnInit {
   this.srv.peopleInfo().subscribe((data) => {
    this.people = data;
    this.aimagIdConvert(this.people.aimagID, this.people.somID);
-   console.log(this.people);
+   //    console.log(this.people);
    this.isloading = false;
    this.isloading = true;
    this.srv.WorkMonth().subscribe((data) => {
@@ -153,43 +154,105 @@ export class RequestComponent implements OnInit {
   };
  }
 
- onSave() {
-  const ajilguildel = {
-   SurName: this.people.surName,
-   FatName: this.people.fatName,
-   BenName: this.people.benName,
-   RegID: this.people.regID,
-   Addr: this.people.address,
-   Phone: this.phone.toString(),
-   Email: this.email,
-   WorkMonth: this.workInfo.totalMonth,
-   ThinkPercent: this.think_percent,
-   ThinkAid: Number(this.Aimag),
-   BankId: Number(this.Bank),
-   BankAccount: this.Account.toString(),
-   HalagdsanOgnoo: this.dismissDate,
-   HuleeltssenOgnoo: this.finishDate,
-   BurtgesenOgnoo: this.registerDate,
-   HalagdsanFile: this.dismissBase64 === undefined ? '' : this.dismissBase64,
-   HuleeltssenFile: this.finishBase64 === undefined ? '' : this.finishBase64,
-  };
+ hasValue() {
+  if (!this.phone || !this.email || !this.Bank || !this.Account || !this.dismissDate || !this.dismissBase64) {
+   this.error = false;
+   this.errormessage = 'Мэдээллээ бүрэн оруулна уу.';
+   this.modalService.open('messageModal');
+   console.log('false');
+   return false;
+  }
+  return true;
+ }
 
-  console.log(ajilguildel);
-  this.srv.requestSave(ajilguildel).subscribe(
-   (data) => {
-    // console.log(data);
-    // if (data) {
-    this.error = false;
-    this.errormessage = 'Хүсэлт амжилттай илгээгдлээ.';
-    this.modalService.open('messageModal');
-    // }
-   },
-   (error) => {
-    this.error = true;
-    this.errormessage = error.toString();
-    this.modalService.open('messageModal');
-   }
-  );
+ onSave() {
+  this.required = this.hasValue();
+  //   if (!this.phone) {
+  //    this.error = false;
+  //    this.errormessage = 'Утсны дугаараа оруулна уу.';
+  //    this.modalService.open('messageModal');
+  //    required = true;
+  //    return;
+  //   }
+  //   required = false;
+  //   if (!this.email) {
+  //    this.error = false;
+  //    this.errormessage = 'И-Мэйл хаяг оруулна уу.';
+  //    required = true;
+  //    this.modalService.open('messageModal');
+
+  //    return;
+  //   }
+  //   required = false;
+  //   if (!this.Bank) {
+  //    this.error = false;
+  //    this.errormessage = 'Банк сонгоно уу.';
+  //    required = true;
+  //    this.modalService.open('messageModal');
+
+  //    return;
+  //   }
+  //   required = false;
+  //   if (!this.Account) {
+  //    this.error = false;
+  //    this.errormessage = 'Дансаа оруулна уу.';
+  //    required = true;
+  //    this.modalService.open('messageModal');
+  //    return;
+  //   }
+  //   required = false;
+  //   if (!this.dismissDate) {
+  //    this.error = false;
+  //    this.errormessage = 'Ажлаас чөлөөлөгдсөн огноо оруулна уу.';
+  //    required = true;
+  //    this.modalService.open('messageModal');
+  //    return;
+  //   }
+  //   required = false;
+  //   if (!this.dismissBase64) {
+  //    this.error = false;
+  //    this.errormessage = 'Ажлаас чөлөөлөгдсөн тушаалаа оруулна уу.';
+  //    required = true;
+  //    this.modalService.open('messageModal');
+  //    return;
+  //   }
+  if (this.required) {
+   const ajilguildel = {
+    SurName: this.people.surName,
+    FatName: this.people.fatName,
+    BenName: this.people.benName,
+    RegID: this.people.regID,
+    Addr: this.people.address,
+    Phone: this.phone.toString(),
+    Email: this.email,
+    WorkMonth: this.workInfo.totalMonth,
+    ThinkPercent: this.think_percent,
+    ThinkAid: Number(this.Aimag),
+    BankId: Number(this.Bank),
+    BankAccount: this.Account.toString(),
+    HalagdsanOgnoo: this.dismissDate,
+    HuleeltssenOgnoo: this.finishDate ? this.finishDate : '1899-01-01',
+    BurtgesenOgnoo: this.registerDate,
+    HalagdsanFile: this.dismissBase64 === undefined ? '' : this.dismissBase64,
+    HuleeltssenFile: this.finishBase64 === undefined ? '' : this.finishBase64,
+   };
+
+   //   console.log(ajilguildel);
+   this.srv.requestSave(ajilguildel).subscribe(
+    (data) => {
+     this.error = false;
+     this.errormessage = 'Хүсэлт амжилттай илгээгдлээ.';
+     this.modalService.open('messageModal');
+     // }
+    },
+    (error) => {
+     //  console.log(error);
+     this.error = true;
+     this.errormessage = error.toString();
+     this.modalService.open('messageModal');
+    }
+   );
+  }
  }
 
  //  numYear(n: number): Array<number> {
