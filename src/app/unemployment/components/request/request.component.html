@@ -207,12 +207,12 @@
               <div class="form-row mb-2">
                 <div class="col-md-6 col-sm-12">
                   <label>Ажлаас чөлөөлөгдсөн тушаал: <span class="text-danger">*</span> </label>
-                  <input type="file" [(ngModel)]="dismissFile" (change)="onFile($event)"
+                  <input type="file" [(ngModel)]="dismissFile" accept="image/*" (change)="onFile($event)"
                     class="form-control form-control-sm">
                 </div>
                 <div class="col-md-6 col-sm-12">
                   <label>Ажил олгогчтой тооцоо хийж дууссан баримт:</label>
-                  <input type="file" [(ngModel)]="finishFile" (change)="onFile1($event)"
+                  <input type="file" [(ngModel)]="finishFile" accept="image/*" (change)="onFile1($event)"
                     class="form-control form-control-sm">
                 </div>
               </div>

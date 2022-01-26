@@ -246,7 +246,7 @@ export class RequestComponent implements OnInit {
      // }
     },
     (error) => {
-     //  console.log(error);
+     console.log(error);
      this.error = true;
      this.errormessage = error.toString();
      this.modalService.open('messageModal');
