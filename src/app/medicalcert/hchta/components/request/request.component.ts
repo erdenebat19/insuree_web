@@ -31,6 +31,7 @@ export class RequestComponent implements OnInit {
  Account: string;
  medicalcertaid: string;
  isAgreed: boolean = false;
+ required: boolean = false;
  constructor(
   private srv: UnemploymentService,
   private hchta: HchtaService,
@@ -111,36 +112,51 @@ export class RequestComponent implements OnInit {
   this.router.navigate(['/main/view/medicalcert/hchta']);
  }
 
+ hasValue() {
+  if (!this.phone || !this.email || !this.Bank || !this.Account) {
+   this.error = false;
+   this.errormessage = 'Мэдээллээ бүрэн оруулна уу.';
+   this.modalService.open('messageModal');
+   console.log('false');
+   return false;
+  }
+  return true;
+ }
+
  onSave() {
-  this.info = {
-   medCert: this.medicalcert,
-   regID: this.people.regID,
-   phone: this.phone.toString(),
-   email: this.email,
-   workMonth: this.workInfo.totalMonth,
-   thinkPercent: this.think_percent,
-   aid: this.Aimag,
-   bankId: parseInt(this.Bank),
-   bankAccount: this.Account.toString(),
-   //    create_at: new Date(),
-   tid: 1,
-  };
+  this.required = this.hasValue();
 
-  //   console.log(this.info);
+  if (this.required) {
+   this.info = {
+    medCert: this.medicalcert,
+    regID: this.people.regID,
+    phone: this.phone.toString(),
+    email: this.email,
+    workMonth: this.workInfo.totalMonth,
+    thinkPercent: this.think_percent,
+    aid: this.Aimag,
+    bankId: parseInt(this.Bank),
+    bankAccount: this.Account.toString(),
+    //    create_at: new Date(),
+    tid: 1,
+   };
 
-  this.hchta.medicalHChTAsave(this.info).subscribe(
-   (data) => {
-    this.error = false;
-    this.errormessage = 'Хүсэлтийг хүлээн авлаа. Баярлалаа';
-    this.modalService.open('messageModal');
-    // this.router.navigate(['/main/view/medicalcert/hchta']);
-   },
-   (error) => {
-    this.error = true;
-    this.errormessage = error.toString();
-    this.modalService.open('messageModal');
-   }
-  );
+   //   console.log(this.info);
+
+   this.hchta.medicalHChTAsave(this.info).subscribe(
+    (data) => {
+     this.error = false;
+     this.errormessage = 'Хүсэлтийг хүлээн авлаа. Баярлалаа';
+     this.modalService.open('messageModal');
+     // this.router.navigate(['/main/view/medicalcert/hchta']);
+    },
+    (error) => {
+     this.error = true;
+     this.errormessage = error.toString();
+     this.modalService.open('messageModal');
+    }
+   );
+  }
  }
 
  isAgree() {

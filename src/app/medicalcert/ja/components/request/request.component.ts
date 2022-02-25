@@ -25,6 +25,7 @@ export class RequestComponent implements OnInit {
  errormessage: string;
  medicalcertaid: string;
  isAgreed: boolean = false;
+ required: boolean = false;
  constructor(
   private srv: UnemploymentService,
   private ja: JaService,
@@ -59,33 +60,48 @@ export class RequestComponent implements OnInit {
   this.router.navigate(['/main/view/medicalcert/ja']);
  }
 
- onSave() {
-  this.info = {
-   medCert: this.medicalcert,
-   regID: this.people.regID,
-   phone: this.phone.toString(),
-   email: this.email,
-   workMonth: 0,
-   thinkPercent: 0,
-   aid: this.Aimag,
-   bankId: parseInt(this.Bank),
-   bankAccount: this.Account.toString(),
-   //    create_at: new Date(),
-   tid: 2,
-  };
+ hasValue() {
+  if (!this.phone || !this.email || !this.Bank || !this.Account) {
+   this.error = false;
+   this.errormessage = 'Мэдээллээ бүрэн оруулна уу.';
+   this.modalService.open('messageModal');
+   console.log('false');
+   return false;
+  }
+  return true;
+ }
 
-  this.ja.medicalJAsave(this.info).subscribe(
-   (data) => {
-    this.error = false;
-    this.errormessage = 'Хүсэлтийг хүлээн авлаа. Баярлалаа';
-    this.modalService.open('messageModal');
-   },
-   (error) => {
-    this.error = true;
-    this.errormessage = error.toString();
-    this.modalService.open('messageModal');
-   }
-  );
+ onSave() {
+  this.required = this.hasValue();
+
+  if (this.required) {
+   this.info = {
+    medCert: this.medicalcert,
+    regID: this.people.regID,
+    phone: this.phone.toString(),
+    email: this.email,
+    workMonth: 0,
+    thinkPercent: 0,
+    aid: this.Aimag,
+    bankId: parseInt(this.Bank),
+    bankAccount: this.Account.toString(),
+    //    create_at: new Date(),
+    tid: 2,
+   };
+
+   this.ja.medicalJAsave(this.info).subscribe(
+    (data) => {
+     this.error = false;
+     this.errormessage = 'Хүсэлтийг хүлээн авлаа. Баярлалаа';
+     this.modalService.open('messageModal');
+    },
+    (error) => {
+     this.error = true;
+     this.errormessage = error.toString();
+     this.modalService.open('messageModal');
+    }
+   );
+  }
  }
 
  isAgree() {

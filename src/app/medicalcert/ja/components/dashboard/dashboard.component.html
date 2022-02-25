@@ -35,12 +35,14 @@
                   <td>{{ item.typeName }}</td>
                   <td>{{ item.hospitalName }}</td>
                   <td>
-                    <button *ngIf="item.status===0" (click)="createRequest(item)"
+                    <button *ngIf="item.status===0 || item.status===3 || item.status===6" (click)="createRequest(item)"
                       class="btn btn-sm btn-link bg-info text-white" [disabled]="btnRequest">Хүсэлт гаргах</button>
-                    <label class="bg-success text-white p-1" *ngIf="item.status===1">Хүсэлт илгээгдсэн</label>
-                    <label class="bg-success text-white p-1" *ngIf="item.status===2">Тэтгэмж бодогдсон</label>
-                    <label class="bg-danger text-white p-1" *ngIf="item.status===3">Хүсэлт буцаасан</label>
-                    <label (click)="showprint(item)" class="btn btn-sm btn-link">хэвлэх</label>
+                    <div class="bg-success text-white p-1" *ngIf="item.status===1">Хүсэлт илгээгдсэн</div>
+                    <div class="bg-success text-white p-1" *ngIf="item.status===2">Тэтгэмж бодогдсон</div>
+                    <div class="bg-danger text-white p-1" *ngIf="item.status===3">Тэтгэмжийн байцаагч буцаасан</div>
+                    <div class="bg-success text-white p-1" *ngIf="item.status===5">НД-н Магадлагч эмч хянасан</div>
+                    <div class="bg-danger text-white p-1" *ngIf="item.status===6">НД-н Магадлагч эмч буцаасан</div>
+                    <div (click)="showprint(item)" class="btn btn-sm btn-link">хэвлэх</div>
                   </td>
                 </tr>
               </tbody>
@@ -92,7 +94,7 @@
         <div class="row">
           <div class="col-5">Үндэсний Статистикийн хорооны даргын 2020 оны 12 дугаар сарын 28-ны өдрийн А/73 дугаар
             тушаалаар зөвшөөрснөөр, Сангийн сайд, Хөдөлмөр, нийгмийн хамгааллын сайдын 20.... оны ..... сарын .....
-            өдрийн ..... удгаар хамтарсан тушаалаар батлав.</div>
+            өдрийн ..... дугаар хамтарсан тушаалаар батлав.</div>
           <div class="col-5"></div>
           <div class="col-2">Б-НД-3</div>
         </div>
@@ -116,8 +118,8 @@
           </div>
           <div class="col-12">
             <div>5. Тохирохыг сонгох: </div>
-            <div class="pl-5">1. Жирэмсний</div>
-            <div class="pl-5">2. Амаржсаны</div>
+            <div class="pl-5">{{printdata.typeName}}</div>
+            <!-- <div class="pl-5">2. Амаржсаны</div> -->
           </div>
           <div class="col-12">
             6. Хугацаа

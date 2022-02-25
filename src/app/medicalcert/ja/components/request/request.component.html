@@ -149,7 +149,8 @@
         {{errormessage}}
       </div>
       <div class="modal-footer">
-        <button class="btn btn-sm btn-primary" (click)="btnOK()">Ok</button>
+        <button class="btn btn-sm btn-primary" *ngIf='required' (click)="Ok()">Ok</button>
+        <button class="btn btn-sm btn-primary" *ngIf='!required' (click)="close()">Ok</button>
       </div>
     </div>
   </div>
