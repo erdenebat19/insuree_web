@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
  error: boolean = false;
  btnRequest: boolean = false;
  isloading: boolean;
+ loadingText: string = '';
  unemployment: any;
  people: any;
  printdata: any;
@@ -36,49 +37,61 @@ export class DashboardComponent implements OnInit {
   //    console.log(data);
   //   });
 
+  this.isloading = true;
+  this.loadingText = '';
   this.srv.requestList().subscribe((data) => {
    //    console.log(data);
    this.unemployment = data;
+   this.isloading = false;
   });
  }
 
  createRequest() {
   this.isloading = true;
+  this.loadingText = 'Хөдөлмөр зохицуулалтын албанд бүртгүүлсэн эсэхийг шалгаж байна';
   this.btnRequest = true;
-  this.srv.jobSeeker().subscribe(async (data) => {
-   this.isloading = false;
-   this.jobSecker = data.return;
-   //    console.log(this.jobSecker);
-   if (this.jobSecker.response != null) {
-    // console.log(this.jobSecker.response);
-    // this.router.navigate(['/main/view/unemployment/request']);
-    if (this.jobSecker.response.lastUpdateDateSpecified === false) {
+  this.srv.jobSeeker().subscribe(
+   async (data) => {
+    this.isloading = false;
+    this.jobSecker = data.return;
+    //    console.log(this.jobSecker);
+    if (this.jobSecker.response != null) {
+     // console.log(this.jobSecker.response);
+     // this.router.navigate(['/main/view/unemployment/request']);
+     if (this.jobSecker.response.lastUpdateDateSpecified === false) {
+      this.error = true;
+      this.errormessage = 'ХХҮЕГ-н хөдөлмөр зохицуулалтын албанд бүртгүүлээгүй байна. Бүртгүүлснээр энэ үйлчилгээг авах боломжтой. ';
+      this.modalService.open('messageModal');
+      this.btnRequest = false;
+     } else {
+      var date1: any = new Date(this.jobSecker.response.lastUpdateDate);
+      var date2: any = new Date();
+      var diffDays: any = Math.floor((date2 - date1) / (1000 * 60 * 60 * 24));
+
+      //  console.log(diffDays);
+      if (diffDays > 14) {
+       this.error = true;
+       this.errormessage = 'Хуулийн 14 хоногийн хугацаа хэтэрсэн байна. Хэрэв та “Хүндэтгэн үзэх шалтгаан”-тай бол НДХ-т биеэр хандана уу';
+       this.modalService.open('messageModal');
+      } else {
+       localStorage.setItem('RegisterDate', this.jobSecker.response.lastUpdateDate);
+       this.router.navigate(['/main/view/unemployment/request']);
+      }
+     }
+    } else {
      this.error = true;
-     this.errormessage = 'Та хөдөлмөр зохицуулалтын албанд бүртгүүлээгүй байна. Бүртгүүлснээр энэ үйлчилгээг авах боломжтой. ';
+     this.errormessage = 'ХХҮЕГ-н хөдөлмөр зохицуулалтын албанд бүртгүүлээгүй байна. Бүртгүүлснээр энэ үйлчилгээг авах боломжтой.';
      this.modalService.open('messageModal');
      this.btnRequest = false;
-    } else {
-     //  var date1: any = new Date(this.jobSecker.response.registeredDate);
-     //  var date2: any = new Date();
-     //  var diffDays: any = Math.floor((date2 - date1) / (1000 * 60 * 60 * 24));
-
-     //  console.log(diffDays);
-     //  if (diffDays > 45) {
-     //   this.error = true;
-     //   this.errormessage = '14 хоногоос хэтэрсэн байна. “Хүндэтгэн үзэх шалтгаан”-тай бол НДХ-т биеэр хандана уу';
-     //   this.modalService.open('messageModal');
-     //  } else {
-     localStorage.setItem('RegisterDate', this.jobSecker.response.lastUpdateDate);
-     this.router.navigate(['/main/view/unemployment/request']);
-     //  }
     }
-   } else {
+   },
+   (error) => {
     this.error = true;
-    this.errormessage = 'Та хөдөлмөр зохицуулалтын албанд бүртгүүлээгүй байна. Бүртгүүлснээр энэ үйлчилгээг авах боломжтой.';
+    this.errormessage = 'ХХҮЕГ-н хөдөлмөр зохицуулалтын албанд бүртгүүлсэн мэдээллийг шалгах явцад алдаа гарлаа.';
     this.modalService.open('messageModal');
     this.btnRequest = false;
    }
-  });
+  );
  }
 
  close() {
@@ -114,7 +127,7 @@ export class DashboardComponent implements OnInit {
  }
 
  statusname(statusid: number): string {
-  console.log(statusid);
+  //   console.log(statusid);
   if (statusid === 0) {
    return 'Хүсэлт илгээсэн';
   }

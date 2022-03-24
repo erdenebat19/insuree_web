@@ -28,7 +28,7 @@
               <button class="btn btn-sm btn-link bg-info text-white" (click)="createRequest()"
                 [disabled]="btnRequest">Тэтгэмж авах хүсэлт</button>
               <app-inline-loader *ngIf="isloading"></app-inline-loader>
-              <span class="ml-3" *ngIf="isloading">Хөдөлмөр зохицуулалтын албанд бүртгүүлсэн эсэхийг шалгаж байна</span>
+              <span class="ml-3" *ngIf="isloading">{{loadingText}}</span>
 
             </div>
             <div class="col-12">
@@ -39,8 +39,8 @@
                     <th scope="col">Овог</th>
                     <th scope="col">Нэр</th>
                     <th scope="col">Чөлөөлөгдсөн огноо</th>
-                    <th scope="col">Ажил хүлээлцсэн огноо</th>
-                    <th scope="col">Бүртгүүлсэн огноо</th>
+                    <!-- <th scope="col">Ажил хүлээлцсэн огноо</th> -->
+                    <th scope="col">ХЗА-д бүртгүүлсэн огноо</th>
                     <th scope="col">Утас</th>
                     <th scope="col">И-Мэйл хаяг</th>
                     <th scope="col">Төлөв</th>
@@ -53,7 +53,7 @@
                     <td>{{ item.fatName }}</td>
                     <td>{{ item.benName }}</td>
                     <td>{{item.halagdsanOgnoo | date: 'yyyy-MM-dd'}}</td>
-                    <td>{{item.huleeltssenOgnoo | date: 'yyyy-MM-dd'}}</td>
+                    <!-- <td>{{item.huleeltssenOgnoo | date: 'yyyy-MM-dd'}}</td> -->
                     <td>{{item.burtgesenOgnoo | date: 'yyyy-MM-dd'}}</td>
                     <td>{{ item.phone }}</td>
                     <td>{{ item.email }}</td>
@@ -65,6 +65,11 @@
                     <td>
                       <label (click)="showprint(item)" class="btn btn-sm btn-link">хэвлэх</label>
                     </td>
+                  </tr>
+                </tbody>
+                <tbody *ngIf="unemployment.length===0">
+                  <tr>
+                    <td colspan="12">Ажилгүйдлийн тэтгэмж авах хүсэлт гаргаагүй байна</td>
                   </tr>
                 </tbody>
               </table>

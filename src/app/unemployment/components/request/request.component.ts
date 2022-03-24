@@ -67,6 +67,7 @@ export class RequestComponent implements OnInit {
    this.people = data;
    this.aimagIdConvert(this.people.aimagID, this.people.somID);
    //    console.log(this.people);
+   //    console.log(this.Aimag);
    this.isloading = false;
    this.isloading = true;
    this.srv.WorkMonth().subscribe((data) => {
@@ -246,7 +247,7 @@ export class RequestComponent implements OnInit {
      // }
     },
     (error) => {
-     console.log(error);
+     //  console.log(error);
      this.error = true;
      this.errormessage = error.toString();
      this.modalService.open('messageModal');
@@ -356,7 +357,7 @@ export class RequestComponent implements OnInit {
   if (aimagId === '11' && somid === '07') {
    this.Aimag = '25';
   }
-  if (aimagId === '11' && somid === '12') {
+  if (aimagId === '11' && (somid === '12' || somid === '22')) {
    this.Aimag = '26';
   }
   if (aimagId === '11' && somid === '10') {

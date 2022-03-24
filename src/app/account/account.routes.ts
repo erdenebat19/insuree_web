@@ -11,20 +11,20 @@ import { ValidateComponent } from './components/validate/validate.component';
 import { RegisterSwitchComponent } from './components/register-switch/register-switch.component';
 
 export const routes: Routes = [
-  { path: '', component: LoginComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'editregister', component: EditRegisterComponent },
-  { path: 'resetpassword', component: ResetpasswordComponent },
-  { path: 'authorized', component: AuthorizedComponent },
-  { path: 'confirm1', component: ConfirmStep1Component },
-  { path: 'confirm2', component: ConfirmStep2Component },
-  { path: 'validate/:id/:val', component: ValidateComponent },
-  { path: 'switch', component: RegisterSwitchComponent },
-  { path: '**', component: LoginComponent }
+ { path: '', component: LoginComponent },
+ { path: 'login', component: LoginComponent },
+ { path: 'register', component: RegisterComponent },
+ { path: 'editregister', component: EditRegisterComponent },
+ { path: 'resetpassword', component: ResetpasswordComponent },
+ { path: 'authorized', component: AuthorizedComponent },
+ { path: 'confirm1', component: ConfirmStep1Component },
+ { path: 'confirm2', component: ConfirmStep2Component },
+ { path: 'validate/:id/:val', component: ValidateComponent },
+ { path: 'switch', component: RegisterSwitchComponent },
+ { path: '**', component: LoginComponent },
 ];
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+ imports: [RouterModule.forChild(routes)],
+ exports: [RouterModule],
 })
 export class AccountRoutingModule {}

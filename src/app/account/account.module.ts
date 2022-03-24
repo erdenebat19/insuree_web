@@ -15,24 +15,18 @@ import { ValidateComponent } from './components/validate/validate.component';
 import { RegisterSwitchComponent } from './components/register-switch/register-switch.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    AccountRoutingModule,
-    FormsModule,
-    RecaptchaModule,
-    InlineLoaderModule
-  ],
-  declarations: [
-    LoginComponent,
-    RegisterComponent,
-    EditRegisterComponent,
-    ResetpasswordComponent,
-    AuthorizedComponent,
-    ConfirmStep1Component,
-    ConfirmStep2Component,
-    ValidateComponent,
-    RegisterSwitchComponent
-  ],
-  exports: [LoginComponent, RegisterComponent, ResetpasswordComponent]
+ imports: [CommonModule, AccountRoutingModule, FormsModule, RecaptchaModule, InlineLoaderModule],
+ declarations: [
+  LoginComponent,
+  RegisterComponent,
+  EditRegisterComponent,
+  ResetpasswordComponent,
+  AuthorizedComponent,
+  ConfirmStep1Component,
+  ConfirmStep2Component,
+  ValidateComponent,
+  RegisterSwitchComponent,
+ ],
+ exports: [LoginComponent, RegisterComponent, ResetpasswordComponent],
 })
 export class AccountModule {}
