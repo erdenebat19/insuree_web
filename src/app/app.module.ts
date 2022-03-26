@@ -13,10 +13,18 @@ import { ServerErrorInterceptor } from './shared/shared/server-error.interceptor
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { ShareDataService } from './shared/shared/share-data.service';
+import { QRCodeModule } from 'angular2-qrcode';
 
 @NgModule({
  declarations: [AppComponent, ErrorReportComponent],
- imports: [BrowserModule, HttpClientModule, RouterModule.forRoot(routes, { useHash: true }), BrowserAnimationsModule, SharedModule],
+ imports: [
+  BrowserModule,
+  HttpClientModule,
+  RouterModule.forRoot(routes, { useHash: true }),
+  BrowserAnimationsModule,
+  SharedModule,
+  QRCodeModule,
+ ],
  providers: [
   ShareDataService,
   JwtHelperService,

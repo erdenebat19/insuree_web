@@ -53,7 +53,7 @@ export class DashboardComponent implements OnInit {
   this.srv1.peopleInfo().subscribe((data) => {
    this.people = data;
    this.printdata = medcert;
-   //    console.log(this.printdata);
+   console.log(this.printdata);
    this.modalService.open('medicalModal');
   });
  }
